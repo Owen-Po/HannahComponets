@@ -7,12 +7,15 @@
   ],
   "main": "dist/hannah-ui.umd.cjs",
   "module": "dist/hannah-ui.js",
+  "types": "dist/main.d.ts",
+  "style": "dist/hannah-ui.css",
   "exports": {
     ".": {
+      "types": "./dist/main.d.ts",
       "import": "./dist/hannah-ui.js",
       "require": "./dist/hannah-ui.umd.cjs"
     },
-    "./dist/hannah-ui.css": "./dist/hannah-ui.css"
+    "./style.css": "./dist/hannah-ui.css"
   },
   "scripts": {
     "dev": "vite",
@@ -24,8 +27,18 @@
     "storybook:serve": "storybook serve"
   },
   "peerDependencies": {
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4"
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "react-router-dom": "^7.0.0",
+    "lucide-react": ">=0.400.0"
+  },
+  "peerDependenciesMeta": {
+    "react-router-dom": {
+      "optional": true
+    },
+    "lucide-react": {
+      "optional": false
+    }
   },
   "devDependencies": {
     "@eslint/js": "^9.39.4",
@@ -40,6 +53,8 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "lucide-react": "^0.577.0",
+    "react-router-dom": "^7.13.1",
     "storybook": "^10.2.19",
     "tailwindcss": "^4.2.1",
     "typescript": "^5.9.3",
@@ -50,8 +65,6 @@
   "dependencies": {
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
-    "lucide-react": "^0.577.0",
-    "react-router-dom": "^7.13.1",
     "tailwind-merge": "^3.5.0"
   }
 }
