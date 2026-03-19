@@ -589,7 +589,7 @@ export const ShowcaseIconOnly: Story = {
       {(
         ["primary", "success", "warning", "danger"] as ButtonProps["variant"][]
       ).map((v) => (
-        <Button key={v} variant={v} size="md" iconOnly aria-label={v}>
+        <Button key={v} variant={v} size="md" iconOnly aria-label={v ?? "icon"}>
           <PlusIcon />
         </Button>
       ))}

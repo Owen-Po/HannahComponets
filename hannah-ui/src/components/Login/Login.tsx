@@ -8,6 +8,7 @@ import {
   Check,
   ShieldCheck,
 } from "lucide-react";
+import { cn } from "../../utils/cn";
 
 /* ─────────────────────────────────────────
    Types
@@ -18,13 +19,9 @@ export interface LoginCredentials {
 }
 
 export interface LoginValidationRules {
-  /** Minimum password length. Default: 6 */
   minPasswordLength?: number;
-  /** Regex to validate email format. Defaults to standard email regex */
   emailPattern?: RegExp;
-  /** Custom error message for invalid email */
   emailErrorMessage?: string;
-  /** Custom error message for invalid password */
   passwordErrorMessage?: string;
 }
 
@@ -62,9 +59,7 @@ export interface LoginProps {
 
   // ── State ──
   loading?: boolean;
-  /** External server-side error to display */
   error?: string;
-  /** Pre-fill email field (e.g. from URL param) */
   defaultEmail?: string;
 
   // ── Validation ──
@@ -80,40 +75,26 @@ export interface LoginProps {
 
   // ── Callbacks ──
   onSubmit: (data: LoginCredentials) => void | Promise<void>;
-  /** Fires on every field change */
   onChange?: (data: LoginCredentials) => void;
 }
 
 /* ─────────────────────────────────────────
    Particle canvas
 ───────────────────────────────────────── */
-interface ParticleCanvasProps {
-  accentColor: string;
-}
-
-const ParticleCanvas = ({ accentColor }: ParticleCanvasProps) => {
+const ParticleCanvas = ({ accentColor }: { accentColor: string }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
 
   useEffect(() => {
     const canvas = canvasRef.current;
     if (!canvas) return;
-
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
     let animId: number;
-
-    interface Pt {
-      x: number;
-      y: number;
-      vx: number;
-      vy: number;
-      r: number;
-    }
-
+    interface Pt { x: number; y: number; vx: number; vy: number; r: number }
     let pts: Pt[] = [];
 
-    const resize = (): void => {
+    const resize = () => {
       canvas.width = canvas.offsetWidth;
       canvas.height = canvas.offsetHeight;
       pts = Array.from({ length: 55 }, () => ({
@@ -125,12 +106,10 @@ const ParticleCanvas = ({ accentColor }: ParticleCanvasProps) => {
       }));
     };
 
-    const draw = (): void => {
+    const draw = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-
       pts.forEach((p) => {
-        p.x += p.vx;
-        p.y += p.vy;
+        p.x += p.vx; p.y += p.vy;
         if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
         if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
         ctx.beginPath();
@@ -138,16 +117,13 @@ const ParticleCanvas = ({ accentColor }: ParticleCanvasProps) => {
         ctx.fillStyle = `${accentColor}99`;
         ctx.fill();
       });
-
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
           const dx = pts[i].x - pts[j].x;
           const dy = pts[i].y - pts[j].y;
           const dist = Math.sqrt(dx * dx + dy * dy);
           if (dist < 90) {
-            const alpha = Math.round(50 * (1 - dist / 90))
-              .toString(16)
-              .padStart(2, "0");
+            const alpha = Math.round(50 * (1 - dist / 90)).toString(16).padStart(2, "0");
             ctx.beginPath();
             ctx.moveTo(pts[i].x, pts[i].y);
             ctx.lineTo(pts[j].x, pts[j].y);
@@ -157,51 +133,15 @@ const ParticleCanvas = ({ accentColor }: ParticleCanvasProps) => {
           }
         }
       }
-
       animId = requestAnimationFrame(draw);
     };
 
-    resize();
-    draw();
+    resize(); draw();
     window.addEventListener("resize", resize);
-
-    return () => {
-      cancelAnimationFrame(animId);
-      window.removeEventListener("resize", resize);
-    };
+    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
   }, [accentColor]);
 
   return <canvas ref={canvasRef} className="absolute inset-0 size-full" />;
-};
-
-/* ─────────────────────────────────────────
-   Field-level error message
-───────────────────────────────────────── */
-interface FieldErrorProps {
-  message?: string;
-}
-
-const FieldError = ({ message }: FieldErrorProps) => {
-  if (!message) return null;
-  return (
-    <p className="mt-1.5 flex items-center gap-1.5 text-[12px] text-red-400">
-      <AlertCircle size={12} className="shrink-0" />
-      {message}
-    </p>
-  );
-};
-
-/* ─────────────────────────────────────────
-   Helpers
-───────────────────────────────────────── */
-const ERROR_BORDER: React.CSSProperties = {
-  borderColor: "rgba(248,113,113,0.5)",
-  backgroundColor: "rgba(248,113,113,0.05)",
-};
-
-const DEFAULT_BORDER: React.CSSProperties = {
-  borderColor: "rgba(255,255,255,0.08)",
-  backgroundColor: "rgba(255,255,255,0.04)",
 };
 
 /* ─────────────────────────────────────────
@@ -242,49 +182,24 @@ export const Login = ({
 
   const [showPassword, setShowPassword] = useState(false);
   const [touched, setTouched] = useState({ email: false, password: false });
-  const [form, setForm] = useState<LoginCredentials>({
-    email: defaultEmail,
-    password: "",
-  });
+  const [focusedField, setFocusedField] = useState<"email" | "password" | null>(null);
+  const [form, setForm] = useState<LoginCredentials>({ email: defaultEmail, password: "" });
 
   const emailInvalid = touched.email && !emailPattern.test(form.email);
-  const passwordInvalid =
-    touched.password && form.password.length < minPasswordLength;
+  const passwordInvalid = touched.password && form.password.length < minPasswordLength;
 
-  const emailError = emailInvalid ? emailErrorMessage : undefined;
-  const passwordError = passwordInvalid ? passwordErrorMessage : undefined;
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-    const updated: LoginCredentials = {
-      ...form,
-      [e.target.name]: e.target.value,
-    };
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const updated = { ...form, [e.target.name]: e.target.value };
     setForm(updated);
     onChange?.(updated);
   };
 
-  const handleBlur = (field: keyof typeof touched): void => {
+  const handleBlur = (field: keyof typeof touched) => {
     setTouched((prev) => ({ ...prev, [field]: true }));
+    setFocusedField(null);
   };
 
-  const handleFocus = (
-    e: React.FocusEvent<HTMLInputElement>,
-    hasError: boolean,
-  ): void => {
-    e.currentTarget.style.borderColor = hasError ? "#f87171" : accentColor;
-    e.currentTarget.style.backgroundColor = hasError
-      ? "rgba(248,113,113,0.06)"
-      : `${accentColor}10`;
-  };
-
-  const handleInputBlur = (e: React.FocusEvent<HTMLInputElement>): void => {
-    e.currentTarget.style.borderColor = "rgba(255,255,255,0.08)";
-    e.currentTarget.style.backgroundColor = "rgba(255,255,255,0.04)";
-  };
-
-  const handleSubmit = async (
-    e: React.FormEvent<HTMLFormElement>,
-  ): Promise<void> => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setTouched({ email: true, password: true });
     if (!emailPattern.test(form.email)) return;
@@ -292,36 +207,43 @@ export const Login = ({
     await onSubmit(form);
   };
 
-  const inputBase =
-    "h-[46px] w-full rounded-[10px] border border-white/[0.08] bg-white/[0.04] px-4 text-[14px] text-white placeholder:text-white/20 outline-none transition-all duration-200 disabled:opacity-50";
+  const getInputStyle = (field: "email" | "password", hasError: boolean): React.CSSProperties => {
+    if (hasError) return { borderColor: "rgba(248,113,113,0.5)", backgroundColor: "rgba(248,113,113,0.05)" };
+    if (focusedField === field) return { borderColor: accentColor, backgroundColor: `${accentColor}12` };
+    return {};
+  };
+
+  // Light mode base, dark: override
+  const inputBase = cn(
+    "h-[46px] w-full rounded-lg border px-4 text-sm outline-none transition-all duration-200 disabled:opacity-50",
+    "border-gray-200 bg-gray-50 text-gray-900 placeholder:text-gray-400",
+    "dark:border-gray-700 dark:bg-gray-800/60 dark:text-white dark:placeholder:text-gray-600",
+  );
 
   return (
-    <div className="flex min-h-screen w-full items-center justify-center bg-[#0a0a0f] px-4 py-16">
-      <div className="flex w-full max-w-[900px] overflow-hidden rounded-[20px] border border-white/[0.07] bg-[#0e0e18] shadow-[0_40px_100px_rgba(0,0,0,0.6)]">
+    <div className="flex min-h-screen w-full items-center justify-center bg-gray-50 px-4 py-16 dark:bg-gray-950">
+      <div className="flex w-full max-w-225 overflow-hidden rounded-2xl border border-gray-200 bg-white shadow-xl dark:border-gray-800 dark:bg-gray-900 dark:shadow-2xl">
+
         {/* ── Hero ── */}
         {showHero && (
-          <div className="relative hidden w-[44%] overflow-hidden bg-[#07070f] lg:flex">
+          <div className="relative hidden w-[44%] overflow-hidden bg-gray-100 lg:flex dark:bg-gray-950">
             <ParticleCanvas accentColor={accentColor} />
-            <div className="pointer-events-none absolute inset-0 z-[1] bg-gradient-to-b from-[#07070f]/50 via-transparent to-[#07070f]/85" />
+            <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-gray-100/50 via-transparent to-gray-100/85 dark:from-gray-950/50 dark:to-gray-950/85" />
             <div className="absolute inset-0 z-10 flex flex-col justify-end p-10">
               {logo && <div className="mb-auto pt-4">{logo}</div>}
               <div>
-                <p className="mb-4 text-[11px] uppercase tracking-[0.18em] text-white/30">
+                <p className="mb-4 text-[11px] uppercase tracking-[0.18em] text-gray-400 dark:text-gray-600">
                   {heroTagline}
                 </p>
-                <h2 className="mb-2 text-[2rem] font-extrabold leading-[1.15] text-white">
+                <h2 className="mb-2 text-[2rem] font-extrabold leading-[1.15] text-gray-900 dark:text-white">
                   {heroTitle ?? (
-                    <>
-                      Acceso al{" "}
-                      <span style={{ color: accentColor }}>sistema</span>
-                    </>
+                    <>Acceso al{" "}<span style={{ color: accentColor }}>sistema</span></>
                   )}
                 </h2>
-                <p className="text-[13px] leading-relaxed text-white/35">
-                  {heroSubtitle ??
-                    "Plataforma segura & moderna para tu equipo."}
+                <p className="text-[13px] leading-relaxed text-gray-500 dark:text-gray-600">
+                  {heroSubtitle ?? "Plataforma segura & moderna para tu equipo."}
                 </p>
-                <p className="mt-6 text-[12px] text-white/20">
+                <p className="mt-6 text-xs text-gray-400 dark:text-gray-700">
                   © {new Date().getFullYear()} {companyName}
                 </p>
               </div>
@@ -331,7 +253,8 @@ export const Login = ({
 
         {/* ── Form side ── */}
         <div className="flex flex-1 items-center justify-center px-10 py-12">
-          <div className="w-full max-w-[360px]">
+          <div className="w-full max-w-90">
+
             {/* Logo mark */}
             <div
               className="mb-7 flex size-8 items-center justify-center rounded-lg"
@@ -340,8 +263,10 @@ export const Login = ({
               <ShieldCheck size={16} color="#fff" strokeWidth={2.5} />
             </div>
 
-            <h1 className="mb-1.5 text-2xl font-bold text-white">{title}</h1>
-            <p className="mb-8 text-[13.5px] leading-relaxed text-white/35">
+            <h1 className="mb-1.5 text-2xl font-bold text-gray-900 dark:text-white">
+              {title}
+            </h1>
+            <p className="mb-8 text-[13.5px] leading-relaxed text-gray-500 dark:text-gray-500">
               {description}
             </p>
 
@@ -354,26 +279,27 @@ export const Login = ({
                     type="button"
                     onClick={provider.onClick}
                     disabled={loading}
-                    className="flex h-[44px] w-full items-center justify-center gap-2.5 rounded-[10px] border border-white/[0.10] bg-white/[0.04] text-[13.5px] font-medium text-white/70 transition-all hover:bg-white/[0.08] hover:text-white disabled:opacity-50"
+                    className="flex h-11 w-full items-center justify-center gap-2.5 rounded-lg border border-gray-200 bg-gray-50 text-[13.5px] font-medium text-gray-600 transition-all hover:bg-gray-100 hover:text-gray-900 disabled:opacity-50 dark:border-gray-700 dark:bg-gray-800/60 dark:text-gray-400 dark:hover:bg-gray-800 dark:hover:text-white"
                   >
                     {provider.icon}
                     {provider.label}
                   </button>
                 ))}
                 <div className="flex items-center gap-3 py-1">
-                  <div className="h-px flex-1 bg-white/[0.07]" />
-                  <span className="text-[11px] uppercase tracking-wider text-white/20">
+                  <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+                  <span className="text-[11px] uppercase tracking-wider text-gray-400 dark:text-gray-700">
                     o continúa con email
                   </span>
-                  <div className="h-px flex-1 bg-white/[0.07]" />
+                  <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
                 </div>
               </div>
             )}
 
             <form onSubmit={handleSubmit} className="space-y-5" noValidate>
+
               {/* Server error */}
               {error && (
-                <div className="flex items-center gap-2 rounded-lg border border-red-500/25 bg-red-500/10 px-3.5 py-2.5 text-[13px] text-red-300">
+                <div className="flex items-center gap-2 rounded-lg border border-red-200 bg-red-50 px-3.5 py-2.5 text-[13px] text-red-600 dark:border-red-500/25 dark:bg-red-500/10 dark:text-red-400">
                   <AlertCircle size={15} className="shrink-0" />
                   {error}
                 </div>
@@ -381,7 +307,7 @@ export const Login = ({
 
               {/* Email */}
               <div>
-                <label className="mb-2 block text-[11.5px] font-medium uppercase tracking-[0.08em] text-white/40">
+                <label className="mb-2 block text-[11.5px] font-medium uppercase tracking-[0.08em] text-gray-400 dark:text-gray-500">
                   {emailLabel}
                 </label>
                 <input
@@ -390,25 +316,19 @@ export const Login = ({
                   placeholder={emailPlaceholder}
                   value={form.email}
                   onChange={handleChange}
-                  onBlur={(e) => {
-                    handleBlur("email");
-                    handleInputBlur(e);
-                  }}
-                  onFocus={(e) => handleFocus(e, emailInvalid)}
+                  onBlur={() => handleBlur("email")}
+                  onFocus={() => setFocusedField("email")}
                   disabled={loading}
                   autoComplete="email"
                   className={inputBase}
-                  style={emailInvalid ? ERROR_BORDER : DEFAULT_BORDER}
+                  style={getInputStyle("email", emailInvalid)}
                   aria-invalid={emailInvalid}
                   aria-describedby={emailInvalid ? "email-error" : undefined}
                 />
-                {emailError && (
-                  <p
-                    id="email-error"
-                    className="mt-1.5 flex items-center gap-1.5 text-[12px] text-red-400"
-                  >
+                {emailInvalid && (
+                  <p id="email-error" className="mt-1.5 flex items-center gap-1.5 text-xs text-red-500 dark:text-red-400">
                     <AlertCircle size={12} className="shrink-0" />
-                    {emailError}
+                    {emailErrorMessage}
                   </p>
                 )}
               </div>
@@ -416,7 +336,7 @@ export const Login = ({
               {/* Password */}
               <div>
                 <div className="mb-2 flex items-center justify-between">
-                  <label className="block text-[11.5px] font-medium uppercase tracking-[0.08em] text-white/40">
+                  <label className="block text-[11.5px] font-medium uppercase tracking-[0.08em] text-gray-400 dark:text-gray-500">
                     {passwordLabel}
                   </label>
                   {forgotPasswordLink && (
@@ -437,39 +357,29 @@ export const Login = ({
                     placeholder={passwordPlaceholder}
                     value={form.password}
                     onChange={handleChange}
-                    onBlur={(e) => {
-                      handleBlur("password");
-                      handleInputBlur(e);
-                    }}
-                    onFocus={(e) => handleFocus(e, passwordInvalid)}
+                    onBlur={() => handleBlur("password")}
+                    onFocus={() => setFocusedField("password")}
                     disabled={loading}
                     autoComplete="current-password"
-                    className={`${inputBase} pr-11`}
-                    style={passwordInvalid ? ERROR_BORDER : DEFAULT_BORDER}
+                    className={cn(inputBase, "pr-11")}
+                    style={getInputStyle("password", passwordInvalid)}
                     aria-invalid={passwordInvalid}
-                    aria-describedby={
-                      passwordInvalid ? "password-error" : undefined
-                    }
+                    aria-describedby={passwordInvalid ? "password-error" : undefined}
                   />
                   <button
                     type="button"
                     onClick={() => setShowPassword((prev) => !prev)}
-                    className="absolute right-3 top-1/2 -translate-y-1/2 text-white/30 transition-colors hover:text-white/70"
+                    className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 transition-colors hover:text-gray-600 dark:text-gray-600 dark:hover:text-gray-400"
                     tabIndex={-1}
-                    aria-label={
-                      showPassword ? "Ocultar contraseña" : "Mostrar contraseña"
-                    }
+                    aria-label={showPassword ? "Ocultar contraseña" : "Mostrar contraseña"}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
                   </button>
                 </div>
-                {passwordError && (
-                  <p
-                    id="password-error"
-                    className="mt-1.5 flex items-center gap-1.5 text-[12px] text-red-400"
-                  >
+                {passwordInvalid && (
+                  <p id="password-error" className="mt-1.5 flex items-center gap-1.5 text-xs text-red-500 dark:text-red-400">
                     <AlertCircle size={12} className="shrink-0" />
-                    {passwordError}
+                    {passwordErrorMessage}
                   </p>
                 )}
               </div>
@@ -478,30 +388,24 @@ export const Login = ({
               <button
                 type="submit"
                 disabled={loading}
-                className="flex h-12 w-full items-center justify-center gap-2 rounded-[10px] text-[14px] font-bold tracking-[0.04em] text-white transition-all duration-200 hover:-translate-y-px active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
+                className="flex h-12 w-full items-center justify-center gap-2 rounded-lg text-sm font-bold tracking-[0.04em] text-white transition-all duration-200 hover:-translate-y-px active:scale-[0.98] disabled:cursor-not-allowed disabled:opacity-50"
                 style={{ backgroundColor: accentColor }}
               >
                 {loading ? (
-                  <>
-                    <Loader2 size={17} className="animate-spin" />
-                    Iniciando sesión...
-                  </>
+                  <><Loader2 size={17} className="animate-spin" />Iniciando sesión...</>
                 ) : (
-                  <>
-                    {submitLabel}
-                    <ArrowRight size={16} />
-                  </>
+                  <>{submitLabel}<ArrowRight size={16} /></>
                 )}
               </button>
 
               {/* Terms */}
               {termsLink && (
-                <p className="text-center text-[11.5px] leading-relaxed text-white/25">
+                <p className="text-center text-[11.5px] leading-relaxed text-gray-400 dark:text-gray-700">
                   Al continuar aceptas los{" "}
                   <a
                     href={termsLink.href}
                     onClick={termsLink.onClick}
-                    className="underline underline-offset-2 transition-colors hover:text-white/60"
+                    className="underline underline-offset-2 transition-colors hover:text-gray-600 dark:hover:text-gray-400"
                   >
                     {termsLink.label}
                   </a>
@@ -510,7 +414,7 @@ export const Login = ({
 
               {/* Register link */}
               {registerLink && (
-                <p className="text-center text-[13px] text-white/30">
+                <p className="text-center text-[13px] text-gray-500 dark:text-gray-600">
                   ¿No tienes cuenta?{" "}
                   <a
                     href={registerLink.href}
@@ -525,12 +429,12 @@ export const Login = ({
 
               {/* Footer divider */}
               <div className="flex items-center gap-2.5 pt-1">
-                <div className="h-px flex-1 bg-white/[0.07]" />
-                <span className="flex items-center gap-1.5 text-[11px] text-white/20">
+                <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
+                <span className="flex items-center gap-1.5 text-[11px] text-gray-400 dark:text-gray-700">
                   <Check size={11} />
                   {companyName}
                 </span>
-                <div className="h-px flex-1 bg-white/[0.07]" />
+                <div className="h-px flex-1 bg-gray-200 dark:bg-gray-800" />
               </div>
             </form>
           </div>

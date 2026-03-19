@@ -200,8 +200,21 @@ type Story = StoryObj<typeof Login>;
    Stories
 ───────────────────────────────────────── */
 
-/** Estado limpio con valores por defecto */
-export const Default: Story = {};
+/** Modo claro (Light) */
+export const Default: Story = {
+  name: "Light mode",
+  parameters: {
+    backgrounds: { default: "Light" },
+  },
+};
+
+/** Modo oscuro (Dark) */
+export const DarkMode: Story = {
+  name: "Dark mode",
+  parameters: {
+    backgrounds: { default: "Dark" },
+  },
+};
 
 /** Spinner activo, formulario bloqueado */
 export const Loading: Story = {

@@ -1,5 +1,5 @@
 import type { FC, HtmlHTMLAttributes } from "react";
-import { cn } from "../../main";
+import { cn } from "../../utils/cn";
 
 interface StackProps extends HtmlHTMLAttributes<HTMLDivElement> {
     col?: boolean;

@@ -1,4 +1,4 @@
-import React from "react";
+import type { ReactNode } from "react";
 import {
   Info,
   ChevronUp,
@@ -8,6 +8,7 @@ import {
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
+import { cn } from "../../utils/cn";
 
 export interface BreadcrumbItem {
   label: string;
@@ -15,11 +16,12 @@ export interface BreadcrumbItem {
   href?: string;
 }
 
-interface HeaderProps {
+export interface HeaderProps {
   title: string;
   description?: string;
-  children?: React.ReactNode;
-  centerContent?: React.ReactNode;
+  children?: ReactNode;
+  centerContent?: ReactNode;
+  className?: string;
 
   onClickInfo?: () => void;
   tutorialActive?: boolean;
@@ -50,45 +52,49 @@ export const Header = ({
   isSidebarOpen = true,
   onToggleSidebar,
   breadcrumbs,
+  className,
 }: HeaderProps) => {
   return (
-    <header className="mb-4">
+    <header className={cn("mb-4", className)}>
       {isCollapsed ? (
-        /* Colapsado */
-        <div className="bg-white border-b px-4 py-2">
+        <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 px-4 py-2 shadow-sm">
           <div className="flex items-center justify-between">
-            <h1 className="text-base font-semibold">{title}</h1>
-
+            <h1 className="text-base font-semibold text-gray-800 dark:text-gray-100">{title}</h1>
             {onToggleCollapse && (
-              <button onClick={onToggleCollapse}>
+              <button
+                onClick={onToggleCollapse}
+                className="p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                aria-label="Expandir"
+              >
                 <ChevronDown className="w-4 h-4" />
               </button>
             )}
           </div>
         </div>
       ) : (
-        /* Expandido */
-        <div className="bg-white border-b relative">
+        <div className="bg-white dark:bg-gray-900 border-b border-gray-200 dark:border-gray-700 shadow-sm relative">
           {/* Breadcrumbs */}
           {breadcrumbs && breadcrumbs.length > 0 && (
-            <div className="px-4 pt-2 flex items-center gap-1 text-xs text-gray-400">
+            <div className="px-4 pt-2.5 flex items-center gap-1 text-xs text-gray-400 dark:text-gray-500">
               {breadcrumbs.map((crumb, i) => (
                 <span key={i} className="flex items-center gap-1">
-                  {i > 0 && <ChevronRight className="w-3 h-3 text-gray-300" />}
-
+                  {i > 0 && <ChevronRight className="w-3 h-3 text-gray-300 dark:text-gray-600" />}
                   {crumb.onClick ? (
                     <button
                       onClick={crumb.onClick}
-                      className="hover:text-amber-600"
+                      className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
                     >
                       {crumb.label}
                     </button>
                   ) : crumb.href ? (
-                    <a href={crumb.href} className="hover:text-amber-600">
+                    <a
+                      href={crumb.href}
+                      className="hover:text-gray-700 dark:hover:text-gray-200 transition-colors"
+                    >
                       {crumb.label}
                     </a>
                   ) : (
-                    <span className="font-medium text-gray-600">
+                    <span className="font-medium text-gray-600 dark:text-gray-400">
                       {crumb.label}
                     </span>
                   )}
@@ -101,9 +107,13 @@ export const Header = ({
             <div className="flex items-center justify-between gap-4">
               {/* Left */}
               <div className="flex-1 min-w-0">
-                <div className="flex items-center gap-2 mb-1">
+                <div className="flex items-center gap-2 mb-0.5">
                   {onToggleSidebar && (
-                    <button onClick={onToggleSidebar} className="md:hidden">
+                    <button
+                      onClick={onToggleSidebar}
+                      className="md:hidden p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                      aria-label="Abrir menú"
+                    >
                       {isSidebarOpen ? (
                         <ChevronLeft className="w-4 h-4" />
                       ) : (
@@ -113,22 +123,34 @@ export const Header = ({
                   )}
 
                   {showBackButton && (
-                    <button onClick={onBack}>
+                    <button
+                      onClick={onBack}
+                      className="p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                      aria-label="Volver"
+                    >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
                   )}
 
-                  <h1 className="text-lg font-semibold truncate">{title}</h1>
+                  <h1 className="text-lg font-semibold text-gray-900 dark:text-white truncate">
+                    {title}
+                  </h1>
 
                   {tutorialActive && onClickInfo && (
-                    <button onClick={onClickInfo}>
+                    <button
+                      onClick={onClickInfo}
+                      className="p-1 rounded-full text-gray-400 hover:text-blue-500 hover:bg-blue-50 dark:text-gray-500 dark:hover:text-blue-400 dark:hover:bg-blue-950/40 transition-colors"
+                      aria-label="Ver tutorial"
+                    >
                       <Info className="w-4 h-4" />
                     </button>
                   )}
                 </div>
 
                 {description && (
-                  <p className="text-sm text-gray-500">{description}</p>
+                  <p className="text-sm text-gray-500 dark:text-gray-400 leading-snug">
+                    {description}
+                  </p>
                 )}
               </div>
 
@@ -140,11 +162,14 @@ export const Header = ({
               )}
 
               {/* Right */}
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-2 shrink-0">
                 {children}
-
                 {onToggleCollapse && (
-                  <button onClick={onToggleCollapse}>
+                  <button
+                    onClick={onToggleCollapse}
+                    className="p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
+                    aria-label="Colapsar"
+                  >
                     <ChevronUp className="w-4 h-4" />
                   </button>
                 )}
