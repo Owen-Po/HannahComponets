@@ -22,6 +22,7 @@ export { Alert } from "./components/Alert";
 export { Modal } from "./components/Modal";
 export { Tabs } from "./components/Tabs";
 export { Avatar, AvatarGroup } from "./components/Avatar";
+export { ToastProvider, useToast } from "./components/Toast";
 
 // ── Templates ──────────────────────────────────────────────────────────────────
 export { AuthProvider, useAuth } from "./templates/AuthContext";
@@ -63,3 +64,4 @@ export type { AlertProps } from "./components/Alert";
 export type { ModalProps } from "./components/Modal";
 export type { TabsProps, TabItem } from "./components/Tabs";
 export type { AvatarProps, AvatarGroupProps } from "./components/Avatar";
+export type { ToastOptions, ToastVariant, ToastPosition, ToastAction, ToastContextValue } from "./components/Toast";
