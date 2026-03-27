@@ -249,7 +249,7 @@ const ToastItemComponent: FC<ToastItemProps> = ({ item, onDismiss, position }) =
           <button
             onClick={dismiss}
             className="shrink-0 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors mt-0.5"
-            aria-label="Cerrar"
+            aria-label="Cerrar notificación"
           >
             <X size={14} />
           </button>

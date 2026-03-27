@@ -13,56 +13,44 @@ import { cn } from "../../utils/cn";
 ───────────────────────────────────────── */
 const button = cva(
   [
-    "relative inline-flex items-center justify-center gap-2",
-    "font-bold tracking-wide whitespace-nowrap select-none",
-    "transition-all duration-150 ease-out",
+    "inline-flex items-center justify-center gap-2",
+    "font-semibold whitespace-nowrap select-none",
+    "transition-all duration-200 ease-out",
     "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
     "disabled:pointer-events-none disabled:opacity-40",
-    // shine overlay
-    "overflow-hidden",
-    "before:absolute before:inset-0 before:translate-x-[-110%] before:skew-x-[-20deg]",
-    "before:bg-white/20 before:transition-transform before:duration-500",
-    "hover:before:translate-x-[110%]",
-    // press effect
-    "active:scale-[0.96]",
+    "active:scale-[0.97]",
   ],
   {
     variants: {
       variant: {
         default: [
-          "bg-slate-700 text-white shadow-[0_4px_0_0_#334155]",
-          "hover:bg-slate-600 hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_#334155]",
-          "active:translate-y-0.5 active:shadow-[0_2px_0_0_#334155]",
+          "bg-slate-700 text-white shadow-sm",
+          "hover:bg-slate-600",
           "focus-visible:ring-slate-500",
         ],
         primary: [
-          "bg-blue-500 text-white shadow-[0_4px_0_0_#1d4ed8]",
-          "hover:bg-blue-400 hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_#1d4ed8]",
-          "active:translate-y-0.5 active:shadow-[0_2px_0_0_#1d4ed8]",
+          "bg-blue-500 text-white shadow-sm",
+          "hover:bg-blue-600",
           "focus-visible:ring-blue-500",
         ],
         success: [
-          "bg-emerald-500 text-white shadow-[0_4px_0_0_#065f46]",
-          "hover:bg-emerald-400 hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_#065f46]",
-          "active:translate-y-0.5 active:shadow-[0_2px_0_0_#065f46]",
+          "bg-emerald-500 text-white shadow-sm",
+          "hover:bg-emerald-600",
           "focus-visible:ring-emerald-500",
         ],
         warning: [
-          "bg-amber-400 text-amber-950 shadow-[0_4px_0_0_#92400e]",
-          "hover:bg-amber-300 hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_#92400e]",
-          "active:translate-y-0.5 active:shadow-[0_2px_0_0_#92400e]",
+          "bg-amber-400 text-amber-950 shadow-sm",
+          "hover:bg-amber-500",
           "focus-visible:ring-amber-400",
         ],
         danger: [
-          "bg-red-600 text-white shadow-[0_4px_0_0_#7f1d1d]",
-          "hover:bg-red-500 hover:-translate-y-0.5 hover:shadow-[0_6px_0_0_#7f1d1d]",
-          "active:translate-y-0.5 active:shadow-[0_2px_0_0_#7f1d1d]",
+          "bg-red-600 text-white shadow-sm",
+          "hover:bg-red-700",
           "focus-visible:ring-red-500",
         ],
         ghost: [
-          "bg-transparent text-slate-700 shadow-none border border-slate-300",
-          "hover:bg-slate-100 hover:-translate-y-0.5 hover:border-slate-400",
-          "active:translate-y-0.5",
+          "bg-transparent text-slate-700 border border-slate-300",
+          "hover:bg-slate-100 hover:border-slate-400",
           "focus-visible:ring-slate-400",
         ],
       },

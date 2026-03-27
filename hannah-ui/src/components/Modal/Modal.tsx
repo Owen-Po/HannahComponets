@@ -72,6 +72,7 @@ export const Modal: FC<ModalProps> = ({
     <div
       role="dialog"
       aria-modal="true"
+      aria-label={typeof title === "string" ? title : undefined}
       className="fixed inset-0 z-50 flex items-center justify-center p-4"
       onClick={handleBackdrop}
     >

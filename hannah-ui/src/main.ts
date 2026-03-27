@@ -23,6 +23,15 @@ export { Modal } from "./components/Modal";
 export { Tabs } from "./components/Tabs";
 export { Avatar, AvatarGroup } from "./components/Avatar";
 export { ToastProvider, useToast } from "./components/Toast";
+export { Breadcrumb } from "./components/Breadcrumb";
+export { Pagination } from "./components/Pagination";
+export { StatsCard } from "./components/StatsCard";
+export { Register } from "./components/Register";
+export { Chip } from "./components/Chip";
+export { Toggle } from "./components/Toggle";
+export { PaymentMethodCard, PaymentForm } from "./components/PaymentMethodCard";
+export { InteractiveCreditCard, CreditCardForm, detectCardBrand, formatCardNumber } from "./components/InteractiveCreditCard";
+export { FilterSelect, FilterSearch, FilterDate, FilterDateRange, FilterChips, FilterBar, FilterButton } from "./components/Filter";
 
 // ── Templates ──────────────────────────────────────────────────────────────────
 export { AuthProvider, useAuth } from "./templates/AuthContext";
@@ -65,3 +74,12 @@ export type { ModalProps } from "./components/Modal";
 export type { TabsProps, TabItem } from "./components/Tabs";
 export type { AvatarProps, AvatarGroupProps } from "./components/Avatar";
 export type { ToastOptions, ToastVariant, ToastPosition, ToastAction, ToastContextValue } from "./components/Toast";
+export type { BreadcrumbProps, BreadcrumbItem as BreadcrumbItemType } from "./components/Breadcrumb";
+export type { PaginationProps } from "./components/Pagination";
+export type { StatsCardProps, StatsCardTrend } from "./components/StatsCard";
+export type { RegisterProps, RegisterData, RegisterValidationRules, RegisterLink, RegisterSocialProvider } from "./components/Register";
+export type { ChipProps } from "./components/Chip";
+export type { ToggleProps } from "./components/Toggle";
+export type { PaymentMethodCardProps, PaymentType, PaymentFormProps } from "./components/PaymentMethodCard";
+export type { InteractiveCreditCardProps, CardBrand, CardBank, CreditCardFormProps } from "./components/InteractiveCreditCard";
+export type { FilterOption, FilterSelectProps, FilterSearchProps, FilterDateProps, FilterDateRangeProps, FilterChipsProps, FilterBarProps, FilterButtonProps } from "./components/Filter";

@@ -6,7 +6,62 @@ import {
   forwardRef,
   useState,
 } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "../../utils/cn";
+
+/* ─────────────────────────────────────────
+   CVA definitions
+───────────────────────────────────────── */
+const radio = cva(
+  [
+    "appearance-none border-2 rounded-full transition-all duration-150",
+    "bg-white focus-visible:outline-none",
+    "focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-1",
+  ],
+  {
+    variants: {
+      size: {
+        sm: "w-4 h-4",
+        md: "w-5 h-5",
+        lg: "w-6 h-6",
+      },
+      checked: {
+        true: "border-blue-500",
+        false: "border-gray-300 hover:border-blue-400",
+      },
+    },
+    defaultVariants: { size: "md", checked: false },
+  },
+);
+
+const radioDot = cva(
+  "absolute rounded-full bg-blue-500 pointer-events-none transition-all duration-150",
+  {
+    variants: {
+      size: {
+        sm: "w-1.5 h-1.5",
+        md: "w-2 h-2",
+        lg: "w-2.5 h-2.5",
+      },
+      checked: {
+        true: "opacity-100 scale-100",
+        false: "opacity-0 scale-0",
+      },
+    },
+    defaultVariants: { size: "md", checked: false },
+  },
+);
+
+const radioLabel = cva("font-medium text-gray-800 dark:text-gray-200 leading-snug", {
+  variants: {
+    size: {
+      sm: "text-xs",
+      md: "text-sm",
+      lg: "text-base",
+    },
+  },
+  defaultVariants: { size: "md" },
+});
 
 /* ─────────────────────────────────────────
    Types
@@ -19,10 +74,10 @@ export interface RadioOption {
 }
 
 export interface RadioProps
-  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type"> {
+  extends Omit<InputHTMLAttributes<HTMLInputElement>, "size" | "type">,
+    Omit<VariantProps<typeof radio>, "checked"> {
   label?: ReactNode;
   description?: string;
-  size?: "sm" | "md" | "lg";
 }
 
 export interface RadioGroupProps {
@@ -63,10 +118,6 @@ export const Radio: FC<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
       onChange?.(e);
     };
 
-    const boxSize = size === "sm" ? "w-4 h-4" : size === "lg" ? "w-6 h-6" : "w-5 h-5";
-    const dotSize = size === "sm" ? "w-1.5 h-1.5" : size === "lg" ? "w-2.5 h-2.5" : "w-2 h-2";
-    const textSize = size === "sm" ? "text-xs" : size === "lg" ? "text-base" : "text-sm";
-
     return (
       <label
         htmlFor={id}
@@ -79,7 +130,7 @@ export const Radio: FC<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
         <div
           className={cn(
             "relative flex items-center justify-center shrink-0 mt-0.5",
-            boxSize,
+            size === "sm" ? "w-4 h-4" : size === "lg" ? "w-6 h-6" : "w-5 h-5",
           )}
         >
           <input
@@ -90,36 +141,20 @@ export const Radio: FC<RadioProps> = forwardRef<HTMLInputElement, RadioProps>(
             checked={isControlled ? checked : undefined}
             defaultChecked={!isControlled ? defaultChecked : undefined}
             onChange={handleChange}
-            className={cn(
-              "appearance-none border-2 rounded-full transition-all duration-150",
-              "bg-white focus-visible:outline-none",
-              "focus-visible:ring-2 focus-visible:ring-blue-300 focus-visible:ring-offset-1",
-              isChecked
-                ? "border-blue-500"
-                : "border-gray-300 hover:border-blue-400",
-              boxSize,
-            )}
+            aria-checked={isChecked}
+            className={cn(radio({ size, checked: !!isChecked }))}
             {...props}
           />
-          {/* Dot — visibilidad controlada por React */}
-          <span
-            className={cn(
-              "absolute rounded-full bg-blue-500 pointer-events-none transition-all duration-150",
-              isChecked ? "opacity-100 scale-100" : "opacity-0 scale-0",
-              dotSize,
-            )}
-          />
+          <span className={cn(radioDot({ size, checked: !!isChecked }))} aria-hidden="true" />
         </div>
 
         {(label || description) && (
           <div className="flex flex-col gap-0.5">
             {label && (
-              <span className={cn("font-medium text-gray-800 leading-snug", textSize)}>
-                {label}
-              </span>
+              <span className={cn(radioLabel({ size }))}>{label}</span>
             )}
             {description && (
-              <span className="text-xs text-gray-500 leading-snug">{description}</span>
+              <span className="text-xs text-gray-500 dark:text-gray-400 leading-snug">{description}</span>
             )}
           </div>
         )}
@@ -154,6 +189,7 @@ export const RadioGroup: FC<RadioGroupProps> = ({
         className,
       )}
       role="radiogroup"
+      aria-label={name}
     >
       {options.map((opt) => (
         <Radio

@@ -62,6 +62,7 @@ export const Tabs: FC<TabsProps> = ({
           return (
             <button
               key={tab.key}
+              id={`tab-${tab.key}`}
               role="tab"
               aria-selected={isActive}
               disabled={tab.disabled}
@@ -107,7 +108,7 @@ export const Tabs: FC<TabsProps> = ({
 
       {/* Tab panel */}
       {activeTab?.content !== undefined && (
-        <div role="tabpanel" className="pt-4">
+        <div role="tabpanel" aria-labelledby={`tab-${activeTab.key}`} className="pt-4">
           {activeTab.content}
         </div>
       )}

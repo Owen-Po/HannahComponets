@@ -15,11 +15,106 @@
       "import": "./dist/hannah-ui.js",
       "require": "./dist/hannah-ui.umd.cjs"
     },
-    "./style.css": "./dist/hannah-ui.css"
+    "./style.css": "./dist/hannah-ui.css",
+    "./Button": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Input": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Select": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Textarea": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Checkbox": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Radio": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Badge": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Card": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Table": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Alert": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Modal": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Tabs": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Avatar": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Toast": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Header": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Sidebar": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Login": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Register": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Stack": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Form": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Breadcrumb": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./Pagination": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    },
+    "./StatsCard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js"
+    }
   },
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "storybook dev",
@@ -27,10 +122,10 @@
     "storybook:serve": "storybook serve"
   },
   "peerDependencies": {
+    "lucide-react": ">=0.400.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "react-router-dom": "^7.0.0",
-    "lucide-react": ">=0.400.0"
+    "react-router-dom": "^7.0.0"
   },
   "peerDependenciesMeta": {
     "react-router-dom": {
@@ -45,6 +140,10 @@
     "@storybook/addon-docs": "^10.2.19",
     "@storybook/react-vite": "^10.2.19",
     "@tailwindcss/vite": "^4.2.1",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
     "@types/node": "^24.12.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -53,6 +152,7 @@
     "eslint-plugin-react-hooks": "^7.0.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "jsdom": "^29.0.1",
     "lucide-react": "^0.577.0",
     "react-router-dom": "^7.13.1",
     "storybook": "^10.2.19",
@@ -60,7 +160,8 @@
     "typescript": "^5.9.3",
     "typescript-eslint": "^8.56.1",
     "vite": "^7.3.1",
-    "vite-plugin-dts": "^4.5.4"
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.1.2"
   },
   "dependencies": {
     "class-variance-authority": "^0.7.1",

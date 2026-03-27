@@ -82,7 +82,7 @@ export function Table<T extends Record<string, unknown>>({
       )}
       {...props}
     >
-      <table className="w-full text-sm border-collapse">
+      <table className="w-full text-sm border-collapse" role="table">
         <thead
           className={cn(
             "bg-gray-50 dark:bg-gray-800 border-b border-gray-200 dark:border-gray-700",
