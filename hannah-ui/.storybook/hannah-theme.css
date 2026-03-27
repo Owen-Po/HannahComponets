@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
 :root {
-  /* HANNAH Brand Colors */
+  /* HANNAH Brand Colors — solo variables, no aplican estilos visuales */
   --hannah-neon: #CCFF00;
   --hannah-neon-dark: #9FCC00;
   --hannah-purple: #1a0f2e;
@@ -11,7 +11,6 @@
   --hannah-gray: #1a1a1a;
   --hannah-gray-light: #2a2a2a;
 
-  /* Storybook Theme */
   --sb-background: #0a0a0a;
   --sb-sidebar-bg: #0f0f0f;
   --sb-toolbar-bg: #141414;
@@ -28,44 +27,7 @@
   --sb-code-bg: #141414;
 }
 
-/* Override Storybook docs page */
-.sbdocs-wrapper {
-  background: #0a0a0a !important;
-  color: #ffffff !important;
-}
-
-.sbdocs-content {
-  max-width: 900px;
-}
-
-/* Code blocks in docs */
-.docblock-source {
-  background: #141414 !important;
-  border-color: #2a2a2a !important;
-}
-
-.docblock-source code {
-  color: #CCFF00 !important;
-  font-family: 'JetBrains Mono', monospace !important;
-}
-
-/* Args table */
-.docblock-argstable th {
-  color: #a0a0a0 !important;
-}
-
-.docblock-argstable td {
-  color: #ffffff !important;
-  border-color: #2a2a2a !important;
-}
-
-/* Canvas toolbar */
-.sb-bar {
-  background: #141414 !important;
-  border-color: #2a2a2a !important;
-}
-
-/* Story canvas */
+/* Tipografía global — solo fonts, no colores */
 .sb-show-main {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
