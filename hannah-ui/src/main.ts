@@ -33,6 +33,28 @@ export { PaymentMethodCard, PaymentForm } from "./components/PaymentMethodCard";
 export { InteractiveCreditCard, CreditCardForm, detectCardBrand, formatCardNumber } from "./components/InteractiveCreditCard";
 export { FilterSelect, FilterSearch, FilterDate, FilterDateRange, FilterChips, FilterBar, FilterButton } from "./components/Filter";
 
+// ── New Components (ported from BDApp) ──────────────────────────────────────
+export { DraggableTable, useTableStore } from "./components/DraggableTable";
+export { FilterPanel } from "./components/FilterPanel";
+export { AdvancedTableFilter } from "./components/AdvancedTableFilter";
+export { AppSelect } from "./components/AppSelect";
+export { FileDropzone } from "./components/FileDropzone";
+export { DatePicker } from "./components/DatePicker";
+export { PhoneInput } from "./components/PhoneInput";
+export { ColorPicker } from "./components/ColorPicker";
+export { KPICard } from "./components/KPICard";
+export { ConfirmModal } from "./components/ConfirmModal";
+export { ExportModal } from "./components/ExportModal";
+export { PageTabs } from "./components/PageTabs";
+export { ExpandableTable } from "./components/ExpandableTable";
+export { StickyTable } from "./components/StickyTable";
+export { SimpleTable } from "./components/SimpleTable";
+export { Switch } from "./components/Switch";
+export { HelpModal, HelpList, HelpParagraph, HelpHighlight, HelpKeyboard } from "./components/HelpModal";
+export { NoteBanner } from "./components/NoteBanner";
+export { ErrorMessage } from "./components/ErrorMessage";
+export { SearchableSelect } from "./components/SearchableSelect";
+
 // ── Templates ──────────────────────────────────────────────────────────────────
 export { AuthProvider, useAuth } from "./templates/AuthContext";
 export { SidebarProvider, useSidebar } from "./templates/SidebarContext";
@@ -83,3 +105,25 @@ export type { ToggleProps } from "./components/Toggle";
 export type { PaymentMethodCardProps, PaymentType, PaymentFormProps } from "./components/PaymentMethodCard";
 export type { InteractiveCreditCardProps, CardBrand, CardBank, CreditCardFormProps } from "./components/InteractiveCreditCard";
 export type { FilterOption, FilterSelectProps, FilterSearchProps, FilterDateProps, FilterDateRangeProps, FilterChipsProps, FilterBarProps, FilterButtonProps } from "./components/Filter";
+
+// ── New Component Types ─────────────────────────────────────────────────────
+export type { DraggableTableProps } from "./components/DraggableTable";
+export type { FilterPanelProps } from "./components/FilterPanel";
+export type { AdvancedTableFilterProps, FilterState } from "./components/AdvancedTableFilter";
+export type { SelectOption as AppSelectOption } from "./components/AppSelect";
+export type { FileDropzoneProps } from "./components/FileDropzone";
+export type { DatePickerProps } from "./components/DatePicker";
+export type { PhoneInputProps } from "./components/PhoneInput";
+export type { ColorPickerProps } from "./components/ColorPicker";
+export type { KPICardProps } from "./components/KPICard";
+export type { ConfirmModalProps } from "./components/ConfirmModal";
+export type { ExportModalProps, ExportFormat } from "./components/ExportModal";
+export type { PageTabsProps, PageTab } from "./components/PageTabs";
+export type { ExpandableTableProps } from "./components/ExpandableTable";
+export type { StickyTableProps } from "./components/StickyTable";
+export type { SimpleTableProps } from "./components/SimpleTable";
+export type { SwitchProps } from "./components/Switch";
+export type { HelpModalProps, HelpSection } from "./components/HelpModal";
+export type { NoteBannerProps } from "./components/NoteBanner";
+export type { ErrorMessageProps } from "./components/ErrorMessage";
+export type { SearchableSelectProps, SearchableSelectOption } from "./components/SearchableSelect";

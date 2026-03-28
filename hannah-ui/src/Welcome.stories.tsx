@@ -186,7 +186,7 @@ function Dashboard() {
                   textTransform: "uppercase",
                 }}
               >
-                Design System · v0.0.2
+                Design System · v0.0.3
               </p>
             </div>
           </div>
@@ -292,6 +292,46 @@ function Dashboard() {
           <ComponentCard name="FilterDate" description="Selector de fecha" path="components-filter" />
           <ComponentCard name="FilterSearch" description="Búsqueda con debounce" path="components-filter" />
           <ComponentCard name="FilterChips" description="Multi-select con chips" path="components-filter" />
+          <ComponentCard name="FilterPanel" description="Popover de filtros con contador" path="components-filterpanel" />
+          <ComponentCard name="AdvancedTableFilter" description="Filtros AND/OR multi-campo" path="components-advancedtablefilter" />
+        </Grid>
+
+        {/* Tablas Avanzadas */}
+        <SectionTitle title="Tablas Avanzadas" />
+        <Grid>
+          <ComponentCard name="DraggableTable" description="Tabla con drag & drop, sorting, resize" path="components-draggabletable" />
+          <ComponentCard name="ExpandableTable" description="Tabla con filas expandibles" path="components-expandabletable" />
+          <ComponentCard name="StickyTable" description="Tabla con columnas sticky" path="components-stickytable" />
+          <ComponentCard name="SimpleTable" description="Tabla simple y ligera" path="components-simpletable" />
+        </Grid>
+
+        {/* Inputs Especializados */}
+        <SectionTitle title="Inputs Especializados" />
+        <Grid>
+          <ComponentCard name="AppSelect" description="Select searchable y creatable" path="components-appselect" />
+          <ComponentCard name="DatePicker" description="Selector de fecha con calendario" path="components-datepicker" />
+          <ComponentCard name="PhoneInput" description="Input de teléfono internacional" path="components-phoneinput" />
+          <ComponentCard name="ColorPicker" description="Selector de color con presets" path="components-colorpicker" />
+          <ComponentCard name="FileDropzone" description="Upload drag & drop con preview" path="components-filedropzone" />
+          <ComponentCard name="SearchableSelect" description="Combobox con búsqueda" path="components-searchableselect" />
+        </Grid>
+
+        {/* Overlays Nuevos */}
+        <SectionTitle title="Modales Especializados" />
+        <Grid>
+          <ComponentCard name="ConfirmModal" description="Confirmación con variantes" path="components-confirmmodal" />
+          <ComponentCard name="ExportModal" description="Exportar datos CSV/Excel/PDF" path="components-exportmodal" />
+          <ComponentCard name="HelpModal" description="Modal de ayuda con secciones" path="components-helpmodal" />
+        </Grid>
+
+        {/* UI Primitives */}
+        <SectionTitle title="Primitivos UI" />
+        <Grid>
+          <ComponentCard name="KPICard" description="Tarjeta de indicador clave" path="components-kpicard" />
+          <ComponentCard name="PageTabs" description="Tabs de navegación por página" path="components-pagetabs" />
+<ComponentCard name="Switch" description="Toggle switch con label" path="components-switch" />
+          <ComponentCard name="NoteBanner" description="Banner informativo con variantes" path="components-notebanner" />
+          <ComponentCard name="ErrorMessage" description="Mensaje de error inline" path="components-errormessage" />
         </Grid>
 
         {/* Templates */}
@@ -318,8 +358,8 @@ function Dashboard() {
             © 2026 HANNAH UI · React + Tailwind CSS
           </p>
           <div style={{ display: "flex", gap: 16 }}>
-            <span style={{ fontSize: 11, color: "#555" }}>29 componentes</span>
-            <span style={{ fontSize: 11, color: "#555" }}>7 filtros</span>
+            <span style={{ fontSize: 11, color: "#555" }}>49 componentes</span>
+            <span style={{ fontSize: 11, color: "#555" }}>9 filtros</span>
             <span style={{ fontSize: 11, color: "#555" }}>4 templates</span>
           </div>
         </div>
