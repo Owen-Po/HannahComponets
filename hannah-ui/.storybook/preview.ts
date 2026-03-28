@@ -32,6 +32,7 @@ const withDarkMode: Decorator = (StoryFn, context) => {
 };
 
 const preview: Preview = {
+  tags: ["autodocs"],
   decorators: [withDarkMode],
   globalTypes: {
     backgrounds: {

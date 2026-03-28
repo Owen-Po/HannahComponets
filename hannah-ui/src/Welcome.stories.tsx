@@ -5,24 +5,16 @@ import type { Meta, StoryObj } from "@storybook/react";
    Uses the Storybook URL API to navigate
 ───────────────────────────────────────── */
 function navigateTo(path: string) {
-  // Storybook 10 URL format: ?path=/docs/<story-id>--docs
   const url = `/?path=/docs/${path}--docs`;
 
-  // Try the Storybook channel API first (works within iframe)
+  // Navigate the parent frame (Storybook manager)
   try {
-    const channel = (window.parent as any).__STORYBOOK_ADDONS_CHANNEL__;
-    if (channel) {
-      channel.emit("setCurrentStory", { storyId: `${path}--docs` });
-      return;
+    if (window.parent !== window) {
+      window.parent.location.href = url;
+    } else {
+      window.location.href = url;
     }
   } catch {
-    // fallback below
-  }
-
-  // Fallback: navigate parent window
-  if (window.parent !== window) {
-    window.parent.location.href = url;
-  } else {
     window.location.href = url;
   }
 }
@@ -164,22 +156,16 @@ function Dashboard() {
               marginBottom: "16px",
             }}
           >
-            <div
+            <img
+              src="./logohanna.png"
+              alt="HANNAH UI"
               style={{
                 width: 48,
                 height: 48,
                 borderRadius: 12,
-                background: "#CCFF00",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                fontWeight: 900,
-                fontSize: 20,
-                color: "#0a0a0a",
+                objectFit: "cover",
               }}
-            >
-              H
-            </div>
+            />
             <div>
               <h1
                 style={{
@@ -266,7 +252,7 @@ function Dashboard() {
           <ComponentCard name="Checkbox" description="Casillas de verificación" path="components-checkbox" />
           <ComponentCard name="Radio" description="Botones de radio" path="components-radio" />
           <ComponentCard name="Toggle" description="Switch on/off" path="components-toggle" />
-          <ComponentCard name="Form" description="Layouts de formulario" path="components-form" />
+          <ComponentCard name="Stack" description="Layout de apilado flexible" path="components-stack" />
         </Grid>
 
         {/* Data */}
