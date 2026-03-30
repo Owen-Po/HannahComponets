@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState } from "react";
 import {
   Eye,
   EyeOff,
@@ -56,6 +56,7 @@ export interface LoginProps {
   showHero?: boolean;
   logo?: React.ReactNode;
   accentColor?: string;
+  heroImage?: string;
 
   // ── State ──
   loading?: boolean;
@@ -79,72 +80,6 @@ export interface LoginProps {
 }
 
 /* ─────────────────────────────────────────
-   Particle canvas
-───────────────────────────────────────── */
-const ParticleCanvas = ({ accentColor }: { accentColor: string }) => {
-  const canvasRef = useRef<HTMLCanvasElement>(null);
-
-  useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
-    const ctx = canvas.getContext("2d");
-    if (!ctx) return;
-
-    let animId: number;
-    interface Pt { x: number; y: number; vx: number; vy: number; r: number }
-    let pts: Pt[] = [];
-
-    const resize = () => {
-      canvas.width = canvas.offsetWidth;
-      canvas.height = canvas.offsetHeight;
-      pts = Array.from({ length: 55 }, () => ({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        vx: (Math.random() - 0.5) * 0.35,
-        vy: (Math.random() - 0.5) * 0.35,
-        r: Math.random() * 1.5 + 0.5,
-      }));
-    };
-
-    const draw = () => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      pts.forEach((p) => {
-        p.x += p.vx; p.y += p.vy;
-        if (p.x < 0 || p.x > canvas.width) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.vy *= -1;
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = `${accentColor}99`;
-        ctx.fill();
-      });
-      for (let i = 0; i < pts.length; i++) {
-        for (let j = i + 1; j < pts.length; j++) {
-          const dx = pts[i].x - pts[j].x;
-          const dy = pts[i].y - pts[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 90) {
-            const alpha = Math.round(50 * (1 - dist / 90)).toString(16).padStart(2, "0");
-            ctx.beginPath();
-            ctx.moveTo(pts[i].x, pts[i].y);
-            ctx.lineTo(pts[j].x, pts[j].y);
-            ctx.strokeStyle = `${accentColor}${alpha}`;
-            ctx.lineWidth = 0.7;
-            ctx.stroke();
-          }
-        }
-      }
-      animId = requestAnimationFrame(draw);
-    };
-
-    resize(); draw();
-    window.addEventListener("resize", resize);
-    return () => { cancelAnimationFrame(animId); window.removeEventListener("resize", resize); };
-  }, [accentColor]);
-
-  return <canvas ref={canvasRef} className="absolute inset-0 size-full" />;
-};
-
-/* ─────────────────────────────────────────
    Main component
 ───────────────────────────────────────── */
 export const Login = ({
@@ -154,6 +89,7 @@ export const Login = ({
   heroTitle,
   heroSubtitle,
   heroTagline = "Component Library",
+  heroImage,
   submitLabel = "Iniciar sesión",
   emailLabel = "Correo electrónico",
   emailPlaceholder = "correo@empresa.com",
@@ -227,7 +163,11 @@ export const Login = ({
         {/* ── Hero ── */}
         {showHero && (
           <div className="relative hidden w-[44%] overflow-hidden bg-gray-100 lg:flex dark:bg-gray-950">
-            <ParticleCanvas accentColor={accentColor} />
+            {heroImage ? (
+              <img src={heroImage} alt="" className="absolute inset-0 size-full object-cover" />
+            ) : (
+              <div className="absolute inset-0" style={{ backgroundColor: `${accentColor}18` }} />
+            )}
             <div className="pointer-events-none absolute inset-0 z-1 bg-linear-to-b from-gray-100/50 via-transparent to-gray-100/85 dark:from-gray-950/50 dark:to-gray-950/85" />
             <div className="absolute inset-0 z-10 flex flex-col justify-end p-10">
               {logo && <div className="mb-auto pt-4">{logo}</div>}

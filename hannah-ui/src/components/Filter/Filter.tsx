@@ -70,6 +70,9 @@ export interface FilterSelectProps extends Omit<VariantProps<typeof filterSelect
   icon?: ReactNode;
   label?: string;
   className?: string;
+  accentColor?: string;
+  searchPlaceholder?: string;
+  noResultsText?: string;
 }
 
 export const FilterSelect: FC<FilterSelectProps> = ({
@@ -84,6 +87,9 @@ export const FilterSelect: FC<FilterSelectProps> = ({
   size = "md",
   variant = "default",
   className,
+  accentColor = "#3b82f6",
+  searchPlaceholder = "Buscar...",
+  noResultsText = "Sin resultados",
 }) => {
   const [open, setOpen] = useState(false);
   const [search, setSearch] = useState("");
@@ -138,7 +144,8 @@ export const FilterSelect: FC<FilterSelectProps> = ({
       <button
         type="button"
         onClick={() => setOpen(!open)}
-        className={cn(filterSelect({ size, variant, active: hasValue }), "w-full justify-between")}
+        className={cn(filterSelect({ size, variant, active: false }), "w-full justify-between")}
+        style={hasValue ? { borderColor: accentColor, backgroundColor: `${accentColor}10`, color: accentColor } : undefined}
       >
         <span className="flex items-center gap-2 truncate">
           {icon && <span className="shrink-0 text-current opacity-60">{icon}</span>}
@@ -176,8 +183,10 @@ export const FilterSelect: FC<FilterSelectProps> = ({
                   type="text"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
-                  placeholder="Buscar..."
-                  className="w-full h-8 pl-8 pr-3 text-xs rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white outline-none focus:border-blue-400"
+                  placeholder={searchPlaceholder}
+                  className="w-full h-8 pl-8 pr-3 text-xs rounded-lg bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 text-gray-900 dark:text-white outline-none"
+                  onFocus={(e) => { e.currentTarget.style.borderColor = accentColor; }}
+                  onBlur={(e) => { e.currentTarget.style.borderColor = ""; }}
                 />
               </div>
             </div>
@@ -185,7 +194,7 @@ export const FilterSelect: FC<FilterSelectProps> = ({
 
           <div className="max-h-52 overflow-y-auto py-1">
             {filtered.length === 0 ? (
-              <p className="px-3 py-2 text-xs text-gray-400">Sin resultados</p>
+              <p className="px-3 py-2 text-xs text-gray-400">{noResultsText}</p>
             ) : (
               filtered.map((opt) => (
                 <button
@@ -197,14 +206,15 @@ export const FilterSelect: FC<FilterSelectProps> = ({
                     "w-full flex items-center gap-2 px-3 py-2 text-sm transition-colors",
                     "disabled:opacity-40 disabled:cursor-not-allowed",
                     opt.value === value
-                      ? "bg-blue-50 text-blue-700 dark:bg-blue-950/40 dark:text-blue-300"
+                      ? ""
                       : "text-gray-700 dark:text-gray-300 hover:bg-gray-50 dark:hover:bg-gray-800",
                   )}
+                  style={opt.value === value ? { backgroundColor: `${accentColor}15`, color: accentColor } : undefined}
                 >
                   {opt.icon && <span className="shrink-0">{opt.icon}</span>}
                   {opt.label}
                   {opt.value === value && (
-                    <span className="ml-auto w-1.5 h-1.5 rounded-full bg-blue-500" />
+                    <span className="ml-auto w-1.5 h-1.5 rounded-full" style={{ backgroundColor: accentColor }} />
                   )}
                 </button>
               ))
@@ -228,6 +238,8 @@ export interface FilterSearchProps {
   debounceMs?: number;
   size?: "sm" | "md" | "lg";
   className?: string;
+  accentColor?: string;
+  clearSearchLabel?: string;
 }
 
 export const FilterSearch: FC<FilterSearchProps> = ({
@@ -237,6 +249,8 @@ export const FilterSearch: FC<FilterSearchProps> = ({
   debounceMs = 300,
   size = "md",
   className,
+  accentColor = "#3b82f6",
+  clearSearchLabel = "Limpiar búsqueda",
 }) => {
   const [internal, setInternal] = useState(externalValue ?? "");
   const timerRef = useRef<ReturnType<typeof setTimeout>>(undefined);
@@ -275,16 +289,18 @@ export const FilterSearch: FC<FilterSearchProps> = ({
           "w-full pr-9 border rounded-lg outline-none transition-all duration-200",
           "bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700",
           "text-gray-900 dark:text-white placeholder:text-gray-400 dark:placeholder:text-gray-600",
-          "focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800",
+          "focus:ring-2",
           sizeClass,
         )}
+        onFocus={(e) => { e.currentTarget.style.borderColor = accentColor; e.currentTarget.style.boxShadow = `0 0 0 2px ${accentColor}40`; }}
+        onBlur={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.boxShadow = ""; }}
       />
       {internal && (
         <button
           type="button"
           onClick={handleClear}
           className="absolute right-2.5 top-1/2 -translate-y-1/2 p-0.5 rounded text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 transition-colors"
-          aria-label="Limpiar búsqueda"
+          aria-label={clearSearchLabel}
         >
           <X className="w-4 h-4" />
         </button>
@@ -306,6 +322,7 @@ export interface FilterDateRangeProps {
   labelTo?: string;
   size?: "sm" | "md" | "lg";
   className?: string;
+  accentColor?: string;
 }
 
 export const FilterDateRange: FC<FilterDateRangeProps> = ({
@@ -316,15 +333,18 @@ export const FilterDateRange: FC<FilterDateRangeProps> = ({
   labelTo = "Hasta",
   size = "md",
   className,
+  accentColor = "#3b82f6",
 }) => {
   const sizeClass = size === "sm" ? "h-8 text-xs" : size === "lg" ? "h-12 text-base" : "h-10 text-sm";
   const inputClass = cn(
     "w-full px-3 border rounded-lg outline-none transition-all duration-200",
     "bg-white dark:bg-gray-900 border-gray-300 dark:border-gray-700",
     "text-gray-900 dark:text-white",
-    "focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:focus:ring-blue-800",
+    "focus:ring-2",
     sizeClass,
   );
+  const handleDateFocus = (e: React.FocusEvent<HTMLInputElement>) => { e.currentTarget.style.borderColor = accentColor; e.currentTarget.style.boxShadow = `0 0 0 2px ${accentColor}40`; };
+  const handleDateBlur = (e: React.FocusEvent<HTMLInputElement>) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.boxShadow = ""; };
 
   return (
     <div className={cn("flex items-end gap-2", className)}>
@@ -337,6 +357,8 @@ export const FilterDateRange: FC<FilterDateRangeProps> = ({
             type="date"
             value={from ?? ""}
             onChange={(e) => onChange(e.target.value || undefined, to)}
+            onFocus={handleDateFocus}
+            onBlur={handleDateBlur}
             className={inputClass}
           />
         </div>
@@ -350,6 +372,8 @@ export const FilterDateRange: FC<FilterDateRangeProps> = ({
           type="date"
           value={to ?? ""}
           onChange={(e) => onChange(from, e.target.value || undefined)}
+          onFocus={handleDateFocus}
+          onBlur={handleDateBlur}
           className={inputClass}
         />
       </div>
@@ -371,6 +395,8 @@ export interface FilterDateProps {
   label?: string;
   size?: "sm" | "md" | "lg";
   className?: string;
+  accentColor?: string;
+  clearDateLabel?: string;
 }
 
 export const FilterDate: FC<FilterDateProps> = ({
@@ -381,6 +407,8 @@ export const FilterDate: FC<FilterDateProps> = ({
   label,
   size = "md",
   className,
+  accentColor = "#3b82f6",
+  clearDateLabel = "Limpiar fecha",
 }) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const hasValue = !!value;
@@ -427,9 +455,10 @@ export const FilterDate: FC<FilterDateProps> = ({
             "focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1",
             sizeMap[size],
             hasValue
-              ? "border-blue-500 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-950/30 dark:text-blue-300"
+              ? ""
               : "border-gray-300 bg-white text-gray-400 hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-500 dark:hover:border-gray-600",
           )}
+          style={hasValue ? { borderColor: accentColor, backgroundColor: `${accentColor}10`, color: accentColor } : undefined}
         >
           <Calendar className={cn("shrink-0 opacity-60", iconSizeMap[size])} />
           <span className={cn("flex-1 truncate", hasValue && "text-gray-900 dark:text-white font-medium")}>
@@ -441,7 +470,7 @@ export const FilterDate: FC<FilterDateProps> = ({
               tabIndex={-1}
               onClick={handleClear}
               className="shrink-0 p-0.5 rounded hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-              aria-label="Limpiar fecha"
+              aria-label={clearDateLabel}
             >
               <X className="w-3.5 h-3.5" />
             </span>
@@ -474,6 +503,7 @@ export interface FilterChipsProps {
   onChange: (value: string[]) => void;
   label?: string;
   className?: string;
+  accentColor?: string;
 }
 
 export const FilterChips: FC<FilterChipsProps> = ({
@@ -482,6 +512,7 @@ export const FilterChips: FC<FilterChipsProps> = ({
   onChange,
   label,
   className,
+  accentColor = "#3b82f6",
 }) => {
   const toggle = (val: string) => {
     onChange(
@@ -509,9 +540,10 @@ export const FilterChips: FC<FilterChipsProps> = ({
                 "inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-medium transition-all duration-200",
                 "disabled:opacity-40 disabled:cursor-not-allowed",
                 isActive
-                  ? "bg-blue-100 text-blue-700 ring-1 ring-blue-300 dark:bg-blue-950/50 dark:text-blue-300 dark:ring-blue-700"
+                  ? "ring-1"
                   : "bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700",
               )}
+              style={isActive ? { backgroundColor: `${accentColor}20`, color: accentColor, ["--tw-ring-color" as any]: `${accentColor}60` } as React.CSSProperties : undefined}
             >
               {opt.icon && <span className="shrink-0">{opt.icon}</span>}
               {opt.label}
@@ -534,6 +566,9 @@ export interface FilterBarProps {
   onClearAll?: () => void;
   activeCount?: number;
   className?: string;
+  accentColor?: string;
+  filtersLabel?: string;
+  clearAllLabel?: string;
 }
 
 export const FilterBar: FC<FilterBarProps> = ({
@@ -541,6 +576,9 @@ export const FilterBar: FC<FilterBarProps> = ({
   onClearAll,
   activeCount = 0,
   className,
+  accentColor = "#3b82f6",
+  filtersLabel = "Filtros",
+  clearAllLabel = "Limpiar todo",
 }) => (
   <div
     className={cn(
@@ -551,9 +589,9 @@ export const FilterBar: FC<FilterBarProps> = ({
   >
     <div className="flex items-center gap-2 mr-2 shrink-0">
       <SlidersHorizontal className="w-4 h-4 text-gray-400" />
-      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">Filtros</span>
+      <span className="text-sm font-semibold text-gray-700 dark:text-gray-300">{filtersLabel}</span>
       {activeCount > 0 && (
-        <span className="flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 text-white text-[10px] font-bold">
+        <span className="flex items-center justify-center w-5 h-5 rounded-full text-white text-[10px] font-bold" style={{ backgroundColor: accentColor }}>
           {activeCount}
         </span>
       )}
@@ -567,7 +605,7 @@ export const FilterBar: FC<FilterBarProps> = ({
         onClick={onClearAll}
         className="ml-auto text-xs font-medium text-red-500 hover:text-red-600 dark:text-red-400 transition-colors"
       >
-        Limpiar todo
+        {clearAllLabel}
       </button>
     )}
   </div>
@@ -595,6 +633,9 @@ export interface FilterButtonProps {
   /** Alineación: izquierda o derecha */
   align?: "left" | "right";
   className?: string;
+  accentColor?: string;
+  clearAllLabel?: string;
+  applyLabel?: string;
 }
 
 export const FilterButton: FC<FilterButtonProps> = ({
@@ -606,6 +647,9 @@ export const FilterButton: FC<FilterButtonProps> = ({
   panelWidth = "320px",
   align = "left",
   className,
+  accentColor = "#3b82f6",
+  clearAllLabel = "Limpiar todo",
+  applyLabel = "Aplicar",
 }) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -647,14 +691,15 @@ export const FilterButton: FC<FilterButtonProps> = ({
           "transition-all duration-200",
           "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-1",
           open || activeCount > 0
-            ? "border-blue-500 bg-blue-50 text-blue-700 dark:border-blue-500 dark:bg-blue-950/30 dark:text-blue-300"
+            ? ""
             : "border-gray-300 bg-white text-gray-700 hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900 dark:text-gray-300 dark:hover:border-gray-600",
         )}
+        style={open || activeCount > 0 ? { borderColor: accentColor, backgroundColor: `${accentColor}10`, color: accentColor } : undefined}
       >
         <SlidersHorizontal className="w-4 h-4" />
         {label}
         {activeCount > 0 && (
-          <span className="flex items-center justify-center min-w-5 h-5 px-1 rounded-full bg-blue-500 text-white text-[10px] font-bold">
+          <span className="flex items-center justify-center min-w-5 h-5 px-1 rounded-full text-white text-[10px] font-bold" style={{ backgroundColor: accentColor }}>
             {activeCount}
           </span>
         )}
@@ -705,7 +750,7 @@ export const FilterButton: FC<FilterButtonProps> = ({
                 onClick={onClearAll}
                 className="text-xs font-medium text-red-500 hover:text-red-600 dark:text-red-400 transition-colors"
               >
-                Limpiar todo
+                {clearAllLabel}
               </button>
             ) : (
               <span />
@@ -715,11 +760,12 @@ export const FilterButton: FC<FilterButtonProps> = ({
               onClick={handleApply}
               className={cn(
                 "h-8 px-4 rounded-lg text-xs font-semibold text-white",
-                "bg-blue-600 hover:bg-blue-700 active:scale-[0.97]",
+                "active:scale-[0.97]",
                 "transition-all duration-200",
               )}
+              style={{ backgroundColor: accentColor }}
             >
-              Aplicar
+              {applyLabel}
             </button>
           </div>
         </div>

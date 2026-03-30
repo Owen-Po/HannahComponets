@@ -1,6 +1,6 @@
 {
   "name": "hannah-ui",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "A modern React component library with 50+ UI components, templates, and utilities built with Tailwind CSS and TypeScript",
   "keywords": [
     "react",
@@ -119,11 +119,6 @@
       "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Register": {
-      "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js",
-      "require": "./dist/hannah-ui.umd.cjs"
-    },
-    "./Stack": {
       "types": "./dist/main.d.ts",
       "import": "./dist/hannah-ui.js",
       "require": "./dist/hannah-ui.umd.cjs"

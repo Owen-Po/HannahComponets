@@ -43,6 +43,12 @@ export interface StickyTableProps<T> {
   showColumnToggle?: boolean;
   emptyMessage?: string;
   getRowClassName?: ((row: T, index: number) => string) | null;
+  accentColor?: string;
+  manageColumnsLabel?: string;
+  minimizeLabel?: string;
+  restoreLabel?: string;
+  restoreColumnsLabel?: string;
+  sortHint?: string;
 }
 
 export const StickyTable = <T extends Record<string, any>>({
@@ -56,6 +62,12 @@ export const StickyTable = <T extends Record<string, any>>({
   emptyMessage = "No hay datos disponibles",
   tableId = "default",
   getRowClassName = null,
+  accentColor = "#d97706",
+  manageColumnsLabel = "Gestionar Columnas",
+  minimizeLabel = "Minimizar",
+  restoreLabel = "Restaurar",
+  restoreColumnsLabel = "Restaurar Columnas",
+  sortHint = "Click para ordenar | Alt+Click para minimizar",
 }: StickyTableProps<T>) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -134,7 +146,7 @@ export const StickyTable = <T extends Record<string, any>>({
       className="px-2 sm:px-3 py-2 text-left text-xs font-semibold text-gray-500 cursor-pointer hover:bg-gray-100 whitespace-nowrap group relative bg-gray-50"
       style={{ width: width ? `${width}px` : `${header.column.columnDef.size || 100}px`, minWidth: width ? `${width}px` : undefined, maxWidth: width ? `${width}px` : undefined, transition: "all 0.2s ease-in-out" }}
       onClick={(e) => handleHeaderClick(header, e)}
-      title="Click para ordenar | Alt+Click para minimizar"
+      title={sortHint}
     >
       <div className="flex items-center gap-1.5">
         {isMinimized ? (
@@ -144,12 +156,12 @@ export const StickyTable = <T extends Record<string, any>>({
             {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
             {header.column.getCanSort() && (
               <div className="flex flex-col shrink-0 ml-auto pl-1">
-                <ChevronUp size={9} className={header.column.getIsSorted() === "asc" ? "text-amber-600" : "text-gray-300"} />
-                <ChevronDown size={9} className={header.column.getIsSorted() === "desc" ? "text-amber-600" : "text-gray-300"} />
+                <ChevronUp size={9} className={header.column.getIsSorted() === "asc" ? "" : "text-gray-300"} style={header.column.getIsSorted() === "asc" ? { color: accentColor } : undefined} />
+                <ChevronDown size={9} className={header.column.getIsSorted() === "desc" ? "" : "text-gray-300"} style={header.column.getIsSorted() === "desc" ? { color: accentColor } : undefined} />
               </div>
             )}
             {header.column.getIsSorted() && (
-              <span className="text-[9px] font-bold text-amber-600 bg-amber-100 rounded-full w-3.5 h-3.5 flex items-center justify-center shrink-0">
+              <span className="text-[9px] font-bold rounded-full w-3.5 h-3.5 flex items-center justify-center shrink-0" style={{ color: accentColor, backgroundColor: `${accentColor}22` }}>
                 {header.column.getSortIndex() + 1}
               </span>
             )}
@@ -187,19 +199,19 @@ export const StickyTable = <T extends Record<string, any>>({
           {showSearch && (
             <div className="relative flex-1">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400" size={18} />
-              <input type="text" placeholder={searchPlaceholder} value={globalFilter ?? ""} onChange={(e) => setGlobalFilter(e.target.value)} className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-amber-300" />
+              <input type="text" placeholder={searchPlaceholder} value={globalFilter ?? ""} onChange={(e) => setGlobalFilter(e.target.value)} className="w-full pl-10 pr-4 py-2.5 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2" style={{ "--tw-ring-color": accentColor } as React.CSSProperties} />
             </div>
           )}
           {showColumnToggle && (
             <div className="relative shrink-0" ref={columnSelectorRef}>
-              <button onClick={() => setShowColumnSelector(!showColumnSelector)} className={`inline-flex items-center gap-2 px-3 py-2.5 border rounded-lg text-sm font-medium transition-colors ${showColumnSelector ? "border-amber-400 bg-amber-50 text-amber-700" : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"}`}>
+              <button onClick={() => setShowColumnSelector(!showColumnSelector)} className={`inline-flex items-center gap-2 px-3 py-2.5 border rounded-lg text-sm font-medium transition-colors ${showColumnSelector ? "" : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"}`} style={showColumnSelector ? { borderColor: accentColor, backgroundColor: `${accentColor}11`, color: accentColor } : undefined}>
                 <Columns3 size={18} />
                 <span>Columnas</span>
               </button>
               {showColumnSelector && (
                 <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-xl z-50 p-3">
                   <div className="flex items-center justify-between mb-3 pb-2 border-b border-gray-200">
-                    <span className="text-sm font-semibold text-gray-900">Gestionar Columnas</span>
+                    <span className="text-sm font-semibold text-gray-900">{manageColumnsLabel}</span>
                     <button onClick={() => setShowColumnSelector(false)} className="text-gray-400 hover:text-gray-600 text-xl leading-none">×</button>
                   </div>
                   <div className="space-y-1.5 max-h-64 overflow-y-auto mb-3">
@@ -208,8 +220,8 @@ export const StickyTable = <T extends Record<string, any>>({
                       return (
                         <div key={column.id} className="flex items-center gap-2 px-2.5 py-2 rounded-lg hover:bg-gray-50">
                           <span className="flex-1 text-sm text-gray-700 font-medium">{typeof column.columnDef.header === "string" ? column.columnDef.header : column.id}</span>
-                          <button onClick={() => toggleMinimizeColumn(column.id)} className={`text-xs px-3 py-1.5 rounded font-medium transition-all ${isMinimized ? "bg-amber-500 text-white hover:bg-amber-600" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`}>
-                            {isMinimized ? "Restaurar" : "Minimizar"}
+                          <button onClick={() => toggleMinimizeColumn(column.id)} className={`text-xs px-3 py-1.5 rounded font-medium transition-all ${isMinimized ? "text-white" : "bg-gray-100 text-gray-700 hover:bg-gray-200"}`} style={isMinimized ? { backgroundColor: accentColor } : undefined}>
+                            {isMinimized ? restoreLabel : minimizeLabel}
                           </button>
                         </div>
                       );
@@ -217,7 +229,7 @@ export const StickyTable = <T extends Record<string, any>>({
                   </div>
                   <button onClick={() => { resetMinimizedColumnsStore(tableId); setShowColumnSelector(false); }} className="w-full flex items-center justify-center gap-2 px-3 py-2 text-xs font-medium bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors">
                     <RotateCcw size={14} />
-                    Restaurar Columnas
+                    {restoreColumnsLabel}
                   </button>
                 </div>
               )}
@@ -296,7 +308,7 @@ export const StickyTable = <T extends Record<string, any>>({
                   else if (cp >= tp - 3) page = tp - 5 + i;
                   else page = cp - 2 + i;
                   return (
-                    <button key={page} onClick={() => table.setPageIndex(page)} className={`min-w-7 h-7 px-1.5 text-xs font-medium rounded-lg transition-colors ${cp === page ? "bg-amber-600 text-white shadow-sm" : "text-gray-600 hover:bg-white"}`}>{page + 1}</button>
+                    <button key={page} onClick={() => table.setPageIndex(page)} className={`min-w-7 h-7 px-1.5 text-xs font-medium rounded-lg transition-colors ${cp === page ? "text-white shadow-sm" : "text-gray-600 hover:bg-white"}`} style={cp === page ? { backgroundColor: accentColor } : undefined}>{page + 1}</button>
                   );
                 })}
               </div>

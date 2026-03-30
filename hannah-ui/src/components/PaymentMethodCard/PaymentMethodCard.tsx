@@ -84,6 +84,10 @@ export interface PaymentMethodCardProps extends Omit<VariantProps<typeof card>, 
   expiry?: string;
   isSelected?: boolean;
   onSelect?: () => void;
+  accentColor?: string;
+  endingInLabel?: string;
+  expiresLabel?: string;
+  activeLabel?: string;
   className?: string;
 }
 
@@ -103,6 +107,10 @@ export const PaymentMethodCard: FC<PaymentMethodCardProps> = ({
   expiry,
   isSelected = false,
   onSelect,
+  accentColor = "#2563eb",
+  endingInLabel = "terminada en",
+  expiresLabel = "Expira",
+  activeLabel = "Activo",
   className,
 }) => {
   const handleKeyDown = (e: KeyboardEvent) => {
@@ -116,16 +124,17 @@ export const PaymentMethodCard: FC<PaymentMethodCardProps> = ({
     <div
       role="radio"
       aria-checked={isSelected}
-      aria-label={`${typeLabels[type]}${lastFour ? ` terminada en ${lastFour}` : ""}`}
+      aria-label={`${typeLabels[type]}${lastFour ? ` ${endingInLabel} ${lastFour}` : ""}`}
       tabIndex={0}
       onClick={onSelect}
       onKeyDown={handleKeyDown}
       className={cn(card({ selected: isSelected }), className)}
+      style={isSelected ? { borderColor: accentColor, backgroundColor: `${accentColor}10` } : undefined}
     >
       {/* Radio indicator */}
-      <div className={cn(radio({ selected: isSelected }))}>
+      <div className={cn(radio({ selected: isSelected }))} style={isSelected ? { borderColor: accentColor } : undefined}>
         {isSelected && (
-          <span className="w-2.5 h-2.5 rounded-full bg-blue-600 dark:bg-blue-500 animate-in zoom-in-50 duration-200" />
+          <span className="w-2.5 h-2.5 rounded-full animate-in zoom-in-50 duration-200" style={{ backgroundColor: accentColor }} />
         )}
       </div>
 
@@ -144,15 +153,15 @@ export const PaymentMethodCard: FC<PaymentMethodCardProps> = ({
         </p>
         {expiry && (
           <p className="text-xs text-gray-500 dark:text-gray-400 mt-0.5">
-            Expira {expiry}
+            {expiresLabel} {expiry}
           </p>
         )}
       </div>
 
       {/* Selected badge */}
       {isSelected && (
-        <span className="shrink-0 px-2 py-0.5 rounded-full bg-blue-100 text-blue-700 text-xs font-medium dark:bg-blue-900/50 dark:text-blue-300">
-          Activo
+        <span className="shrink-0 px-2 py-0.5 rounded-full text-xs font-medium" style={{ backgroundColor: `${accentColor}20`, color: accentColor }}>
+          {activeLabel}
         </span>
       )}
     </div>

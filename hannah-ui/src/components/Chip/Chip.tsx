@@ -44,6 +44,7 @@ export interface ChipProps
     VariantProps<typeof chip> {
   children: ReactNode;
   onRemove?: () => void;
+  removeAriaLabel?: string;
 }
 
 export const Chip: FC<ChipProps> = ({
@@ -51,6 +52,7 @@ export const Chip: FC<ChipProps> = ({
   size,
   children,
   onRemove,
+  removeAriaLabel = "Eliminar",
   className,
   ...props
 }) => (
@@ -60,7 +62,7 @@ export const Chip: FC<ChipProps> = ({
       <button
         onClick={onRemove}
         className="hover:bg-black/20 dark:hover:bg-white/10 rounded-full p-0.5 transition-colors duration-150"
-        aria-label="Eliminar"
+        aria-label={removeAriaLabel}
       >
         <X className="w-3 h-3" />
       </button>

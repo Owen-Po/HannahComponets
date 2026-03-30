@@ -15,6 +15,10 @@ export interface PaginationProps {
   itemsPerPage?: number;
   disabled?: boolean;
   className?: string;
+  showingLabel?: (start: number, end: number, total: number) => string;
+  prevLabel?: string;
+  nextLabel?: string;
+  pageLabel?: string;
 }
 
 /* ─────────────────────────────────────────
@@ -60,6 +64,10 @@ export const Pagination = ({
   itemsPerPage,
   disabled = false,
   className,
+  showingLabel,
+  prevLabel = "Página anterior",
+  nextLabel = "Página siguiente",
+  pageLabel = "Página",
 }: PaginationProps) => {
   const pages = buildPages(currentPage, totalPages, siblingCount);
 
@@ -75,8 +83,8 @@ export const Pagination = ({
       {/* Info */}
       {showInfo && totalItems != null && itemsPerPage != null && (
         <p className="text-sm text-gray-500 dark:text-gray-500">
-          Mostrando <span className="font-medium text-gray-700 dark:text-gray-300">{infoStart}–{infoEnd}</span> de{" "}
-          <span className="font-medium text-gray-700 dark:text-gray-300">{totalItems}</span>
+          {showingLabel && infoStart && infoEnd ? showingLabel(infoStart, infoEnd, totalItems!) : (<>Mostrando <span className="font-medium text-gray-700 dark:text-gray-300">{infoStart}–{infoEnd}</span> de{" "}
+          <span className="font-medium text-gray-700 dark:text-gray-300">{totalItems}</span></>)}
         </p>
       )}
 
@@ -91,7 +99,7 @@ export const Pagination = ({
             btnBase,
             "px-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-white",
           )}
-          aria-label="Página anterior"
+          aria-label={prevLabel}
         >
           <ChevronLeft size={16} />
         </button>
@@ -119,7 +127,7 @@ export const Pagination = ({
               )}
               style={page === currentPage ? { backgroundColor: accentColor } : undefined}
               aria-current={page === currentPage ? "page" : undefined}
-              aria-label={`Página ${page}`}
+              aria-label={`${pageLabel} ${page}`}
             >
               {page}
             </button>
@@ -135,7 +143,7 @@ export const Pagination = ({
             btnBase,
             "px-2 text-gray-500 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-500 dark:hover:bg-gray-800 dark:hover:text-white",
           )}
-          aria-label="Página siguiente"
+          aria-label={nextLabel}
         >
           <ChevronRight size={16} />
         </button>

@@ -7,6 +7,9 @@ export interface FilterPanelProps {
   activeFiltersCount?: number;
   onClear?: () => void;
   title?: string;
+  accentColor?: string;
+  clearAllLabel?: string;
+  openLabel?: string;
 }
 
 export const FilterPanel = ({
@@ -14,6 +17,9 @@ export const FilterPanel = ({
   activeFiltersCount = 0,
   onClear,
   title = "Filtros",
+  accentColor = "#d97706",
+  clearAllLabel = "Limpiar todo",
+  openLabel = "Abrir filtros",
 }: FilterPanelProps) => {
   const [open, setOpen] = useState(false);
   const panelRef = useRef<HTMLDivElement>(null);
@@ -37,12 +43,12 @@ export const FilterPanel = ({
         type="button"
         onClick={() => setOpen(!open)}
         className="inline-flex items-center gap-2 px-3 py-2 text-sm font-medium border border-gray-200 rounded-lg bg-white text-gray-700 hover:bg-gray-50 hover:shadow-md hover:border-gray-300 transition-all duration-200 relative group"
-        aria-label={`Abrir filtros${hasActiveFilters ? ` (${activeFiltersCount} activos)` : ""}`}
+        aria-label={`${openLabel}${hasActiveFilters ? ` (${activeFiltersCount} activos)` : ""}`}
       >
         <motion.div animate={{ rotate: open ? 90 : 0 }} transition={{ duration: 0.2 }}>
-          <Filter className="w-4 h-4 transition-colors group-hover:text-amber-500" />
+          <Filter className="w-4 h-4 transition-colors group-hover:text-current" style={{ color: accentColor }} />
         </motion.div>
-        <span className="font-medium">Filtros</span>
+        <span className="font-medium">{title}</span>
         <motion.div animate={{ rotate: open ? 180 : 0 }} transition={{ duration: 0.2 }}>
           <ChevronDown className="w-3.5 h-3.5 opacity-50" />
         </motion.div>
@@ -54,7 +60,8 @@ export const FilterPanel = ({
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0, opacity: 0 }}
               transition={{ type: "spring", stiffness: 500, damping: 30 }}
-              className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full bg-gradient-to-br from-amber-500 to-amber-600 text-white text-xs font-bold shadow-lg shadow-amber-500/30 ring-2 ring-white"
+              className="absolute -top-1.5 -right-1.5 inline-flex items-center justify-center min-w-5 h-5 px-1.5 rounded-full text-white text-xs font-bold shadow-lg ring-2 ring-white"
+              style={{ background: accentColor }}
             >
               {activeFiltersCount}
             </motion.span>
@@ -74,8 +81,8 @@ export const FilterPanel = ({
             {/* Header */}
             <div className="flex items-center justify-between px-4 py-3.5 bg-gray-50/80">
               <div className="flex items-center gap-2">
-                <div className="p-1.5 rounded-md bg-amber-500/10">
-                  <Filter className="w-3.5 h-3.5 text-amber-600" />
+                <div className="p-1.5 rounded-md" style={{ backgroundColor: `${accentColor}18` }}>
+                  <Filter className="w-3.5 h-3.5" style={{ color: accentColor }} />
                 </div>
                 <h3 className="text-sm font-semibold tracking-tight text-gray-800">{title}</h3>
               </div>
@@ -90,7 +97,7 @@ export const FilterPanel = ({
                     className="flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium bg-white hover:bg-red-50 hover:text-red-600 rounded-md transition-all duration-200 border border-transparent hover:border-red-200"
                   >
                     <X className="w-3.5 h-3.5" />
-                    Limpiar todo
+                    {clearAllLabel}
                   </motion.button>
                 )}
               </AnimatePresence>

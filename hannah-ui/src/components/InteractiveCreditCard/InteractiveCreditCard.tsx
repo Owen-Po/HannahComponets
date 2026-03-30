@@ -158,6 +158,9 @@ export interface InteractiveCreditCardProps {
   isCvvFocused?: boolean;
   /** Banco emisor peruano — aplica gradiente y logo del banco */
   bank?: CardBank;
+  holderLabel?: string;
+  expiresLabel?: string;
+  disclaimerText?: string;
   className?: string;
 }
 
@@ -171,6 +174,9 @@ export const InteractiveCreditCard: FC<InteractiveCreditCardProps> = ({
   cvv = "",
   isCvvFocused = false,
   bank = "none",
+  holderLabel = "Titular",
+  expiresLabel = "Vence",
+  disclaimerText,
   className,
 }) => {
   const brand = detectCardBrand(cardNumber);
@@ -232,13 +238,13 @@ export const InteractiveCreditCard: FC<InteractiveCreditCardProps> = ({
           {/* Bottom row: holder + expiry */}
           <div className="relative flex items-end justify-between gap-4">
             <div className="flex-1 min-w-0">
-              <p className="text-[10px] text-white/50 uppercase tracking-wider mb-0.5">Titular</p>
+              <p className="text-[10px] text-white/50 uppercase tracking-wider mb-0.5">{holderLabel}</p>
               <p className="text-sm font-medium text-white tracking-wider truncate">
                 {displayHolder}
               </p>
             </div>
             <div className="text-right shrink-0">
-              <p className="text-[10px] text-white/50 uppercase tracking-wider mb-0.5">Vence</p>
+              <p className="text-[10px] text-white/50 uppercase tracking-wider mb-0.5">{expiresLabel}</p>
               <p className="text-sm font-medium text-white font-mono tracking-wider">
                 {displayExpiry}
               </p>
@@ -285,8 +291,7 @@ export const InteractiveCreditCard: FC<InteractiveCreditCardProps> = ({
           <div className="flex-1 flex items-end px-6 pb-5">
             <div className="flex items-end justify-between w-full">
               <p className="text-[10px] text-white/40 leading-tight max-w-[55%]">
-                Tarjeta emitida{bank !== "none" ? ` por ${bank.toUpperCase()}` : ""}.
-                Su uso indebido está penalizado por la ley.
+                {disclaimerText ?? `Tarjeta emitida${bank !== "none" ? ` por ${bank.toUpperCase()}` : ""}. Su uso indebido está penalizado por la ley.`}
               </p>
               <div className="flex items-center gap-2">
                 {bank !== "none" && <BankLogo bank={bank} />}

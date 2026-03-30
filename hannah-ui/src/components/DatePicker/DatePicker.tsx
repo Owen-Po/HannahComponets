@@ -11,10 +11,16 @@ export interface DatePickerProps {
   className?: string;
   minDate?: string;
   maxDate?: string;
+  accentColor?: string;
+  locale?: string;
+  placeholderText?: string;
+  todayLabel?: string;
+  monthNames?: string[];
+  dayNames?: string[];
 }
 
-const DAYS = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"];
-const MONTHS = [
+const DEFAULT_DAYS = ["Lu", "Ma", "Mi", "Ju", "Vi", "Sa", "Do"];
+const DEFAULT_MONTHS = [
   "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
   "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre",
 ];
@@ -31,13 +37,19 @@ function getFirstDayOfMonth(year: number, month: number) {
 export const DatePicker = ({
   value,
   onChange,
-  placeholder = "Seleccione una fecha...",
+  placeholder,
   disabled = false,
   isClearable = false,
   id,
   className = "",
   minDate,
   maxDate,
+  accentColor = "#d97706",
+  locale = "es-PE",
+  placeholderText = "Seleccione una fecha...",
+  todayLabel = "Hoy",
+  monthNames = DEFAULT_MONTHS,
+  dayNames = DEFAULT_DAYS,
 }: DatePickerProps) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -65,7 +77,7 @@ export const DatePicker = ({
   }, [open]);
 
   const formatted = selectedDate
-    ? selectedDate.toLocaleDateString("es-PE", { year: "numeric", month: "long", day: "numeric" })
+    ? selectedDate.toLocaleDateString(locale, { year: "numeric", month: "long", day: "numeric" })
     : null;
 
   const daysInMonth = getDaysInMonth(viewYear, viewMonth);
@@ -111,13 +123,14 @@ export const DatePicker = ({
         type="button"
         disabled={disabled}
         onClick={() => setOpen(!open)}
-        className={`w-full flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-lg bg-white text-left text-sm transition-colors hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-amber-400 disabled:opacity-50 disabled:cursor-not-allowed ${
+        className={`w-full flex items-center gap-2 px-3 py-2 border border-gray-200 rounded-lg bg-white text-left text-sm transition-colors hover:border-gray-300 focus:outline-none focus:ring-2 disabled:opacity-50 disabled:cursor-not-allowed ${
           isClearable && value ? "pr-10" : ""
         }`}
+        style={{ ["--tw-ring-color" as string]: accentColor }}
       >
         <CalendarIcon className="w-4 h-4 text-gray-400 shrink-0" />
         <span className={`flex-1 truncate ${formatted ? "text-gray-900" : "text-gray-400"}`}>
-          {formatted ?? placeholder}
+          {formatted ?? (placeholder || placeholderText)}
         </span>
       </button>
 
@@ -139,7 +152,7 @@ export const DatePicker = ({
               <ChevronLeft size={16} />
             </button>
             <span className="text-sm font-semibold text-gray-800">
-              {MONTHS[viewMonth]} {viewYear}
+              {monthNames[viewMonth]} {viewYear}
             </span>
             <button type="button" onClick={handleNext} className="p-1 rounded-lg hover:bg-gray-100 text-gray-500 transition-colors">
               <ChevronRight size={16} />
@@ -148,7 +161,7 @@ export const DatePicker = ({
 
           {/* Day headers */}
           <div className="grid grid-cols-7 mb-1">
-            {DAYS.map((d) => (
+            {dayNames.map((d) => (
               <div key={d} className="text-center text-[10px] font-semibold text-gray-400 uppercase py-1">
                 {d}
               </div>
@@ -172,11 +185,18 @@ export const DatePicker = ({
                   onClick={() => handleSelect(day)}
                   className={`w-9 h-9 text-sm rounded-lg transition-colors mx-auto flex items-center justify-center ${
                     selected_
-                      ? "bg-amber-600 text-white font-bold"
+                      ? "text-white font-bold"
                       : today_
-                        ? "bg-amber-50 text-amber-700 font-medium"
+                        ? "font-medium"
                         : "text-gray-700 hover:bg-gray-100"
                   } ${disabled_ ? "opacity-30 cursor-not-allowed" : "cursor-pointer"}`}
+                  style={
+                    selected_
+                      ? { backgroundColor: accentColor }
+                      : today_
+                        ? { backgroundColor: `${accentColor}12`, color: accentColor }
+                        : undefined
+                  }
                 >
                   {day}
                 </button>
@@ -194,9 +214,10 @@ export const DatePicker = ({
                 onChange?.(`${today.getFullYear()}-${m}-${d}`);
                 setOpen(false);
               }}
-              className="w-full text-center text-xs font-medium text-amber-600 hover:text-amber-700 py-1"
+              className="w-full text-center text-xs font-medium py-1"
+              style={{ color: accentColor }}
             >
-              Hoy
+              {todayLabel}
             </button>
           </div>
         </div>

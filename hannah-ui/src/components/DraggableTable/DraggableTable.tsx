@@ -62,6 +62,7 @@ interface SortableThProps {
   enableColumnOrdering: boolean;
   onHeaderClick: (header: Header<any, unknown>, e: React.MouseEvent) => void;
   isDraggingActive: boolean;
+  accentColor: string;
 }
 
 const SortableTh = ({
@@ -73,6 +74,7 @@ const SortableTh = ({
   enableColumnOrdering,
   onHeaderClick,
   isDraggingActive,
+  accentColor,
 }: SortableThProps) => {
   const {
     attributes,
@@ -112,14 +114,15 @@ const SortableTh = ({
         opacity: isDragging ? 0 : 1,
         zIndex: isDragging ? 1 : undefined,
         boxShadow:
-          isOver && !isDragging ? "inset 3px 0 0 0 #f59e0b" : undefined,
+          isOver && !isDragging ? `inset 3px 0 0 0 ${accentColor}` : undefined,
+        ...(isSorted ? { backgroundColor: `${accentColor}11`, color: accentColor } : {}),
       }}
       className={`
         px-3 py-2.5 text-left text-[11px] font-semibold uppercase tracking-wider
         select-none border-r border-gray-200 last:border-r-0 relative group
         ${
           isSorted
-            ? "bg-amber-50 text-amber-800"
+            ? ""
             : "bg-gray-50 text-gray-500 hover:bg-gray-100 hover:text-gray-700"
         }
         transition-colors duration-100
@@ -133,7 +136,7 @@ const SortableTh = ({
             {...attributes}
             {...listeners}
             onClick={(e) => e.stopPropagation()}
-            className="text-gray-300 hover:text-amber-400 shrink-0 touch-none cursor-grab active:cursor-grabbing transition-colors duration-100"
+            className="text-gray-300 shrink-0 touch-none cursor-grab active:cursor-grabbing transition-colors duration-100"
           >
             <GripVertical size={12} />
           </div>
@@ -158,22 +161,20 @@ const SortableTh = ({
               <div className="flex flex-col shrink-0 ml-auto pl-1">
                 <ChevronUp
                   size={9}
-                  className={
-                    isSorted === "asc" ? "text-amber-600" : "text-gray-300"
-                  }
+                  className={isSorted === "asc" ? "" : "text-gray-300"}
+                  style={isSorted === "asc" ? { color: accentColor } : undefined}
                 />
                 <ChevronDown
                   size={9}
-                  className={
-                    isSorted === "desc" ? "text-amber-600" : "text-gray-300"
-                  }
+                  className={isSorted === "desc" ? "" : "text-gray-300"}
+                  style={isSorted === "desc" ? { color: accentColor } : undefined}
                 />
               </div>
             )}
 
             {/* Badge de orden múltiple */}
             {isSorted && (
-              <span className="text-[9px] font-bold text-amber-600 bg-amber-100 rounded-full w-3.5 h-3.5 flex items-center justify-center shrink-0">
+              <span className="text-[9px] font-bold rounded-full w-3.5 h-3.5 flex items-center justify-center shrink-0" style={{ color: accentColor, backgroundColor: `${accentColor}22` }}>
                 {header.column.getSortIndex() + 1}
               </span>
             )}
@@ -187,11 +188,10 @@ const SortableTh = ({
           onMouseDown={header.getResizeHandler()}
           onTouchStart={header.getResizeHandler()}
           onClick={(e) => e.stopPropagation()}
-          className={`absolute right-0 top-0 h-full w-1 cursor-col-resize touch-none z-10 transition-colors ${
-            header.column.getIsResizing()
-              ? "bg-amber-400"
-              : "bg-transparent hover:bg-amber-300"
-          }`}
+          className="absolute right-0 top-0 h-full w-1 cursor-col-resize touch-none z-10 transition-colors"
+          style={{
+            backgroundColor: header.column.getIsResizing() ? accentColor : undefined,
+          }}
         />
       )}
     </th>
@@ -201,9 +201,9 @@ const SortableTh = ({
 // ---------------------------------------------------------------------------
 // DragOverlay — "fantasma" flotante al arrastrar
 // ---------------------------------------------------------------------------
-const DragColumnGhost = ({ label }: { label: string }) => (
-  <div className="px-3 py-2 bg-white border border-amber-400 rounded-lg shadow-lg text-[11px] font-semibold text-amber-700 uppercase tracking-wider flex items-center gap-1.5 opacity-90">
-    <GripVertical size={12} className="text-amber-400" />
+const DragColumnGhost = ({ label, accentColor = "#d97706" }: { label: string; accentColor?: string }) => (
+  <div className="px-3 py-2 bg-white rounded-lg shadow-lg text-[11px] font-semibold uppercase tracking-wider flex items-center gap-1.5 opacity-90" style={{ borderColor: accentColor, borderWidth: 1, borderStyle: "solid", color: accentColor }}>
+    <GripVertical size={12} style={{ color: accentColor }} />
     {label}
   </div>
 );
@@ -242,6 +242,17 @@ export interface DraggableTableProps<T> {
   enableColumnOrdering?: boolean;
   isLoading?: boolean;
   skeletonRows?: number;
+  accentColor?: string;
+  columnsLabel?: string;
+  manageColumnsLabel?: string;
+  hideLabel?: string;
+  showLabel?: string;
+  expandLabel?: string;
+  collapseLabel?: string;
+  fullscreenLabel?: string;
+  exitFullscreenLabel?: string;
+  loadingText?: string;
+  minimizeHint?: string;
 }
 
 export const DraggableTable = <T,>({
@@ -263,6 +274,17 @@ export const DraggableTable = <T,>({
   enableColumnOrdering = true,
   isLoading = false,
   skeletonRows = 6,
+  accentColor = "#d97706",
+  columnsLabel = "Columnas",
+  manageColumnsLabel = "Gestionar columnas",
+  hideLabel = "Ocultar",
+  showLabel = "Mostrar",
+  expandLabel = "Expandir",
+  collapseLabel = "Colapsar",
+  fullscreenLabel = "Pantalla completa",
+  exitFullscreenLabel = "Salir de pantalla completa",
+  loadingText = "Cargando…",
+  minimizeHint = "Alt+Click en columna para minimizar",
 }: DraggableTableProps<T>) => {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [globalFilter, setGlobalFilter] = useState("");
@@ -490,7 +512,8 @@ export const DraggableTable = <T,>({
                       ? serverSearch.onSearchChange(e.target.value)
                       : setGlobalFilter(e.target.value)
                   }
-                  className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-amber-300 focus:border-transparent transition-all"
+                  className="w-full pl-9 pr-3 py-2 border border-gray-200 rounded-lg text-sm bg-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:border-transparent transition-all"
+                  style={{ "--tw-ring-color": accentColor } as React.CSSProperties}
                 />
               </div>
             )}
@@ -499,7 +522,7 @@ export const DraggableTable = <T,>({
               {/* Hint de Alt+Click */}
               {enableColumnOrdering && (
                 <span className="hidden md:inline text-[11px] text-gray-400 italic">
-                  Alt+Click en columna para minimizar
+                  {minimizeHint}
                 </span>
               )}
 
@@ -508,8 +531,8 @@ export const DraggableTable = <T,>({
                   onClick={() => setIsFullScreen(!isFullScreen)}
                   title={
                     isFullScreen
-                      ? "Salir de pantalla completa"
-                      : "Pantalla completa"
+                      ? exitFullscreenLabel
+                      : fullscreenLabel
                   }
                   className="p-2 border border-gray-200 rounded-lg hover:bg-gray-50 text-gray-500 hover:text-gray-700 transition-colors"
                 >
@@ -527,12 +550,13 @@ export const DraggableTable = <T,>({
                     onClick={() => setShowColumnSelector(!showColumnSelector)}
                     className={`inline-flex items-center gap-1.5 px-3 py-2 border rounded-lg text-sm font-medium transition-colors ${
                       showColumnSelector
-                        ? "border-amber-400 bg-amber-50 text-amber-700"
+                        ? ""
                         : "border-gray-200 bg-white text-gray-600 hover:bg-gray-50"
                     }`}
+                    style={showColumnSelector ? { borderColor: accentColor, backgroundColor: `${accentColor}11`, color: accentColor } : undefined}
                   >
                     <Columns3 size={14} />
-                    <span>Columnas</span>
+                    <span>{columnsLabel}</span>
                   </button>
 
                   {/* Panel de columnas */}
@@ -540,13 +564,13 @@ export const DraggableTable = <T,>({
                     <div className="absolute right-0 top-full mt-2 w-64 bg-white border border-gray-200 rounded-xl shadow-xl z-50 overflow-hidden">
                       <div className="flex items-center justify-between px-4 py-3 border-b border-gray-100 bg-gray-50">
                         <span className="text-xs font-semibold text-gray-600 uppercase tracking-wider">
-                          Gestionar columnas
+                          {manageColumnsLabel}
                         </span>
                         <div className="flex items-center gap-1">
                           <button
                             onClick={resetAll}
                             title="Restablecer todo"
-                            className="p-1.5 text-gray-400 hover:text-amber-600 rounded-lg hover:bg-amber-50 transition-colors"
+                            className="p-1.5 text-gray-400 rounded-lg transition-colors"
                           >
                             <RotateCcw size={12} />
                           </button>
@@ -583,7 +607,7 @@ export const DraggableTable = <T,>({
                               <div className="flex items-center gap-1 shrink-0">
                                 <button
                                   onClick={() => column.toggleVisibility()}
-                                  title={isVisible ? "Ocultar" : "Mostrar"}
+                                  title={isVisible ? hideLabel : showLabel}
                                   className={`p-1.5 rounded-lg transition-colors ${
                                     isVisible
                                       ? "text-gray-500 hover:bg-gray-100"
@@ -600,12 +624,13 @@ export const DraggableTable = <T,>({
                                   onClick={() =>
                                     toggleMinimizeColumn(column.id)
                                   }
-                                  title={isMinimized ? "Expandir" : "Colapsar"}
+                                  title={isMinimized ? expandLabel : collapseLabel}
                                   className={`p-1.5 rounded-lg transition-colors ${
                                     isMinimized
-                                      ? "text-amber-500 bg-amber-50 hover:bg-amber-100"
+                                      ? ""
                                       : "text-gray-400 hover:bg-gray-100 hover:text-gray-600"
                                   }`}
+                                  style={isMinimized ? { color: accentColor, backgroundColor: `${accentColor}11` } : undefined}
                                 >
                                   <ChevronsLeftRight size={13} />
                                 </button>
@@ -648,6 +673,7 @@ export const DraggableTable = <T,>({
                           enableColumnOrdering={enableColumnOrdering}
                           onHeaderClick={handleHeaderClick}
                           isDraggingActive={activeDragId !== null}
+                          accentColor={accentColor}
                         />
                       ))}
                     </tr>
@@ -684,8 +710,8 @@ export const DraggableTable = <T,>({
                       key={row.id}
                       className={`transition-colors duration-100 ${
                         index % 2 === 0
-                          ? "bg-white hover:bg-amber-50/40"
-                          : "bg-gray-50/60 hover:bg-amber-50/40"
+                          ? "bg-white hover:bg-gray-50"
+                          : "bg-gray-50/60 hover:bg-gray-100"
                       }`}
                     >
                       {row.getVisibleCells().map((cell) => {
@@ -744,8 +770,8 @@ export const DraggableTable = <T,>({
                     ? `${(serverPagination.currentPage - 1) * pageSize + 1}–${Math.min(serverPagination.currentPage * pageSize, serverPagination.totalRecords)} de ${serverPagination.totalRecords}`
                     : `${currentPage * table.getState().pagination.pageSize + 1}–${Math.min((currentPage + 1) * table.getState().pagination.pageSize, table.getFilteredRowModel().rows.length)} de ${table.getFilteredRowModel().rows.length}`}
                   {usingServerPagination && serverPagination.isLoading && (
-                    <span className="ml-2 text-amber-500 animate-pulse">
-                      Cargando…
+                    <span className="ml-2 animate-pulse" style={{ color: accentColor }}>
+                      {loadingText}
                     </span>
                   )}
                 </p>
@@ -806,9 +832,10 @@ export const DraggableTable = <T,>({
                           }
                           className={`min-w-7 h-7 px-1.5 text-xs font-medium rounded-lg transition-colors ${
                             isActive
-                              ? "bg-amber-600 text-white shadow-sm"
+                              ? "text-white shadow-sm"
                               : "text-gray-600 hover:bg-white hover:border hover:border-gray-200"
                           }`}
+                          style={isActive ? { backgroundColor: accentColor } : undefined}
                         >
                           {page + 1}
                         </button>
@@ -860,7 +887,7 @@ export const DraggableTable = <T,>({
 
       {/* Fantasma flotante durante drag */}
       <DragOverlay dropAnimation={null}>
-        {activeDragId ? <DragColumnGhost label={activeDragLabel} /> : null}
+        {activeDragId ? <DragColumnGhost label={activeDragLabel} accentColor={accentColor} /> : null}
       </DragOverlay>
     </DndContext>
   );

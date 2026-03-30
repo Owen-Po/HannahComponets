@@ -19,6 +19,7 @@ export interface ModalProps {
   size?: "sm" | "md" | "lg" | "xl" | "full";
   closeOnBackdrop?: boolean;
   showCloseButton?: boolean;
+  closeAriaLabel?: string;
   className?: string;
 }
 
@@ -40,6 +41,7 @@ export const Modal: FC<ModalProps> = ({
   size = "md",
   closeOnBackdrop = true,
   showCloseButton = true,
+  closeAriaLabel = "Cerrar",
   className,
 }) => {
   const panelRef = useRef<HTMLDivElement>(null);
@@ -108,7 +110,7 @@ export const Modal: FC<ModalProps> = ({
               <button
                 onClick={onClose}
                 className="shrink-0 p-1.5 rounded-lg text-gray-400 hover:text-gray-700 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-200 dark:hover:bg-gray-700 transition-all duration-150"
-                aria-label="Cerrar"
+                aria-label={closeAriaLabel}
               >
                 <X size={18} />
               </button>

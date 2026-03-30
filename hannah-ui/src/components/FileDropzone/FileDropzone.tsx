@@ -9,6 +9,7 @@ export interface FileDropzoneProps {
   accept?: Record<string, string[]>;
   formatText?: string;
   shouldClear?: boolean;
+  accentColor?: string;
 }
 
 const defaultAccept = {
@@ -27,6 +28,7 @@ export const FileDropzone = ({
   accept = defaultAccept,
   formatText = "PDF, DOC, XLS, Imágenes hasta 10MB",
   shouldClear = false,
+  accentColor = "#d97706",
 }: FileDropzoneProps) => {
   const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
@@ -60,18 +62,19 @@ export const FileDropzone = ({
         {...getRootProps()}
         className={`relative flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-xl cursor-pointer transition-all duration-200 overflow-hidden ${
           isDragActive
-            ? "border-amber-500 bg-amber-50 scale-[1.02]"
+            ? "scale-[1.02]"
             : "border-gray-300 hover:border-gray-400 hover:bg-gray-50"
         }`}
+        style={isDragActive ? { borderColor: accentColor, backgroundColor: `${accentColor}12` } : undefined}
       >
         <input {...getInputProps()} />
         <div
-          className={`p-4 rounded-full mb-3 shadow-sm ${
-            isDragActive ? "bg-amber-100" : "bg-white"
-          }`}
+          className="p-4 rounded-full mb-3 shadow-sm"
+          style={isDragActive ? { backgroundColor: `${accentColor}18` } : { backgroundColor: "white" }}
         >
           <UploadCloud
-            className={`w-8 h-8 ${isDragActive ? "text-amber-600" : "text-gray-400"}`}
+            className="w-8 h-8"
+            style={{ color: isDragActive ? accentColor : "#9ca3af" }}
           />
         </div>
         <p className="mb-2 text-sm text-center text-gray-600">
@@ -81,10 +84,10 @@ export const FileDropzone = ({
       </div>
 
       {selectedFile && (
-        <div className="p-4 bg-amber-50 border border-amber-200 rounded-xl shadow-sm flex flex-col gap-3 animate-in fade-in">
+        <div className="p-4 rounded-xl shadow-sm flex flex-col gap-3 animate-in fade-in" style={{ backgroundColor: `${accentColor}12`, borderColor: `${accentColor}33`, borderWidth: "1px", borderStyle: "solid" }}>
           <div className="flex items-start gap-4">
             {selectedFile.type.startsWith("image/") ? (
-              <div className="w-16 h-16 shrink-0 rounded-lg overflow-hidden border border-amber-200 shadow-sm bg-white flex items-center justify-center">
+              <div className="w-16 h-16 shrink-0 rounded-lg overflow-hidden shadow-sm bg-white flex items-center justify-center" style={{ borderWidth: "1px", borderStyle: "solid", borderColor: `${accentColor}33` }}>
                 <img
                   src={URL.createObjectURL(selectedFile)}
                   alt="Previsualización"
@@ -92,16 +95,17 @@ export const FileDropzone = ({
                 />
               </div>
             ) : (
-              <div className="p-2 bg-amber-100 text-amber-600 rounded-full mt-1 shrink-0">
+              <div className="p-2 rounded-full mt-1 shrink-0" style={{ backgroundColor: `${accentColor}18`, color: accentColor }}>
                 <AlertCircle className="w-5 h-5" />
               </div>
             )}
             <div className="flex-1 min-w-0 py-1">
-              <h4 className="text-sm font-semibold text-amber-900 mb-1">
+              <h4 className="text-sm font-semibold mb-1" style={{ color: accentColor }}>
                 ¿Estás seguro de subir este archivo?
               </h4>
               <p
-                className="text-xs font-medium text-amber-800 truncate"
+                className="text-xs font-medium truncate"
+                style={{ color: accentColor }}
                 title={selectedFile.name}
               >
                 {selectedFile.name}
@@ -113,7 +117,8 @@ export const FileDropzone = ({
               type="button"
               onClick={() => setSelectedFile(null)}
               disabled={isUploading}
-              className="flex-1 px-4 py-2 text-sm font-medium bg-white border border-amber-200 text-amber-800 rounded-lg hover:bg-amber-100 disabled:opacity-50 transition-colors"
+              className="flex-1 px-4 py-2 text-sm font-medium bg-white rounded-lg disabled:opacity-50 transition-colors"
+              style={{ borderWidth: "1px", borderStyle: "solid", borderColor: `${accentColor}33`, color: accentColor }}
             >
               Cancelar
             </button>
@@ -121,7 +126,8 @@ export const FileDropzone = ({
               type="button"
               onClick={handleUploadClick}
               disabled={isUploading}
-              className="flex-1 px-4 py-2 text-sm font-medium bg-amber-600 text-white rounded-lg hover:bg-amber-700 disabled:opacity-50 transition-colors"
+              className="flex-1 px-4 py-2 text-sm font-medium text-white rounded-lg disabled:opacity-50 transition-colors hover:brightness-110"
+              style={{ backgroundColor: accentColor }}
             >
               {isUploading ? (
                 <span className="inline-flex items-center gap-2">

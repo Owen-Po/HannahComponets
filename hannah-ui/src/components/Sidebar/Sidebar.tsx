@@ -26,6 +26,8 @@ export interface SidebarProps {
   onNavigate?: (path: string, moduleId: string) => void;
   onLogout?: () => void;
   logoutLabel?: string;
+  pinLabel?: string;
+  unpinLabel?: string;
   renderUser?: React.ReactNode;
   brandName?: string;
   brandShort?: string;
@@ -51,6 +53,8 @@ export const Sidebar = ({
   onNavigate,
   onLogout,
   logoutLabel = "Cerrar sesión",
+  pinLabel = "Anclar menú",
+  unpinLabel = "Desanclar menú",
   renderUser,
   brandName = "Sistema",
   brandShort = "S",
@@ -114,7 +118,7 @@ export const Sidebar = ({
           <button
             onClick={() => setIsPinned(!isPinned)}
             className="hidden md:flex p-1.5 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors shrink-0"
-            aria-label={isPinned ? "Desanclar menú" : "Anclar menú"}
+            aria-label={isPinned ? unpinLabel : pinLabel}
           >
             {isPinned ? <PinOff size={15} /> : <Pin size={15} />}
           </button>

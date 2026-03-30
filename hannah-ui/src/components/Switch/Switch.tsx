@@ -1,6 +1,7 @@
 import { forwardRef, useState, useEffect } from "react";
 
 export interface SwitchProps {
+  accentColor?: string;
   label?: string;
   description?: string;
   error?: string;
@@ -11,7 +12,7 @@ export interface SwitchProps {
 }
 
 export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
-  ({ label, description, error, defaultChecked = false, checked, onChange, disabled = false }, ref) => {
+  ({ accentColor = "#d97706", label, description, error, defaultChecked = false, checked, onChange, disabled = false }, ref) => {
     const isControlled = checked !== undefined;
     const [internal, setInternal] = useState(defaultChecked);
     const enabled = isControlled ? checked : internal;
@@ -41,9 +42,10 @@ export const Switch = forwardRef<HTMLButtonElement, SwitchProps>(
             aria-checked={enabled}
             onClick={handleToggle}
             disabled={disabled}
-            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-amber-500 focus:ring-offset-2 ${
-              enabled ? "bg-amber-600" : "bg-gray-200"
+            className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors duration-200 ease-in-out focus:outline-none focus:ring-2 focus:ring-offset-2 ${
+              enabled ? "" : "bg-gray-200"
             } ${disabled ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+            style={enabled ? { backgroundColor: accentColor } : undefined}
           >
             <span className={`inline-block h-4 w-4 transform rounded-full bg-white transition duration-200 ease-in-out ${enabled ? "translate-x-6" : "translate-x-1"}`} />
           </button>

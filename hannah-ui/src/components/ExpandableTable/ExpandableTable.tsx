@@ -17,6 +17,8 @@ export interface ExpandableTableProps<T> {
   className?: string;
   tableId?: string;
   showMinimizeHint?: boolean;
+  hintText?: string;
+  minimizeTitle?: string;
 }
 
 export const ExpandableTable = <T,>({
@@ -27,6 +29,8 @@ export const ExpandableTable = <T,>({
   className = "",
   tableId = "default-expandible",
   showMinimizeHint = true,
+  hintText = "Usa Alt + Click en encabezados para minimizar. Click en expandir para ver detalles.",
+  minimizeTitle = "Alt + Click para minimizar",
 }: ExpandableTableProps<T>) => {
   const [expanded, setExpanded] = useState<ExpandedState>({});
   const [columnasMinimizadas, setColumnasMinimizadas] = useState<Record<string, boolean>>({});
@@ -69,9 +73,7 @@ export const ExpandableTable = <T,>({
           <div className="flex items-start gap-2">
             <Info size={16} className="text-blue-600 mt-0.5 shrink-0" />
             <div>
-              <strong>Consejo:</strong> Usa{" "}
-              <kbd className="px-1.5 py-0.5 bg-white border border-gray-300 rounded text-xs">Alt</kbd>{" "}
-              + Click en encabezados para minimizar. Click en expandir para ver detalles.
+              <strong>Consejo:</strong> {hintText}
             </div>
           </div>
         </div>
@@ -96,7 +98,7 @@ export const ExpandableTable = <T,>({
                         columnMeta?.minimizable !== false ? "cursor-pointer hover:bg-gray-100 transition-colors" : ""
                       }`}
                       style={{ width: `${width}px`, minWidth: `${width}px`, maxWidth: `${width}px`, transition: "all 0.2s ease-in-out" }}
-                      title={columnMeta?.minimizable !== false ? "Alt + Click para minimizar" : undefined}
+                      title={columnMeta?.minimizable !== false ? minimizeTitle : undefined}
                     >
                       {isMinimized ? (
                         <span className="text-gray-300 text-base font-bold leading-none">·</span>

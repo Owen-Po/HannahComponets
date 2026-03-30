@@ -18,6 +18,7 @@ export interface SearchableSelectProps {
   emptyLabel?: string;
   className?: string;
   allowCustom?: boolean;
+  accentColor?: string;
 }
 
 export const SearchableSelect = ({
@@ -31,6 +32,7 @@ export const SearchableSelect = ({
   emptyLabel = "Todos",
   className = "",
   allowCustom = false,
+  accentColor = "#d97706",
 }: SearchableSelectProps) => {
   const [query, setQuery] = useState("");
   const [open, setOpen] = useState(false);
@@ -76,11 +78,13 @@ export const SearchableSelect = ({
         <input
           ref={inputRef}
           type="text"
-          className={`w-full border border-gray-200 rounded-lg p-2.5 pr-10 text-sm focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition ${disabled ? "bg-gray-100 cursor-not-allowed" : "bg-white"}`}
+          className={`w-full border border-gray-200 rounded-lg p-2.5 pr-10 text-sm focus:ring-2 transition ${disabled ? "bg-gray-100 cursor-not-allowed" : "bg-white"}`}
+          style={{ ["--tw-ring-color" as any]: accentColor } as React.CSSProperties}
+          onFocus={(e) => { e.currentTarget.style.borderColor = accentColor; e.currentTarget.style.boxShadow = `0 0 0 2px ${accentColor}40`; setOpen(true); setQuery(""); }}
+          onBlur={(e) => { e.currentTarget.style.borderColor = ""; e.currentTarget.style.boxShadow = ""; }}
           placeholder={placeholder}
           value={open ? query : selectedLabel}
           onChange={(e) => { setQuery(e.target.value); if (!open) setOpen(true); }}
-          onFocus={() => { setOpen(true); setQuery(""); }}
           disabled={disabled}
         />
         <button
@@ -108,11 +112,12 @@ export const SearchableSelect = ({
                   type="button"
                   onClick={() => handleSelect(option.value)}
                   className={`w-full flex items-center gap-2 px-4 py-2.5 text-sm text-left transition-colors ${
-                    isSelected ? "bg-amber-50 text-amber-800 font-medium" : "text-gray-900 hover:bg-gray-50"
+                    isSelected ? "font-medium" : "text-gray-900 hover:bg-gray-50"
                   } ${option.value === "" ? "font-medium border-b border-gray-100" : ""}`}
+                  style={isSelected ? { backgroundColor: `${accentColor}15`, color: accentColor } : undefined}
                 >
                   <span className="w-4 shrink-0">
-                    {isSelected && <Check className="h-4 w-4 text-amber-600" />}
+                    {isSelected && <Check className="h-4 w-4" style={{ color: accentColor }} />}
                   </span>
                   <span className="flex-1 truncate">
                     {option.label}

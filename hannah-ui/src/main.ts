@@ -8,7 +8,6 @@ export { Button } from "./components/Button";
 export { Header } from "./components/Header";
 export { Sidebar } from "./components/Sidebar";
 export { Login } from "./components/Login";
-export { Stack } from "./components/Stack";
 export { Form, FormGroup, FormDivider } from "./components/Form";
 export { Input } from "./components/Input";
 export { Textarea } from "./components/Textarea";

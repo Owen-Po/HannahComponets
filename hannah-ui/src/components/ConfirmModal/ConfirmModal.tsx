@@ -9,8 +9,10 @@ export interface ConfirmModalProps {
   message?: ReactNode;
   confirmText?: string;
   cancelText?: string;
+  loadingText?: string;
   variant?: "danger" | "warning" | "info";
   isLoading?: boolean;
+  accentColor?: string;
 }
 
 const variantStyles = {
@@ -36,8 +38,10 @@ export const ConfirmModal = ({
   message = "Esta acción no se puede deshacer.",
   confirmText = "Confirmar",
   cancelText = "Cancelar",
+  loadingText = "Procesando...",
   variant = "danger",
   isLoading = false,
+  accentColor,
 }: ConfirmModalProps) => {
   if (!isOpen) return null;
 
@@ -75,9 +79,10 @@ export const ConfirmModal = ({
               type="button"
               onClick={onConfirm}
               disabled={isLoading}
-              className={`flex-1 px-4 py-2.5 text-sm font-medium rounded-lg disabled:opacity-50 transition-colors ${styles.button}`}
+              className={`flex-1 px-4 py-2.5 text-sm font-medium rounded-lg disabled:opacity-50 transition-colors ${accentColor ? "text-white" : styles.button}`}
+              style={accentColor ? { backgroundColor: accentColor } : undefined}
             >
-              {isLoading ? "Procesando..." : confirmText}
+              {isLoading ? loadingText : confirmText}
             </button>
           </div>
         </div>

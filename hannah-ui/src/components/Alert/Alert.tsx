@@ -44,6 +44,7 @@ export interface AlertProps
   icon?: ReactNode;
   dismissible?: boolean;
   onDismiss?: () => void;
+  closeAriaLabel?: string;
 }
 
 export const Alert: FC<AlertProps> = ({
@@ -53,6 +54,7 @@ export const Alert: FC<AlertProps> = ({
   icon,
   dismissible = false,
   onDismiss,
+  closeAriaLabel = "Cerrar",
   children,
   ...props
 }) => {
@@ -78,7 +80,7 @@ export const Alert: FC<AlertProps> = ({
         <button
           onClick={onDismiss}
           className="shrink-0 opacity-60 hover:opacity-100 transition-opacity duration-150 mt-0.5"
-          aria-label="Cerrar"
+          aria-label={closeAriaLabel}
         >
           <X size={16} />
         </button>

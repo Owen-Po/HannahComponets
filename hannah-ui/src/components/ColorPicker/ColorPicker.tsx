@@ -6,6 +6,7 @@ export interface ColorPickerProps {
   onChange?: (color: string) => void;
   label?: string;
   presets?: string[];
+  accentColor?: string;
 }
 
 const DEFAULT_PRESETS = [
@@ -18,6 +19,7 @@ export const ColorPicker = ({
   onChange,
   label,
   presets = DEFAULT_PRESETS,
+  accentColor = "#d97706",
 }: ColorPickerProps) => {
   const [open, setOpen] = useState(false);
   const ref = useRef<HTMLDivElement>(null);
@@ -54,7 +56,8 @@ export const ColorPicker = ({
             color={value}
             onChange={onChange}
             prefixed
-            className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md text-center font-mono uppercase focus:outline-none focus:ring-2 focus:ring-amber-400"
+            className="w-full px-3 py-1.5 text-sm border border-gray-200 rounded-md text-center font-mono uppercase focus:outline-none focus:ring-2"
+            style={{ "--tw-ring-color": accentColor } as React.CSSProperties}
           />
           {presets.length > 0 && (
             <div className="flex flex-wrap gap-1.5">

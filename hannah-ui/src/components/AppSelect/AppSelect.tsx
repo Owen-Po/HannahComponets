@@ -19,6 +19,7 @@ type AppSelectProps<
     "onCreateOption" | "formatCreateLabel" | "isValidNewOption"
   > & {
     isCreatable?: boolean;
+    accentColor?: string;
   };
 
 export const AppSelect = <
@@ -34,6 +35,7 @@ export const AppSelect = <
   onCreateOption,
   formatCreateLabel = (input) => `Usar "${input}"`,
   isValidNewOption,
+  accentColor = "#d97706",
   ...props
 }: AppSelectProps<Option, IsMulti, Group>) => {
   const sharedClassNames: ReactSelectProps<Option, IsMulti, Group>["classNames"] = {
@@ -41,7 +43,7 @@ export const AppSelect = <
       [
         "flex min-h-9 w-full rounded-md border bg-transparent px-3 py-1 text-sm shadow-xs transition-colors",
         isFocused
-          ? "border-amber-400 ring-amber-400/50 ring-[3px] outline-none"
+          ? "ring-[3px] outline-none"
           : "border-gray-300",
         isDisabled ? "cursor-not-allowed opacity-50" : "cursor-default",
       ].join(" "),
@@ -65,9 +67,9 @@ export const AppSelect = <
       [
         "relative flex cursor-pointer items-center rounded-sm px-2 py-1.5 text-sm outline-none transition-colors",
         isSelected
-          ? "bg-amber-100 text-amber-800 font-medium"
+          ? "font-medium"
           : isFocused
-            ? "bg-amber-50 text-amber-700"
+            ? ""
             : "text-gray-900",
       ].join(" "),
     noOptionsMessage: () => "py-6 text-center text-sm text-gray-400",
@@ -91,7 +93,21 @@ export const AppSelect = <
     classNames: sharedClassNames,
     menuPosition: "fixed" as const,
     menuPortalTarget: typeof document !== "undefined" ? document.body : null,
-    styles: { menuPortal: (base: any) => ({ ...base, zIndex: 9999 }) },
+    styles: {
+      menuPortal: (base: any) => ({ ...base, zIndex: 9999 }),
+      control: (base: any, state: any) => ({
+        ...base,
+        ...(state.isFocused ? { borderColor: accentColor, boxShadow: `0 0 0 3px ${accentColor}50` } : {}),
+      }),
+      option: (base: any, state: any) => ({
+        ...base,
+        ...(state.isSelected
+          ? { backgroundColor: `${accentColor}25`, color: accentColor }
+          : state.isFocused
+            ? { backgroundColor: `${accentColor}15`, color: accentColor }
+            : {}),
+      }),
+    },
     ...props,
   };
 

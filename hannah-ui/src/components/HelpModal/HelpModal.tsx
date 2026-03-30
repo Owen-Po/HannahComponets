@@ -11,9 +11,10 @@ export interface HelpModalProps {
   title: string;
   description?: string;
   sections: HelpSection[];
+  accentColor?: string;
 }
 
-export const HelpModal = ({ title, description, sections }: HelpModalProps) => {
+export const HelpModal = ({ title, description, sections, accentColor = "#d97706" }: HelpModalProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState(0);
 
@@ -22,7 +23,10 @@ export const HelpModal = ({ title, description, sections }: HelpModalProps) => {
       <button
         type="button"
         onClick={() => setIsOpen(true)}
-        className="p-1.5 text-gray-400 hover:text-amber-600 hover:bg-amber-50 rounded-full transition-colors"
+        className="p-1.5 text-gray-400 rounded-full transition-colors"
+        style={{ ["--accent" as string]: accentColor }}
+        onMouseEnter={(e) => { e.currentTarget.style.color = accentColor; e.currentTarget.style.backgroundColor = `${accentColor}12`; }}
+        onMouseLeave={(e) => { e.currentTarget.style.color = ""; e.currentTarget.style.backgroundColor = ""; }}
         title="Ver ayuda"
         aria-label="Ver ayuda"
       >
@@ -36,7 +40,7 @@ export const HelpModal = ({ title, description, sections }: HelpModalProps) => {
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-4 border-b border-gray-100">
               <div className="flex items-center gap-2">
-                <HelpCircle className="w-5 h-5 text-amber-600" />
+                <HelpCircle className="w-5 h-5" style={{ color: accentColor }} />
                 <h3 className="text-base font-semibold text-gray-900">{title}</h3>
               </div>
               <button type="button" onClick={() => setIsOpen(false)} className="p-1 text-gray-400 hover:text-gray-600 rounded-lg hover:bg-gray-100 transition-colors">
@@ -47,7 +51,7 @@ export const HelpModal = ({ title, description, sections }: HelpModalProps) => {
             {/* Body */}
             <div className="flex-1 overflow-y-auto p-5 space-y-4">
               {description && (
-                <p className="text-sm text-gray-600 border-l-4 border-amber-400 pl-3 py-1 bg-amber-50 rounded-r">{description}</p>
+                <p className="text-sm text-gray-600 border-l-4 pl-3 py-1 rounded-r" style={{ borderColor: accentColor, backgroundColor: `${accentColor}12` }}>{description}</p>
               )}
 
               {sections.length > 1 && (
@@ -59,9 +63,10 @@ export const HelpModal = ({ title, description, sections }: HelpModalProps) => {
                       onClick={() => setActiveSection(index)}
                       className={`flex items-center gap-2 px-3 py-1.5 text-sm rounded-md transition-all ${
                         activeSection === index
-                          ? "bg-amber-100 text-amber-800 font-medium"
+                          ? "font-medium"
                           : "text-gray-600 hover:bg-gray-100"
                       }`}
+                      style={activeSection === index ? { backgroundColor: `${accentColor}20`, color: accentColor } : undefined}
                     >
                       {section.icon}
                       {section.title}
@@ -91,7 +96,8 @@ export const HelpModal = ({ title, description, sections }: HelpModalProps) => {
                       key={index}
                       type="button"
                       onClick={() => setActiveSection(index)}
-                      className={`w-2 h-2 rounded-full transition-all ${activeSection === index ? "bg-amber-500 w-4" : "bg-gray-300 hover:bg-gray-400"}`}
+                      className={`w-2 h-2 rounded-full transition-all ${activeSection === index ? "w-4" : "bg-gray-300 hover:bg-gray-400"}`}
+                      style={activeSection === index ? { backgroundColor: accentColor } : undefined}
                       aria-label={`Ir a sección ${index + 1}`}
                     />
                   ))}
@@ -105,11 +111,11 @@ export const HelpModal = ({ title, description, sections }: HelpModalProps) => {
   );
 };
 
-export const HelpList = ({ items }: { items: string[] }) => (
+export const HelpList = ({ items, accentColor = "#d97706" }: { items: string[]; accentColor?: string }) => (
   <ul className="space-y-1.5 list-none">
     {items.map((item, index) => (
       <li key={index} className="flex items-start gap-2">
-        <span className="text-amber-500 mt-0.5">•</span>
+        <span className="mt-0.5" style={{ color: accentColor }}>•</span>
         <span>{item}</span>
       </li>
     ))}
@@ -120,8 +126,8 @@ export const HelpParagraph = ({ children }: { children: ReactNode }) => (
   <p className="leading-relaxed">{children}</p>
 );
 
-export const HelpHighlight = ({ children }: { children: ReactNode }) => (
-  <span className="bg-amber-100 text-amber-800 px-1.5 py-0.5 rounded text-xs font-medium">{children}</span>
+export const HelpHighlight = ({ children, accentColor = "#d97706" }: { children: ReactNode; accentColor?: string }) => (
+  <span className="px-1.5 py-0.5 rounded text-xs font-medium" style={{ backgroundColor: `${accentColor}20`, color: accentColor }}>{children}</span>
 );
 
 export const HelpKeyboard = ({ keys }: { keys: string }) => (

@@ -134,9 +134,10 @@ interface ToastItemProps {
   item: ToastItem;
   onDismiss: (id: string) => void;
   position: ToastPosition;
+  closeAriaLabel?: string;
 }
 
-const ToastItemComponent: FC<ToastItemProps> = ({ item, onDismiss, position }) => {
+const ToastItemComponent: FC<ToastItemProps> = ({ item, onDismiss, position, closeAriaLabel = "Cerrar notificación" }) => {
   const [progress, setProgress] = useState(100);
   const [visible, setVisible] = useState(false);
   const [exiting, setExiting] = useState(false);
@@ -249,7 +250,7 @@ const ToastItemComponent: FC<ToastItemProps> = ({ item, onDismiss, position }) =
           <button
             onClick={dismiss}
             className="shrink-0 text-gray-400 hover:text-gray-600 dark:text-gray-500 dark:hover:text-gray-300 transition-colors mt-0.5"
-            aria-label="Cerrar notificación"
+            aria-label={closeAriaLabel}
           >
             <X size={14} />
           </button>
@@ -276,12 +277,14 @@ export interface ToastProviderProps {
   children: ReactNode;
   position?: ToastPosition;
   maxToasts?: number;
+  closeAriaLabel?: string;
 }
 
 export const ToastProvider: FC<ToastProviderProps> = ({
   children,
   position = "bottom-right",
   maxToasts = 5,
+  closeAriaLabel = "Cerrar notificación",
 }) => {
   const [toasts, setToasts] = useState<ToastItem[]>([]);
 
@@ -349,6 +352,7 @@ export const ToastProvider: FC<ToastProviderProps> = ({
                 item={item}
                 onDismiss={dismiss}
                 position={position}
+                closeAriaLabel={closeAriaLabel}
               />
             </div>
           ))}

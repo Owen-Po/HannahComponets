@@ -36,6 +36,10 @@ export interface HeaderProps {
   onToggleSidebar?: () => void;
 
   breadcrumbs?: BreadcrumbItem[];
+  expandLabel?: string;
+  collapseLabel?: string;
+  openMenuLabel?: string;
+  backLabel?: string;
 }
 
 export const Header = ({
@@ -53,6 +57,10 @@ export const Header = ({
   onToggleSidebar,
   breadcrumbs,
   className,
+  expandLabel = "Expandir",
+  collapseLabel = "Colapsar",
+  openMenuLabel = "Abrir menú",
+  backLabel = "Volver",
 }: HeaderProps) => {
   return (
     <header className={cn("mb-4", className)}>
@@ -64,7 +72,7 @@ export const Header = ({
               <button
                 onClick={onToggleCollapse}
                 className="p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                aria-label="Expandir"
+                aria-label={expandLabel}
               >
                 <ChevronDown className="w-4 h-4" />
               </button>
@@ -112,7 +120,7 @@ export const Header = ({
                     <button
                       onClick={onToggleSidebar}
                       className="md:hidden p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                      aria-label="Abrir menú"
+                      aria-label={openMenuLabel}
                     >
                       {isSidebarOpen ? (
                         <ChevronLeft className="w-4 h-4" />
@@ -126,7 +134,7 @@ export const Header = ({
                     <button
                       onClick={onBack}
                       className="p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                      aria-label="Volver"
+                      aria-label={backLabel}
                     >
                       <ArrowLeft className="w-4 h-4" />
                     </button>
@@ -168,7 +176,7 @@ export const Header = ({
                   <button
                     onClick={onToggleCollapse}
                     className="p-1 rounded-md text-gray-400 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-500 dark:hover:text-gray-300 dark:hover:bg-gray-700 transition-colors"
-                    aria-label="Colapsar"
+                    aria-label={collapseLabel}
                   >
                     <ChevronUp className="w-4 h-4" />
                   </button>
