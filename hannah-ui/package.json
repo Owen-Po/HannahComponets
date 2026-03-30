@@ -1,6 +1,15 @@
 {
   "name": "hannah-ui",
   "version": "0.0.4",
+  "description": "A modern React component library with 50+ UI components, templates, and utilities built with Tailwind CSS and TypeScript",
+  "keywords": ["react", "ui", "components", "tailwindcss", "typescript", "design-system", "component-library"],
+  "author": "Hannah UI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hannah-UI/Hannah-UI"
+  },
+  "homepage": "https://github.com/Hannah-UI/Hannah-UI",
   "type": "module",
   "files": [
     "dist"
@@ -18,95 +27,243 @@
     "./style.css": "./dist/hannah-ui.css",
     "./Button": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Input": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Select": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Textarea": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Checkbox": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Radio": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Badge": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Card": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Table": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Alert": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Modal": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Tabs": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Avatar": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Toast": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Header": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Sidebar": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Login": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Register": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Stack": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Form": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Breadcrumb": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./Pagination": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     },
     "./StatsCard": {
       "types": "./dist/main.d.ts",
-      "import": "./dist/hannah-ui.js"
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Chip": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Toggle": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Switch": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./PaymentMethodCard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./InteractiveCreditCard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Filter": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./DraggableTable": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./FilterPanel": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./AdvancedTableFilter": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./AppSelect": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./FileDropzone": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./DatePicker": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./PhoneInput": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ColorPicker": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./KPICard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ConfirmModal": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ExportModal": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./PageTabs": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ExpandableTable": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./StickyTable": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./SimpleTable": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./HelpModal": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./NoteBanner": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ErrorMessage": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./SearchableSelect": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     }
   },
   "scripts": {
