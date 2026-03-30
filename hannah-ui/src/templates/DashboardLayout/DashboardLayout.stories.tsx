@@ -1,16 +1,18 @@
-import { useState } from "react";
 import type { Meta, StoryObj } from "@storybook/react";
 import { MemoryRouter, Routes, Route } from "react-router-dom";
 import { Home, Users, Settings, BarChart2, FileText, Bell } from "lucide-react";
+
 import { DashboardLayout } from "./DashboardLayout";
-import type { ModuleCategory } from "../modulos/modulos";
-import type { User } from "../AuthContext/AuthContext";
 import { Badge } from "../../components/Badge/Badge";
 import { Card, CardHeader, CardBody } from "../../components/Card/Card";
+
+import type { ModuleCategory } from "../modulos/modulos";
+import type { User } from "../AuthContext/AuthContext";
 
 /* ─────────────────────────────────────────
    Mock data
 ───────────────────────────────────────── */
+
 const MOCK_USER: User = {
   id: "1",
   nombre: "Ana García",
@@ -50,14 +52,16 @@ const MOCK_CATEGORIES: ModuleCategory[] = [
 ];
 
 /* ─────────────────────────────────────────
-   Páginas de ejemplo
+   Example pages
 ───────────────────────────────────────── */
+
 const PageHome = () => (
   <div className="space-y-4">
     <div>
       <h1 className="text-xl font-bold text-gray-900">Dashboard</h1>
-      <p className="text-sm text-gray-500 mt-0.5">Bienvenido de vuelta, Ana.</p>
+      <p className="mt-0.5 text-sm text-gray-500">Bienvenido de vuelta, Ana.</p>
     </div>
+
     <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
       {[
         { label: "Usuarios", value: "1,248", badge: "primary" as const },
@@ -73,6 +77,7 @@ const PageHome = () => (
         </Card>
       ))}
     </div>
+
     <Card shadow="sm">
       <CardBody>
         <p className="text-sm text-gray-500">Selecciona un módulo desde el sidebar para navegar.</p>
@@ -82,9 +87,9 @@ const PageHome = () => (
 );
 
 const PagePlaceholder = ({ title }: { title: string }) => (
-  <div className="flex flex-col items-center justify-center min-h-[60vh] gap-3">
-    <div className="w-12 h-12 rounded-2xl bg-gray-100 flex items-center justify-center">
-      <FileText className="w-6 h-6 text-gray-400" />
+  <div className="flex min-h-[60vh] flex-col items-center justify-center gap-3">
+    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-gray-100">
+      <FileText className="h-6 w-6 text-gray-400" />
     </div>
     <p className="text-sm font-semibold text-gray-700">{title}</p>
     <p className="text-xs text-gray-400">Página de demostración</p>
@@ -92,43 +97,41 @@ const PagePlaceholder = ({ title }: { title: string }) => (
 );
 
 /* ─────────────────────────────────────────
-   Wrapper con router completo
+   Layout wrapper
 ───────────────────────────────────────── */
-const LayoutDemo = ({ initialPinned = false }: { initialPinned?: boolean }) => {
-  const [pinned, setPinned] = useState(initialPinned);
 
-  return (
-    <MemoryRouter initialEntries={["/dashboard"]}>
-      <Routes>
-        <Route
-          path="/dashboard/*"
-          element={
-            <DashboardLayout
-              sidebarProps={{
-                user: MOCK_USER,
-                categories: MOCK_CATEGORIES,
-                onLogout: () => alert("Logout"),
-              }}
-            >
-              <Routes>
-                <Route index element={<PageHome />} />
-                <Route path="reportes" element={<PagePlaceholder title="Reportes" />} />
-                <Route path="usuarios" element={<PagePlaceholder title="Usuarios" />} />
-                <Route path="documentos" element={<PagePlaceholder title="Documentos" />} />
-                <Route path="notif" element={<PagePlaceholder title="Notificaciones" />} />
-                <Route path="config" element={<PagePlaceholder title="Configuración" />} />
-              </Routes>
-            </DashboardLayout>
-          }
-        />
-      </Routes>
-    </MemoryRouter>
-  );
-};
+const LayoutDemo = () => (
+  <MemoryRouter initialEntries={["/dashboard"]}>
+    <Routes>
+      <Route
+        path="/dashboard/*"
+        element={
+          <DashboardLayout
+            sidebarProps={{
+              user: MOCK_USER,
+              categories: MOCK_CATEGORIES,
+              onLogout: () => alert("Logout"),
+            }}
+          >
+            <Routes>
+              <Route index element={<PageHome />} />
+              <Route path="reportes" element={<PagePlaceholder title="Reportes" />} />
+              <Route path="usuarios" element={<PagePlaceholder title="Usuarios" />} />
+              <Route path="documentos" element={<PagePlaceholder title="Documentos" />} />
+              <Route path="notif" element={<PagePlaceholder title="Notificaciones" />} />
+              <Route path="config" element={<PagePlaceholder title="Configuración" />} />
+            </Routes>
+          </DashboardLayout>
+        }
+      />
+    </Routes>
+  </MemoryRouter>
+);
 
 /* ─────────────────────────────────────────
    Meta
 ───────────────────────────────────────── */
+
 const meta: Meta = {
   title: "Templates/DashboardLayout",
   parameters: {
@@ -148,12 +151,8 @@ type Story = StoryObj;
 /* ─────────────────────────────────────────
    Stories
 ───────────────────────────────────────── */
+
 export const Default: Story = {
   name: "Default · Sidebar colapsado",
   render: () => <LayoutDemo />,
-};
-
-export const PinnedSidebar: Story = {
-  name: "State · Sidebar fijo expandido",
-  render: () => <LayoutDemo initialPinned={true} />,
 };

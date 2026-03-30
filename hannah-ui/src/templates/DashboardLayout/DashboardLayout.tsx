@@ -1,67 +1,66 @@
 import { useState, useEffect, type ReactNode } from "react";
 import { Outlet } from "react-router-dom";
+
 import { cn } from "../../utils/cn";
 import { SidebarProvider } from "../SidebarContext/SidebarContext";
 import { AppSidebar } from "../AppSidebar/AppSidebar";
 import type { AppSidebarProps, SidebarTheme } from "../AppSidebar/AppSidebar";
 
+/* ─────────────────────────────────────────
+   Types
+───────────────────────────────────────── */
+
 export interface DashboardLayoutProps {
-  /**
-   * Props que se pasan directamente al AppSidebar.
-   * Incluye `user`, `categories`, `appName`, `appSubtitle`, `onLogout` y `theme`.
-   */
+  /** Props passed directly to AppSidebar (user, categories, appName, etc.) */
   sidebarProps?: Omit<
     AppSidebarProps,
     "isSidebarOpen" | "setIsSidebarOpen" | "isPinned" | "setIsPinned"
   >;
-  /**
-   * Contenido a renderizar en el área principal.
-   * Si no se pasa, usa <Outlet /> de React Router.
-   */
+
+  /** Main area content. Falls back to <Outlet /> if omitted. */
   children?: ReactNode;
-  /**
-   * Color de fondo del área de contenido principal.
-   * @default "bg-gray-50"
-   */
+
+  /** Background class for the content area. @default "bg-gray-50" */
   contentBg?: string;
 }
 
-// Re-export for convenience
 export type { SidebarTheme };
+
+/* ─────────────────────────────────────────
+   Helpers
+───────────────────────────────────────── */
+
+function readLocal<T>(key: string, fallback: T): T {
+  try {
+    const saved = localStorage.getItem(key);
+    return saved !== null ? (JSON.parse(saved) as T) : fallback;
+  } catch {
+    return fallback;
+  }
+}
+
+/* ─────────────────────────────────────────
+   Component
+───────────────────────────────────────── */
 
 export const DashboardLayout = ({
   sidebarProps,
   children,
   contentBg = "bg-gray-50",
 }: DashboardLayoutProps) => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(() => {
-    try {
-      const saved = localStorage.getItem("sidebarOpen");
-      return saved !== null ? (JSON.parse(saved) as boolean) : true;
-    } catch {
-      return true;
-    }
-  });
 
-  const [isPinned, setIsPinned] = useState(() => {
-    try {
-      const saved = localStorage.getItem("sidebarPinned");
-      return saved !== null ? (JSON.parse(saved) as boolean) : false;
-    } catch {
-      return false;
-    }
-  });
+  /* ── Sidebar state ── */
+  const [isSidebarOpen, setIsSidebarOpen] = useState(() => readLocal("sidebarOpen", true));
+  const [isPinned, setIsPinned]           = useState(() => readLocal("sidebarPinned", false));
 
-  useEffect(() => {
-    localStorage.setItem("sidebarOpen", JSON.stringify(isSidebarOpen));
-  }, [isSidebarOpen]);
+  /* ── Persist to localStorage ── */
+  useEffect(() => { localStorage.setItem("sidebarOpen", JSON.stringify(isSidebarOpen)); }, [isSidebarOpen]);
+  useEffect(() => { localStorage.setItem("sidebarPinned", JSON.stringify(isPinned)); }, [isPinned]);
 
-  useEffect(() => {
-    localStorage.setItem("sidebarPinned", JSON.stringify(isPinned));
-  }, [isPinned]);
-
+  /* ── Render ── */
   return (
     <div className={cn("flex h-screen overflow-hidden", contentBg)}>
+
       {/* Sidebar */}
       <AppSidebar
         isSidebarOpen={isSidebarOpen}
@@ -91,7 +90,7 @@ export const DashboardLayout = ({
           </SidebarProvider>
         </div>
       </main>
+
     </div>
   );
 };
-
