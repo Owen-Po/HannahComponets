@@ -267,6 +267,151 @@
       "types": "./dist/main.d.ts",
       "import": "./dist/hannah-ui.js",
       "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Navbar": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ModernSidebar": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Dock": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./CommandPalette": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./EmptyState": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Tooltip": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Timeline": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Skeleton": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Stepper": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./DropdownMenu": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./CopyBlock": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./PricingCard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Divider": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./Kbd": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ProductCard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./CartItem": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./CartSummary": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./CategoryShowcase": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./PromoBanner": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ProductQuickView": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./ReviewCard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./QuantitySelector": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./WishlistButton": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./DataGrid": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./KanbanBoard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./StatusFlow": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./MetricCard": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./InlineEdit": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./UserStack": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
     }
   },
   "scripts": {
