@@ -284,34 +284,94 @@ Los templates son layouts y contextos de nivel superior para armar aplicaciones 
 npm install hannah-ui
 ```
 
+Esto instalara **hannah-ui** junto con sus dependencias directas (`clsx`, `tailwind-merge`, `class-variance-authority`, etc.). Las dependencias opcionales (como `@tanstack/react-table` o `framer-motion`) **no se instalan automaticamente** — solo instalalas si usas los componentes que las requieren (ver [Dependencias opcionales](#dependencias-opcionales)).
+
+> **Importante:** `react`, `react-dom` y `lucide-react` son **peerDependencies obligatorias**. Tu proyecto ya debe tenerlas instaladas. Si no las tienes:
+>
+> ```bash
+> npm install react react-dom lucide-react
+> ```
+
 ### 2. Importar estilos
 
+Hannah UI incluye un archivo CSS con todos los estilos de Tailwind compilados. **Debes importarlo una sola vez** en el entry point de tu aplicacion:
+
 ```tsx
-// En tu archivo principal (main.tsx o App.tsx)
+// main.tsx o App.tsx
 import "hannah-ui/style.css";
 ```
+
+> Sin esta importacion, los componentes se renderizaran sin estilos.
 
 ### 3. Usar componentes
 
 ```tsx
-import { Button, Input, DraggableTable, DatePicker } from "hannah-ui";
+import { Button, Input, Card, CardHeader, CardBody, Alert } from "hannah-ui";
 
 function App() {
   return (
-    <div>
-      <Input placeholder="Escribe algo..." />
-      <Button variant="primary">Guardar</Button>
-      <DatePicker value={fecha} onChange={setFecha} isClearable />
-    </div>
+    <Card>
+      <CardHeader>
+        <h2>Formulario de contacto</h2>
+      </CardHeader>
+      <CardBody>
+        <Input placeholder="Tu nombre" leftIcon={<UserIcon />} />
+        <Input placeholder="Tu email" type="email" />
+        <Button variant="primary" size="md">
+          Enviar
+        </Button>
+        <Alert variant="success">Mensaje enviado correctamente.</Alert>
+      </CardBody>
+    </Card>
+  );
+}
+```
+
+#### Ejemplo: Button con variantes
+
+```tsx
+import { Button } from "hannah-ui";
+import { Save, Trash2, Plus } from "lucide-react";
+
+function Buttons() {
+  return (
+    <>
+      <Button variant="primary" leftIcon={<Save size={16} />}>Guardar</Button>
+      <Button variant="danger" outline leftIcon={<Trash2 size={16} />}>Eliminar</Button>
+      <Button variant="success" size="lg" loading loadingText="Creando...">Crear</Button>
+      <Button variant="ghost" iconOnly><Plus size={16} /></Button>
+    </>
+  );
+}
+```
+
+#### Ejemplo: Toast notifications
+
+```tsx
+import { ToastProvider, Toast, Button } from "hannah-ui";
+
+function App() {
+  return (
+    <ToastProvider>
+      <MiContenido />
+    </ToastProvider>
   );
 }
 ```
 
 ### 4. Usar un template de dashboard
 
+Para aplicaciones completas, Hannah UI incluye templates de dashboard con sidebar, autenticacion y rutas protegidas:
+
+```bash
+# Instalar dependencias opcionales para templates
+npm install react-router-dom
+```
+
 ```tsx
 import { DashboardLayout, AuthProvider } from "hannah-ui";
 import type { ModuleCategory } from "hannah-ui";
+import { Home, Users } from "lucide-react";
 
 const categories: ModuleCategory[] = [
   {
@@ -320,6 +380,7 @@ const categories: ModuleCategory[] = [
     icon: Home,
     modules: [
       { id: 1, name: "Dashboard", path: "/dashboard", icon: Home, roles: ["ADMIN"] },
+      { id: 2, name: "Usuarios", path: "/users", icon: Users, roles: ["ADMIN"] },
     ],
   },
 ];
@@ -337,6 +398,24 @@ function App() {
     </AuthProvider>
   );
 }
+```
+
+### 5. Componentes avanzados (dependencias opcionales)
+
+Si necesitas tablas avanzadas o componentes especializados, instala las dependencias correspondientes:
+
+```bash
+# Para DraggableTable, ExpandableTable, StickyTable, SimpleTable
+npm install @tanstack/react-table
+
+# Para DraggableTable (drag & drop de columnas)
+npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+
+# Para AppSelect (select searchable)
+npm install react-select
+
+# Para FileDropzone (upload con drag & drop)
+npm install react-dropzone
 ```
 
 ---

@@ -572,6 +572,7 @@ function Dashboard() {
 /* ─── Storybook config ─── */
 const meta: Meta = {
   title: "Welcome",
+  tags: ["!autodocs"],
   parameters: {
     layout: "fullscreen",
     backgrounds: { disable: true },
