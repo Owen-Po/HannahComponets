@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="public/logohanna.png" alt="Hannah UI" width="80" />
+  <img src="https://raw.githubusercontent.com/Hannah-UI/Hannah-UI/main/hannah-ui/public/logohanna.png" alt="Hannah UI" width="80" />
 </p>
 
 <h1 align="center">HANNAH UI</h1>
@@ -9,7 +9,7 @@
 </p>
 
 <p align="center">
-  <strong>v0.0.3</strong> &middot; 49 componentes &middot; 9 filtros &middot; 6 templates
+  <strong>v0.0.4</strong> &middot; 49 componentes &middot; 9 filtros &middot; 6 templates
 </p>
 
 ---
@@ -504,6 +504,7 @@ Los componentes base (Button, Input, Card, Table, Modal, etc.) **no requieren ni
 
 | Version | Descripcion |
 |---|---|
+| v0.0.4 | Optimización de bundle: externalizadas todas las peer dependencies, subpath exports completos con soporte CommonJS |
 | v0.0.3 | Se agregan 24 nuevos componentes portados desde BDApp-Frontend-V2 (tablas avanzadas, filtros, inputs especializados, modales) |
 | v0.0.2 | Primera publicacion de prueba en npm |
 
