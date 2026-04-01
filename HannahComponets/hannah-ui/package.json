@@ -1,0 +1,494 @@
+{
+  "name": "hannah-ui",
+  "version": "0.0.8",
+  "description": "A lightweight React component library with essential UI components, templates, and utilities built with Tailwind CSS and TypeScript. Install individual components for maximum optimization.",
+  "keywords": [
+    "react",
+    "ui",
+    "components",
+    "tailwindcss",
+    "typescript",
+    "design-system",
+    "component-library"
+  ],
+  "author": "Hannah UI",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Hannah-UI/Hannah-UI"
+  },
+  "homepage": "https://github.com/Hannah-UI/Hannah-UI",
+  "workspaces": [
+    "packages/*"
+  ],
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "main": "dist/hannah-ui.umd.cjs",
+  "module": "dist/hannah-ui.js",
+  "types": "dist/main.d.ts",
+  "style": "dist/hannah-ui.css",
+  "exports": {
+    ".": {
+      "types": "./dist/main.d.ts",
+      "import": "./dist/hannah-ui.js",
+      "require": "./dist/hannah-ui.umd.cjs"
+    },
+    "./style.css": "./dist/hannah-ui.css",
+    "./Advancedtablefilter": {
+      "types": "./packages/advancedtablefilter/dist/src/index.d.ts",
+      "import": "./packages/advancedtablefilter/dist/hannah-ui-advancedtablefilter.js",
+      "require": "./packages/advancedtablefilter/dist/hannah-ui-advancedtablefilter.umd.cjs"
+    },
+    "./Alert": {
+      "types": "./packages/alert/dist/src/index.d.ts",
+      "import": "./packages/alert/dist/hannah-ui-alert.js",
+      "require": "./packages/alert/dist/hannah-ui-alert.umd.cjs"
+    },
+    "./Appselect": {
+      "types": "./packages/appselect/dist/src/index.d.ts",
+      "import": "./packages/appselect/dist/hannah-ui-appselect.js",
+      "require": "./packages/appselect/dist/hannah-ui-appselect.umd.cjs"
+    },
+    "./Avatar": {
+      "types": "./packages/avatar/dist/src/index.d.ts",
+      "import": "./packages/avatar/dist/hannah-ui-avatar.js",
+      "require": "./packages/avatar/dist/hannah-ui-avatar.umd.cjs"
+    },
+    "./Badge": {
+      "types": "./packages/badge/dist/src/index.d.ts",
+      "import": "./packages/badge/dist/hannah-ui-badge.js",
+      "require": "./packages/badge/dist/hannah-ui-badge.umd.cjs"
+    },
+    "./Breadcrumb": {
+      "types": "./packages/breadcrumb/dist/src/index.d.ts",
+      "import": "./packages/breadcrumb/dist/hannah-ui-breadcrumb.js",
+      "require": "./packages/breadcrumb/dist/hannah-ui-breadcrumb.umd.cjs"
+    },
+    "./Button": {
+      "types": "./packages/button/dist/src/index.d.ts",
+      "import": "./packages/button/dist/hannah-ui-button.js",
+      "require": "./packages/button/dist/hannah-ui-button.umd.cjs"
+    },
+    "./Card": {
+      "types": "./packages/card/dist/src/index.d.ts",
+      "import": "./packages/card/dist/hannah-ui-card.js",
+      "require": "./packages/card/dist/hannah-ui-card.umd.cjs"
+    },
+    "./Cartitem": {
+      "types": "./packages/cartitem/dist/src/index.d.ts",
+      "import": "./packages/cartitem/dist/hannah-ui-cartitem.js",
+      "require": "./packages/cartitem/dist/hannah-ui-cartitem.umd.cjs"
+    },
+    "./Cartsummary": {
+      "types": "./packages/cartsummary/dist/src/index.d.ts",
+      "import": "./packages/cartsummary/dist/hannah-ui-cartsummary.js",
+      "require": "./packages/cartsummary/dist/hannah-ui-cartsummary.umd.cjs"
+    },
+    "./Categoryshowcase": {
+      "types": "./packages/categoryshowcase/dist/src/index.d.ts",
+      "import": "./packages/categoryshowcase/dist/hannah-ui-categoryshowcase.js",
+      "require": "./packages/categoryshowcase/dist/hannah-ui-categoryshowcase.umd.cjs"
+    },
+    "./Checkbox": {
+      "types": "./packages/checkbox/dist/src/index.d.ts",
+      "import": "./packages/checkbox/dist/hannah-ui-checkbox.js",
+      "require": "./packages/checkbox/dist/hannah-ui-checkbox.umd.cjs"
+    },
+    "./Chip": {
+      "types": "./packages/chip/dist/src/index.d.ts",
+      "import": "./packages/chip/dist/hannah-ui-chip.js",
+      "require": "./packages/chip/dist/hannah-ui-chip.umd.cjs"
+    },
+    "./Colorpicker": {
+      "types": "./packages/colorpicker/dist/src/index.d.ts",
+      "import": "./packages/colorpicker/dist/hannah-ui-colorpicker.js",
+      "require": "./packages/colorpicker/dist/hannah-ui-colorpicker.umd.cjs"
+    },
+    "./Commandpalette": {
+      "types": "./packages/commandpalette/dist/src/index.d.ts",
+      "import": "./packages/commandpalette/dist/hannah-ui-commandpalette.js",
+      "require": "./packages/commandpalette/dist/hannah-ui-commandpalette.umd.cjs"
+    },
+    "./Confirmmodal": {
+      "types": "./packages/confirmmodal/dist/src/index.d.ts",
+      "import": "./packages/confirmmodal/dist/hannah-ui-confirmmodal.js",
+      "require": "./packages/confirmmodal/dist/hannah-ui-confirmmodal.umd.cjs"
+    },
+    "./Copyblock": {
+      "types": "./packages/copyblock/dist/src/index.d.ts",
+      "import": "./packages/copyblock/dist/hannah-ui-copyblock.js",
+      "require": "./packages/copyblock/dist/hannah-ui-copyblock.umd.cjs"
+    },
+    "./Datagrid": {
+      "types": "./packages/datagrid/dist/src/index.d.ts",
+      "import": "./packages/datagrid/dist/hannah-ui-datagrid.js",
+      "require": "./packages/datagrid/dist/hannah-ui-datagrid.umd.cjs"
+    },
+    "./Datepicker": {
+      "types": "./packages/datepicker/dist/src/index.d.ts",
+      "import": "./packages/datepicker/dist/hannah-ui-datepicker.js",
+      "require": "./packages/datepicker/dist/hannah-ui-datepicker.umd.cjs"
+    },
+    "./Divider": {
+      "types": "./packages/divider/dist/src/index.d.ts",
+      "import": "./packages/divider/dist/hannah-ui-divider.js",
+      "require": "./packages/divider/dist/hannah-ui-divider.umd.cjs"
+    },
+    "./Dock": {
+      "types": "./packages/dock/dist/src/index.d.ts",
+      "import": "./packages/dock/dist/hannah-ui-dock.js",
+      "require": "./packages/dock/dist/hannah-ui-dock.umd.cjs"
+    },
+    "./Draggabletable": {
+      "types": "./packages/draggabletable/dist/src/index.d.ts",
+      "import": "./packages/draggabletable/dist/hannah-ui-draggabletable.js",
+      "require": "./packages/draggabletable/dist/hannah-ui-draggabletable.umd.cjs"
+    },
+    "./Dropdownmenu": {
+      "types": "./packages/dropdownmenu/dist/src/index.d.ts",
+      "import": "./packages/dropdownmenu/dist/hannah-ui-dropdownmenu.js",
+      "require": "./packages/dropdownmenu/dist/hannah-ui-dropdownmenu.umd.cjs"
+    },
+    "./Emptystate": {
+      "types": "./packages/emptystate/dist/src/index.d.ts",
+      "import": "./packages/emptystate/dist/hannah-ui-emptystate.js",
+      "require": "./packages/emptystate/dist/hannah-ui-emptystate.umd.cjs"
+    },
+    "./Errormessage": {
+      "types": "./packages/errormessage/dist/src/index.d.ts",
+      "import": "./packages/errormessage/dist/hannah-ui-errormessage.js",
+      "require": "./packages/errormessage/dist/hannah-ui-errormessage.umd.cjs"
+    },
+    "./Expandabletable": {
+      "types": "./packages/expandabletable/dist/src/index.d.ts",
+      "import": "./packages/expandabletable/dist/hannah-ui-expandabletable.js",
+      "require": "./packages/expandabletable/dist/hannah-ui-expandabletable.umd.cjs"
+    },
+    "./Exportmodal": {
+      "types": "./packages/exportmodal/dist/src/index.d.ts",
+      "import": "./packages/exportmodal/dist/hannah-ui-exportmodal.js",
+      "require": "./packages/exportmodal/dist/hannah-ui-exportmodal.umd.cjs"
+    },
+    "./Filedropzone": {
+      "types": "./packages/filedropzone/dist/src/index.d.ts",
+      "import": "./packages/filedropzone/dist/hannah-ui-filedropzone.js",
+      "require": "./packages/filedropzone/dist/hannah-ui-filedropzone.umd.cjs"
+    },
+    "./Filter": {
+      "types": "./packages/filter/dist/src/index.d.ts",
+      "import": "./packages/filter/dist/hannah-ui-filter.js",
+      "require": "./packages/filter/dist/hannah-ui-filter.umd.cjs"
+    },
+    "./Filterpanel": {
+      "types": "./packages/filterpanel/dist/src/index.d.ts",
+      "import": "./packages/filterpanel/dist/hannah-ui-filterpanel.js",
+      "require": "./packages/filterpanel/dist/hannah-ui-filterpanel.umd.cjs"
+    },
+    "./Form": {
+      "types": "./packages/form/dist/src/index.d.ts",
+      "import": "./packages/form/dist/hannah-ui-form.js",
+      "require": "./packages/form/dist/hannah-ui-form.umd.cjs"
+    },
+    "./Formbuilder": {
+      "types": "./packages/formbuilder/dist/src/index.d.ts",
+      "import": "./packages/formbuilder/dist/hannah-ui-formbuilder.js",
+      "require": "./packages/formbuilder/dist/hannah-ui-formbuilder.umd.cjs"
+    },
+    "./Header": {
+      "types": "./packages/header/dist/src/index.d.ts",
+      "import": "./packages/header/dist/hannah-ui-header.js",
+      "require": "./packages/header/dist/hannah-ui-header.umd.cjs"
+    },
+    "./Helpmodal": {
+      "types": "./packages/helpmodal/dist/src/index.d.ts",
+      "import": "./packages/helpmodal/dist/hannah-ui-helpmodal.js",
+      "require": "./packages/helpmodal/dist/hannah-ui-helpmodal.umd.cjs"
+    },
+    "./Inlineedit": {
+      "types": "./packages/inlineedit/dist/src/index.d.ts",
+      "import": "./packages/inlineedit/dist/hannah-ui-inlineedit.js",
+      "require": "./packages/inlineedit/dist/hannah-ui-inlineedit.umd.cjs"
+    },
+    "./Input": {
+      "types": "./packages/input/dist/src/index.d.ts",
+      "import": "./packages/input/dist/hannah-ui-input.js",
+      "require": "./packages/input/dist/hannah-ui-input.umd.cjs"
+    },
+    "./Interactivecreditcard": {
+      "types": "./packages/interactivecreditcard/dist/src/index.d.ts",
+      "import": "./packages/interactivecreditcard/dist/hannah-ui-interactivecreditcard.js",
+      "require": "./packages/interactivecreditcard/dist/hannah-ui-interactivecreditcard.umd.cjs"
+    },
+    "./Kanbanboard": {
+      "types": "./packages/kanbanboard/dist/src/index.d.ts",
+      "import": "./packages/kanbanboard/dist/hannah-ui-kanbanboard.js",
+      "require": "./packages/kanbanboard/dist/hannah-ui-kanbanboard.umd.cjs"
+    },
+    "./Kbd": {
+      "types": "./packages/kbd/dist/src/index.d.ts",
+      "import": "./packages/kbd/dist/hannah-ui-kbd.js",
+      "require": "./packages/kbd/dist/hannah-ui-kbd.umd.cjs"
+    },
+    "./Kpicard": {
+      "types": "./packages/kpicard/dist/src/index.d.ts",
+      "import": "./packages/kpicard/dist/hannah-ui-kpicard.js",
+      "require": "./packages/kpicard/dist/hannah-ui-kpicard.umd.cjs"
+    },
+    "./Login": {
+      "types": "./packages/login/dist/src/index.d.ts",
+      "import": "./packages/login/dist/hannah-ui-login.js",
+      "require": "./packages/login/dist/hannah-ui-login.umd.cjs"
+    },
+    "./Metriccard": {
+      "types": "./packages/metriccard/dist/src/index.d.ts",
+      "import": "./packages/metriccard/dist/hannah-ui-metriccard.js",
+      "require": "./packages/metriccard/dist/hannah-ui-metriccard.umd.cjs"
+    },
+    "./Modal": {
+      "types": "./packages/modal/dist/src/index.d.ts",
+      "import": "./packages/modal/dist/hannah-ui-modal.js",
+      "require": "./packages/modal/dist/hannah-ui-modal.umd.cjs"
+    },
+    "./Modernsidebar": {
+      "types": "./packages/modernsidebar/dist/src/index.d.ts",
+      "import": "./packages/modernsidebar/dist/hannah-ui-modernsidebar.js",
+      "require": "./packages/modernsidebar/dist/hannah-ui-modernsidebar.umd.cjs"
+    },
+    "./Navbar": {
+      "types": "./packages/navbar/dist/src/index.d.ts",
+      "import": "./packages/navbar/dist/hannah-ui-navbar.js",
+      "require": "./packages/navbar/dist/hannah-ui-navbar.umd.cjs"
+    },
+    "./Notebanner": {
+      "types": "./packages/notebanner/dist/src/index.d.ts",
+      "import": "./packages/notebanner/dist/hannah-ui-notebanner.js",
+      "require": "./packages/notebanner/dist/hannah-ui-notebanner.umd.cjs"
+    },
+    "./Pagetabs": {
+      "types": "./packages/pagetabs/dist/src/index.d.ts",
+      "import": "./packages/pagetabs/dist/hannah-ui-pagetabs.js",
+      "require": "./packages/pagetabs/dist/hannah-ui-pagetabs.umd.cjs"
+    },
+    "./Pagination": {
+      "types": "./packages/pagination/dist/src/index.d.ts",
+      "import": "./packages/pagination/dist/hannah-ui-pagination.js",
+      "require": "./packages/pagination/dist/hannah-ui-pagination.umd.cjs"
+    },
+    "./Paymentmethodcard": {
+      "types": "./packages/paymentmethodcard/dist/src/index.d.ts",
+      "import": "./packages/paymentmethodcard/dist/hannah-ui-paymentmethodcard.js",
+      "require": "./packages/paymentmethodcard/dist/hannah-ui-paymentmethodcard.umd.cjs"
+    },
+    "./Phoneinput": {
+      "types": "./packages/phoneinput/dist/src/index.d.ts",
+      "import": "./packages/phoneinput/dist/hannah-ui-phoneinput.js",
+      "require": "./packages/phoneinput/dist/hannah-ui-phoneinput.umd.cjs"
+    },
+    "./Pricingcard": {
+      "types": "./packages/pricingcard/dist/src/index.d.ts",
+      "import": "./packages/pricingcard/dist/hannah-ui-pricingcard.js",
+      "require": "./packages/pricingcard/dist/hannah-ui-pricingcard.umd.cjs"
+    },
+    "./Productcard": {
+      "types": "./packages/productcard/dist/src/index.d.ts",
+      "import": "./packages/productcard/dist/hannah-ui-productcard.js",
+      "require": "./packages/productcard/dist/hannah-ui-productcard.umd.cjs"
+    },
+    "./Productquickview": {
+      "types": "./packages/productquickview/dist/src/index.d.ts",
+      "import": "./packages/productquickview/dist/hannah-ui-productquickview.js",
+      "require": "./packages/productquickview/dist/hannah-ui-productquickview.umd.cjs"
+    },
+    "./Promobanner": {
+      "types": "./packages/promobanner/dist/src/index.d.ts",
+      "import": "./packages/promobanner/dist/hannah-ui-promobanner.js",
+      "require": "./packages/promobanner/dist/hannah-ui-promobanner.umd.cjs"
+    },
+    "./Quantityselector": {
+      "types": "./packages/quantityselector/dist/src/index.d.ts",
+      "import": "./packages/quantityselector/dist/hannah-ui-quantityselector.js",
+      "require": "./packages/quantityselector/dist/hannah-ui-quantityselector.umd.cjs"
+    },
+    "./Radio": {
+      "types": "./packages/radio/dist/src/index.d.ts",
+      "import": "./packages/radio/dist/hannah-ui-radio.js",
+      "require": "./packages/radio/dist/hannah-ui-radio.umd.cjs"
+    },
+    "./Register": {
+      "types": "./packages/register/dist/src/index.d.ts",
+      "import": "./packages/register/dist/hannah-ui-register.js",
+      "require": "./packages/register/dist/hannah-ui-register.umd.cjs"
+    },
+    "./Reviewcard": {
+      "types": "./packages/reviewcard/dist/src/index.d.ts",
+      "import": "./packages/reviewcard/dist/hannah-ui-reviewcard.js",
+      "require": "./packages/reviewcard/dist/hannah-ui-reviewcard.umd.cjs"
+    },
+    "./Searchableselect": {
+      "types": "./packages/searchableselect/dist/src/index.d.ts",
+      "import": "./packages/searchableselect/dist/hannah-ui-searchableselect.js",
+      "require": "./packages/searchableselect/dist/hannah-ui-searchableselect.umd.cjs"
+    },
+    "./Select": {
+      "types": "./packages/select/dist/src/index.d.ts",
+      "import": "./packages/select/dist/hannah-ui-select.js",
+      "require": "./packages/select/dist/hannah-ui-select.umd.cjs"
+    },
+    "./Sidebar": {
+      "types": "./packages/sidebar/dist/src/index.d.ts",
+      "import": "./packages/sidebar/dist/hannah-ui-sidebar.js",
+      "require": "./packages/sidebar/dist/hannah-ui-sidebar.umd.cjs"
+    },
+    "./Simpletable": {
+      "types": "./packages/simpletable/dist/src/index.d.ts",
+      "import": "./packages/simpletable/dist/hannah-ui-simpletable.js",
+      "require": "./packages/simpletable/dist/hannah-ui-simpletable.umd.cjs"
+    },
+    "./Skeleton": {
+      "types": "./packages/skeleton/dist/src/index.d.ts",
+      "import": "./packages/skeleton/dist/hannah-ui-skeleton.js",
+      "require": "./packages/skeleton/dist/hannah-ui-skeleton.umd.cjs"
+    },
+    "./Statscard": {
+      "types": "./packages/statscard/dist/src/index.d.ts",
+      "import": "./packages/statscard/dist/hannah-ui-statscard.js",
+      "require": "./packages/statscard/dist/hannah-ui-statscard.umd.cjs"
+    },
+    "./Statusflow": {
+      "types": "./packages/statusflow/dist/src/index.d.ts",
+      "import": "./packages/statusflow/dist/hannah-ui-statusflow.js",
+      "require": "./packages/statusflow/dist/hannah-ui-statusflow.umd.cjs"
+    },
+    "./Stepper": {
+      "types": "./packages/stepper/dist/src/index.d.ts",
+      "import": "./packages/stepper/dist/hannah-ui-stepper.js",
+      "require": "./packages/stepper/dist/hannah-ui-stepper.umd.cjs"
+    },
+    "./Stickytable": {
+      "types": "./packages/stickytable/dist/src/index.d.ts",
+      "import": "./packages/stickytable/dist/hannah-ui-stickytable.js",
+      "require": "./packages/stickytable/dist/hannah-ui-stickytable.umd.cjs"
+    },
+    "./Switch": {
+      "types": "./packages/switch/dist/src/index.d.ts",
+      "import": "./packages/switch/dist/hannah-ui-switch.js",
+      "require": "./packages/switch/dist/hannah-ui-switch.umd.cjs"
+    },
+    "./Table": {
+      "types": "./packages/table/dist/src/index.d.ts",
+      "import": "./packages/table/dist/hannah-ui-table.js",
+      "require": "./packages/table/dist/hannah-ui-table.umd.cjs"
+    },
+    "./Tabs": {
+      "types": "./packages/tabs/dist/src/index.d.ts",
+      "import": "./packages/tabs/dist/hannah-ui-tabs.js",
+      "require": "./packages/tabs/dist/hannah-ui-tabs.umd.cjs"
+    },
+    "./Textarea": {
+      "types": "./packages/textarea/dist/src/index.d.ts",
+      "import": "./packages/textarea/dist/hannah-ui-textarea.js",
+      "require": "./packages/textarea/dist/hannah-ui-textarea.umd.cjs"
+    },
+    "./Timeline": {
+      "types": "./packages/timeline/dist/src/index.d.ts",
+      "import": "./packages/timeline/dist/hannah-ui-timeline.js",
+      "require": "./packages/timeline/dist/hannah-ui-timeline.umd.cjs"
+    },
+    "./Toast": {
+      "types": "./packages/toast/dist/src/index.d.ts",
+      "import": "./packages/toast/dist/hannah-ui-toast.js",
+      "require": "./packages/toast/dist/hannah-ui-toast.umd.cjs"
+    },
+    "./Toggle": {
+      "types": "./packages/toggle/dist/src/index.d.ts",
+      "import": "./packages/toggle/dist/hannah-ui-toggle.js",
+      "require": "./packages/toggle/dist/hannah-ui-toggle.umd.cjs"
+    },
+    "./Tooltip": {
+      "types": "./packages/tooltip/dist/src/index.d.ts",
+      "import": "./packages/tooltip/dist/hannah-ui-tooltip.js",
+      "require": "./packages/tooltip/dist/hannah-ui-tooltip.umd.cjs"
+    },
+    "./Userstack": {
+      "types": "./packages/userstack/dist/src/index.d.ts",
+      "import": "./packages/userstack/dist/hannah-ui-userstack.js",
+      "require": "./packages/userstack/dist/hannah-ui-userstack.umd.cjs"
+    },
+    "./Wishlistbutton": {
+      "types": "./packages/wishlistbutton/dist/src/index.d.ts",
+      "import": "./packages/wishlistbutton/dist/hannah-ui-wishlistbutton.js",
+      "require": "./packages/wishlistbutton/dist/hannah-ui-wishlistbutton.umd.cjs"
+    }
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "build:components": "node ./scripts/build-components.mjs",
+    "publish:components": "node ./scripts/publish-components.mjs",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:coverage": "vitest run --coverage",
+    "test:check-components": "node ./scripts/ensure-component-tests.mjs",
+    "test:all": "npm run test:check-components && npm run test",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "storybook": "storybook dev",
+    "storybook:build": "storybook build",
+    "storybook:serve": "storybook serve"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "@storybook/addon-docs": "^10.2.19",
+    "@storybook/react-vite": "^10.2.19",
+    "@tailwindcss/vite": "^4.2.1",
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^24.12.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^5.2.0",
+    "eslint": "^9.39.4",
+    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "jsdom": "^29.0.1",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "storybook": "^10.2.19",
+    "tailwindcss": "^4.2.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.56.1",
+    "vite": "^7.3.1",
+    "vite-plugin-dts": "^4.5.4",
+    "vitest": "^4.1.2"
+  },
+  "dependencies": {
+    "@dnd-kit/core": "^6.0.0",
+    "@dnd-kit/sortable": "^8.0.0",
+    "@dnd-kit/utilities": "^3.0.0",
+    "@headlessui/react": "^2.2.9",
+    "@radix-ui/react-popover": "^1.1.15",
+    "@radix-ui/react-scroll-area": "^1.2.10",
+    "@radix-ui/react-separator": "^1.1.8",
+    "@tanstack/react-table": "^8.0.0",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "framer-motion": "^11.0.0",
+    "lucide-react": ">=0.400.0",
+    "react-colorful": "^5.0.0",
+    "react-dropzone": "^14.0.0",
+    "react-phone-number-input": "^3.0.0",
+    "react-router-dom": "^7.0.0",
+    "react-select": "^5.0.0",
+    "tailwind-merge": "^3.5.0",
+    "zustand": "^5.0.0"
+  }
+}

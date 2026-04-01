@@ -1,0 +1,29 @@
+{
+  "name": "@hannah-ui/core",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/hannah-ui-core.umd.cjs",
+  "module": "./dist/hannah-ui-core.js",
+  "types": "./dist/src/index.d.ts",
+  "style": "./dist/hannah-ui-core.css",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/hannah-ui-core.js",
+      "require": "./dist/hannah-ui-core.umd.cjs"
+    },
+    "./styles.css": "./dist/hannah-ui-core.css"
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0",
+    "tailwindcss": "^4.2.1"
+  }
+}

@@ -1,0 +1,27 @@
+{
+  "name": "@hannah-ui/emptystate",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/hannah-ui-emptystate.umd.cjs",
+  "module": "./dist/hannah-ui-emptystate.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/hannah-ui-emptystate.js",
+      "require": "./dist/hannah-ui-emptystate.umd.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "lucide-react": ">=0.400.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0"
+  }
+}

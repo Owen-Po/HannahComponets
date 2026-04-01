@@ -1,0 +1,79 @@
+@import "tailwindcss";
+
+/* Tailwind v4: dark mode activado por clase .dark en el html */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ─── Design Tokens ────────────────────────────────────────────────────────── */
+:root {
+  /* Colors - Primary */
+  --hui-color-primary: #3b82f6;
+  --hui-color-primary-hover: #60a5fa;
+  --hui-color-primary-active: #2563eb;
+
+  /* Colors - Semantic */
+  --hui-color-success: #10b981;
+  --hui-color-warning: #f59e0b;
+  --hui-color-danger: #ef4444;
+  --hui-color-info: #0ea5e9;
+
+  /* Colors - Neutral */
+  --hui-color-bg: #ffffff;
+  --hui-color-bg-subtle: #f9fafb;
+  --hui-color-bg-muted: #f3f4f6;
+  --hui-color-text: #111827;
+  --hui-color-text-secondary: #6b7280;
+  --hui-color-text-muted: #9ca3af;
+  --hui-color-border: #e5e7eb;
+  --hui-color-border-hover: #d1d5db;
+
+  /* Spacing */
+  --hui-radius-sm: 0.375rem;
+  --hui-radius-md: 0.75rem;
+  --hui-radius-lg: 1rem;
+  --hui-radius-xl: 1.5rem;
+
+  /* Shadows */
+  --hui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --hui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --hui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Typography */
+  --hui-font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  --hui-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, monospace;
+
+  /* Transitions */
+  --hui-transition-fast: 150ms ease-out;
+  --hui-transition-normal: 200ms ease-out;
+  --hui-transition-slow: 300ms ease-out;
+
+  /* HANNAH Brand */
+  --hannah-neon: #CCFF00;
+  --hannah-neon-dark: #9FCC00;
+  --hannah-purple: #1a0f2e;
+  --hannah-purple-light: #2d1a4d;
+  --hannah-black: #0a0a0a;
+}
+
+.dark {
+  --hui-color-primary: #60a5fa;
+  --hui-color-primary-hover: #93c5fd;
+  --hui-color-primary-active: #3b82f6;
+
+  --hui-color-success: #34d399;
+  --hui-color-warning: #fbbf24;
+  --hui-color-danger: #f87171;
+  --hui-color-info: #38bdf8;
+
+  --hui-color-bg: #111827;
+  --hui-color-bg-subtle: #1f2937;
+  --hui-color-bg-muted: #374151;
+  --hui-color-text: #f9fafb;
+  --hui-color-text-secondary: #9ca3af;
+  --hui-color-text-muted: #6b7280;
+  --hui-color-border: #374151;
+  --hui-color-border-hover: #4b5563;
+
+  --hui-shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --hui-shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.4), 0 2px 4px -2px rgb(0 0 0 / 0.3);
+  --hui-shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.4), 0 4px 6px -4px rgb(0 0 0 / 0.3);
+}

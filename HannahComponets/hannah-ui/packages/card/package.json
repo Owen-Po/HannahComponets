@@ -1,0 +1,29 @@
+{
+  "name": "@hannah-ui/card",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/hannah-ui-card.umd.cjs",
+  "module": "./dist/hannah-ui-card.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/hannah-ui-card.js",
+      "require": "./dist/hannah-ui-card.umd.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "lucide-react": ">=0.400.0"
+  },
+  "dependencies": {
+    "@hannah-ui/button": "*",
+    "@hannah-ui/badge": "*",
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0"
+  }
+}

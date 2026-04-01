@@ -1,0 +1,27 @@
+{
+  "name": "@hannah-ui/advancedtablefilter",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/hannah-ui-advancedtablefilter.umd.cjs",
+  "module": "./dist/hannah-ui-advancedtablefilter.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/hannah-ui-advancedtablefilter.js",
+      "require": "./dist/hannah-ui-advancedtablefilter.umd.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0",
+    "lucide-react": ">=0.400.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0"
+  }
+}
