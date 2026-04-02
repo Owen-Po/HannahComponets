@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "buildCommand": "npm run build:all-docs",
+  "outputDirectory": "apps/docs/.next",
+  "framework": "nextjs",
+  "rewrites": [
+    {
+      "source": "/storybook/(.*)",
+      "destination": "/storybook/$1"
+    }
+  ]
+}

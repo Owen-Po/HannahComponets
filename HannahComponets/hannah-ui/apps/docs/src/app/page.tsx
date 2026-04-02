@@ -38,7 +38,11 @@ interface ComponentInfo {
   code: string;
 }
 
-const STORYBOOK_BASE_URL = "http://localhost:6006";
+// Storybook logic to handle production vs development environment
+const IS_SERVER = typeof window === "undefined";
+const STORYBOOK_BASE_URL = !IS_SERVER && window.location.hostname === "localhost" 
+  ? "http://localhost:6006" 
+  : "/storybook"; // In production, we'll host storybook at /storybook inside the main site 
 
 const COMPONENTS: ComponentInfo[] = [
   {

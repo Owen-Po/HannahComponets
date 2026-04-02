@@ -437,7 +437,8 @@
     "preview": "vite preview",
     "storybook": "storybook dev",
     "storybook:build": "storybook build",
-    "storybook:serve": "storybook serve"
+    "storybook:serve": "storybook serve",
+    "build:all-docs": "npm run storybook:build && mkdir -p apps/docs/public/storybook && cp -rv storybook-static/* apps/docs/public/storybook/ && cd apps/docs && npm run build"
   },
   "peerDependencies": {
     "react": "^19.0.0",
