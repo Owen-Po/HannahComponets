@@ -12,6 +12,9 @@
     "moduleDetection": "force",
     "noEmit": true,
     "jsx": "react-jsx",
+    "paths": {
+      "@hannah-ui/*": ["./packages/*/src"]
+    },
     /* Linting */
     "strict": true,
     "noUnusedLocals": false,

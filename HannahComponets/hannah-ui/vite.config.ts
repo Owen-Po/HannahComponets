@@ -58,6 +58,14 @@ export default defineConfig(() => {
   const isStorybook = process.argv[1]?.includes('storybook');
 
   return {
+    resolve: {
+      alias: [
+        {
+          find: /^@hannah-ui\/(.*)$/,
+          replacement: resolve(import.meta.dirname, 'packages/$1/src/index.ts'),
+        },
+      ],
+    },
     plugins: [
       react(),
       tailwindcss(),
