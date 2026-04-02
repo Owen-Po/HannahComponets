@@ -438,7 +438,7 @@
     "storybook": "storybook dev",
     "storybook:build": "storybook build",
     "storybook:serve": "storybook serve",
-    "build:all-docs": "npm run storybook:build && rm -rf apps/docs/public/storybook && mkdir -p apps/docs/public/storybook && cp -rv storybook-static/* apps/docs/public/storybook/ && cp -rv storybook-static/sb-manager apps/docs/public/ && cp -rv storybook-static/sb-addons apps/docs/public/ && cp -rv storybook-static/sb-common-assets apps/docs/public/ && cd apps/docs && npm run build"
+    "build:all-docs": "npm run storybook:build && rm -rf apps/docs/public/storybook && mkdir -p apps/docs/public/storybook && cp -rv storybook-static/* apps/docs/public/storybook/ && cp -rv storybook-static/sb-manager apps/docs/public/ && cp -rv storybook-static/sb-addons apps/docs/public/ && cp -rv storybook-static/sb-common-assets apps/docs/public/ && cp -rv storybook-static/assets apps/docs/public/ && cp -v storybook-static/iframe.html apps/docs/public/ && cp -v storybook-static/index.json apps/docs/public/ && cp -v storybook-static/project.json apps/docs/public/ && cd apps/docs && npm run build"
   },
   "peerDependencies": {
     "react": "^19.0.0",
