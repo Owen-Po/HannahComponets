@@ -15,9 +15,9 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/Hannah-UI/Hannah-UI"
+    "url": "https://github.com/Owen-Po/HannahComponets"
   },
-  "homepage": "https://github.com/Hannah-UI/Hannah-UI",
+  "homepage": "https://github.com/Owen-Po/HannahComponets",
   "workspaces": [
     "packages/*",
     "apps/*"

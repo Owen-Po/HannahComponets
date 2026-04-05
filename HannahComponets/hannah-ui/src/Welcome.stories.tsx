@@ -329,9 +329,9 @@ function Dashboard() {
         {/* Stats */}
         {!showCatalog && (
           <div style={{ display: "flex", gap: "16px", marginBottom: 40 }}>
-            <StatPill value="49" label="Componentes" />
-            <StatPill value="9" label="Filtros" />
-            <StatPill value="6" label="Templates" />
+            <StatPill value="78+" label="Componentes" />
+            <StatPill value="12+" label="Filtros" />
+            <StatPill value="6+" label="Templates" />
           </div>
         )}
 
@@ -589,9 +589,9 @@ function Dashboard() {
               </p>
             </div>
             <div style={{ display: "flex", gap: 16 }}>
-              <span style={{ fontSize: 11, color: "#555" }}>49 componentes</span>
-              <span style={{ fontSize: 11, color: "#555" }}>9 filtros</span>
-              <span style={{ fontSize: 11, color: "#555" }}>6 templates</span>
+              <span style={{ fontSize: 11, color: "#555" }}>78+ componentes</span>
+              <span style={{ fontSize: 11, color: "#555" }}>12+ filtros</span>
+              <span style={{ fontSize: 11, color: "#555" }}>6+ templates</span>
             </div>
           </div>
         </div>
