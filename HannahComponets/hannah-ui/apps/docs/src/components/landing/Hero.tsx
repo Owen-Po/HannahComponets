@@ -34,7 +34,7 @@ export const Hero = ({ onExplore }: HeroProps) => {
       </motion.div>
 
       <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.1]">
-        HIGH PERFORMANCE <br /> <span className="text-[#c4ff0d]">HANNAH UI</span>
+        HANNAH <span className="text-[#c4ff0d]" style={{ WebkitTextFillColor: "#c4ff0d" }}>UI</span>
       </h1>
 
       <p className="max-w-2xl text-lg text-white/40 font-medium leading-relaxed mb-8">
@@ -55,7 +55,7 @@ export const Hero = ({ onExplore }: HeroProps) => {
         >
           Explorar Componentes
         </button>
-        <button 
+        <button
           onClick={onExplore}
           className="px-9 py-3.5 bg-white/5 text-[#c4ff0d] font-semibold rounded-xl border border-[#c4ff0d]/25 hover:bg-[#c4ff0d]/10 hover:border-[#c4ff0d]/40 transition-all text-[15px]"
         >

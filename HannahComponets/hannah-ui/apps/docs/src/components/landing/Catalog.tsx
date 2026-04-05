@@ -36,6 +36,66 @@ export const Catalog = ({ onBack, onSelectComponent }: CatalogProps) => {
         </button>
       </div>
 
+      {/* ──── Installation Section ──── */}
+      <div
+        className="max-w-4xl mx-auto mb-16"
+        style={{
+          padding: 24,
+          borderRadius: 16,
+          border: "1px solid rgba(196,255,13,0.1)",
+          background: "rgba(196,255,13,0.02)",
+          display: "flex",
+          flexDirection: "column",
+          gap: "24px",
+        }}
+      >
+        <div>
+          <h3 style={{ fontSize: 13, color: "#c4ff0d", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 0, marginBottom: 8, fontWeight: 700 }}>
+            Opcion 1: Libreria principal
+          </h3>
+          <p style={{ color: "#a0a0a0", fontSize: 14, marginTop: 0, marginBottom: 12, lineHeight: 1.5 }}>
+            Paquete ligero que incluye solo los componentes esenciales.
+          </p>
+          <code
+            style={{
+              display: "block",
+              padding: 16,
+              borderRadius: 10,
+              background: "#111",
+              border: "1px solid rgba(196,255,13,0.08)",
+              color: "#c4ff0d",
+              fontSize: 14,
+              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+            }}
+          >
+            npm install hannah-ui
+          </code>
+        </div>
+
+        <div>
+          <h3 style={{ fontSize: 13, color: "#c4ff0d", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 0, marginBottom: 8, fontWeight: 700 }}>
+            Opcion 2: Componentes Individuales
+          </h3>
+          <p style={{ color: "#a0a0a0", fontSize: 14, marginTop: 0, marginBottom: 12, lineHeight: 1.5 }}>
+            Instala <b>exclusivamente</b> los componentes a tu medida para maximizar la optimizacion de tu proyecto.
+          </p>
+          <code
+            style={{
+              display: "block",
+              padding: 16,
+              borderRadius: 10,
+              background: "#111",
+              border: "1px solid rgba(196,255,13,0.08)",
+              color: "#c4ff0d",
+              fontSize: 14,
+              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
+            }}
+          >
+            npm install @hannah-ui/button @hannah-ui/input
+          </code>
+        </div>
+      </div>
+
       {/* ──── GRIDS ──── */}
       <SectionTitle title="Core Controls" icon={MousePointer2} />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
