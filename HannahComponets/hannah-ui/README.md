@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <strong>🚀 v0.0.9</strong> &middot; ✨ 78+ componentes &middot; 🛠️ 12+ filtros &middot; 📱 6+ templates
+  <strong>🚀 v0.0.10</strong> &middot; ✨ 78+ componentes &middot; 🛠️ 12+ filtros &middot; 📱 6+ templates
 </p>
 
 ---

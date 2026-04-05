@@ -1,6 +1,6 @@
 {
   "name": "hannah-ui",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A lightweight React component library with essential UI components, templates, and utilities built with Tailwind CSS and TypeScript. Install individual components for maximum optimization.",
   "keywords": [
     "react",
