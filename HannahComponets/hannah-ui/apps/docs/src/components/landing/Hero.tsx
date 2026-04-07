@@ -33,16 +33,16 @@ export const Hero = ({ onExplore }: HeroProps) => {
         />
       </motion.div>
 
-      <h1 className="text-6xl md:text-8xl font-black tracking-tight mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.1]">
+      <h1 className="text-4xl sm:text-6xl md:text-8xl font-black tracking-tight mb-4 bg-gradient-to-b from-white via-white to-white/40 bg-clip-text text-transparent leading-[1.1]">
         HANNAH <span className="text-[#c4ff0d]" style={{ WebkitTextFillColor: "#c4ff0d" }}>UI</span>
       </h1>
 
-      <p className="max-w-2xl text-lg text-white/40 font-medium leading-relaxed mb-8">
+      <p className="max-w-2xl text-base sm:text-lg text-white/40 font-medium leading-relaxed mb-8 px-4 sm:px-0">
         Libreria de componentes React + Tailwind CSS. <br />
         Explora cada componente con un diseno moderno y minimalista.
       </p>
 
-      <div className="flex flex-wrap items-center justify-center gap-4 mb-10">
+      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4 mb-10">
         <StatPill label="Components" value="78+" />
         <StatPill label="Templates" value="12+" />
         <StatPill label="Icons" value="600+" />
@@ -51,13 +51,13 @@ export const Hero = ({ onExplore }: HeroProps) => {
       <div className="flex flex-wrap items-center justify-center gap-4">
         <button
           onClick={onExplore}
-          className="px-9 py-3.5 bg-[#c4ff0d] text-black font-bold rounded-xl shadow-[0_0_30px_rgba(196,255,13,0.3)] hover:shadow-[0_0_50px_rgba(196,255,13,0.5)] hover:-translate-y-0.5 transition-all text-[15px]"
+          className="px-7 sm:px-9 py-3 sm:py-3.5 bg-[#c4ff0d] text-black font-bold rounded-xl shadow-[0_0_30px_rgba(196,255,13,0.3)] hover:shadow-[0_0_50px_rgba(196,255,13,0.5)] hover:-translate-y-0.5 transition-all text-sm sm:text-[15px]"
         >
           Explorar Componentes
         </button>
         <button
           onClick={onExplore}
-          className="px-9 py-3.5 bg-white/5 text-[#c4ff0d] font-semibold rounded-xl border border-[#c4ff0d]/25 hover:bg-[#c4ff0d]/10 hover:border-[#c4ff0d]/40 transition-all text-[15px]"
+          className="px-7 sm:px-9 py-3 sm:py-3.5 bg-white/5 text-[#c4ff0d] font-semibold rounded-xl border border-[#c4ff0d]/25 hover:bg-[#c4ff0d]/10 hover:border-[#c4ff0d]/40 transition-all text-sm sm:text-[15px]"
         >
           Instalacion
         </button>

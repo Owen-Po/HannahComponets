@@ -20,7 +20,7 @@ export const Catalog = ({ onBack, onSelectComponent }: CatalogProps) => {
       className="py-12"
     >
       {/* ──── Catalog Header ──── */}
-      <div className="flex flex-col items-center mb-20 text-center">
+      <div className="flex flex-col items-center mb-12 md:mb-20 text-center px-2">
         <div className="w-12 h-1 overflow-hidden rounded-full bg-white/5 mb-8">
           <motion.div
             initial={{ x: "-100%" }}
@@ -29,7 +29,7 @@ export const Catalog = ({ onBack, onSelectComponent }: CatalogProps) => {
             className="w-full h-full bg-[#c4ff0d]"
           />
         </div>
-        <h2 className="text-4xl font-black mb-4 tracking-tight uppercase">Component Catalog</h2>
+        <h2 className="text-2xl sm:text-4xl font-black mb-4 tracking-tight uppercase">Component Catalog</h2>
         <p className="text-white/40 max-w-lg mb-8 uppercase text-[10px] tracking-[0.3em] font-bold">Meticulously Crafted Primitives</p>
         <button onClick={onBack} className="px-6 py-2 rounded-full border border-white/5 bg-white/[0.02] text-[10px] font-black text-white/30 uppercase tracking-[0.2em] hover:text-[#c4ff0d] hover:border-[#c4ff0d]/20 transition-all flex items-center gap-3">
           <div className="w-1 h-3 bg-[#c4ff0d]" /> Back to Home
@@ -37,60 +37,28 @@ export const Catalog = ({ onBack, onSelectComponent }: CatalogProps) => {
       </div>
 
       {/* ──── Installation Section ──── */}
-      <div
-        className="max-w-4xl mx-auto mb-16"
-        style={{
-          padding: 24,
-          borderRadius: 16,
-          border: "1px solid rgba(196,255,13,0.1)",
-          background: "rgba(196,255,13,0.02)",
-          display: "flex",
-          flexDirection: "column",
-          gap: "24px",
-        }}
-      >
+      <div className="max-w-4xl mx-auto mb-16 p-4 sm:p-6 rounded-2xl border border-[#c4ff0d]/10 bg-[#c4ff0d]/[0.02] flex flex-col gap-6">
+
         <div>
-          <h3 style={{ fontSize: 13, color: "#c4ff0d", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 0, marginBottom: 8, fontWeight: 700 }}>
+          <h3 className="text-[13px] text-[#c4ff0d] uppercase tracking-[0.1em] mb-2 font-bold">
             Opcion 1: Libreria principal
           </h3>
-          <p style={{ color: "#a0a0a0", fontSize: 14, marginTop: 0, marginBottom: 12, lineHeight: 1.5 }}>
+          <p className="text-[#a0a0a0] text-sm mb-3 leading-relaxed">
             Paquete ligero que incluye solo los componentes esenciales.
           </p>
-          <code
-            style={{
-              display: "block",
-              padding: 16,
-              borderRadius: 10,
-              background: "#111",
-              border: "1px solid rgba(196,255,13,0.08)",
-              color: "#c4ff0d",
-              fontSize: 14,
-              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-            }}
-          >
+          <code className="block p-3 sm:p-4 rounded-[10px] bg-[#111] border border-[#c4ff0d]/[0.08] text-[#c4ff0d] text-xs sm:text-sm font-mono overflow-x-auto">
             npm install hannah-ui
           </code>
         </div>
 
         <div>
-          <h3 style={{ fontSize: 13, color: "#c4ff0d", textTransform: "uppercase", letterSpacing: "0.1em", marginTop: 0, marginBottom: 8, fontWeight: 700 }}>
+          <h3 className="text-[13px] text-[#c4ff0d] uppercase tracking-[0.1em] mb-2 font-bold">
             Opcion 2: Componentes Individuales
           </h3>
-          <p style={{ color: "#a0a0a0", fontSize: 14, marginTop: 0, marginBottom: 12, lineHeight: 1.5 }}>
+          <p className="text-[#a0a0a0] text-sm mb-3 leading-relaxed">
             Instala <b>exclusivamente</b> los componentes a tu medida para maximizar la optimizacion de tu proyecto.
           </p>
-          <code
-            style={{
-              display: "block",
-              padding: 16,
-              borderRadius: 10,
-              background: "#111",
-              border: "1px solid rgba(196,255,13,0.08)",
-              color: "#c4ff0d",
-              fontSize: 14,
-              fontFamily: "'JetBrains Mono', 'Fira Code', monospace",
-            }}
-          >
+          <code className="block p-3 sm:p-4 rounded-[10px] bg-[#111] border border-[#c4ff0d]/[0.08] text-[#c4ff0d] text-xs sm:text-sm font-mono overflow-x-auto">
             npm install @hannah-ui/button @hannah-ui/input
           </code>
         </div>
@@ -98,21 +66,21 @@ export const Catalog = ({ onBack, onSelectComponent }: CatalogProps) => {
 
       {/* ──── GRIDS ──── */}
       <SectionTitle title="Core Controls" icon={MousePointer2} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {COMPONENTS.filter(c => c.category === "Controls" || c.category === "Inputs").map(c => (
           <ComponentCard key={c.name} component={c} onClick={onSelectComponent} />
         ))}
       </div>
 
       <SectionTitle title="Data & Display" icon={TableIcon} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {COMPONENTS.filter(c => c.category === "Data" || c.category === "Display").map(c => (
           <ComponentCard key={c.name} component={c} onClick={onSelectComponent} />
         ))}
       </div>
 
       <SectionTitle title="Layout & Overlays" icon={Layers} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
         {COMPONENTS.filter(c => c.category === "Layout" || c.category === "Overlays").map(c => (
           <ComponentCard key={c.name} component={c} onClick={onSelectComponent} />
         ))}
@@ -122,7 +90,7 @@ export const Catalog = ({ onBack, onSelectComponent }: CatalogProps) => {
       </div>
 
       <SectionTitle title="More Components" icon={Box} />
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-20">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 mb-20">
         {FALLBACK_COMPONENTS.map(c => (
           <ComponentCard key={c.name} component={c} onClick={onSelectComponent} />
         ))}

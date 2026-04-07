@@ -32,7 +32,7 @@ export const ShowcaseModal = ({ component, onClose }: ShowcaseModalProps) => {
         initial={{ scale: 0.9, y: 20, opacity: 0 }}
         animate={{ scale: 1, y: 0, opacity: 1 }}
         exit={{ scale: 0.9, y: 20, opacity: 0 }}
-        className="relative w-full max-w-5xl bg-[#0c0c0c] border border-white/10 rounded-[32px] overflow-hidden shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]"
+        className="relative w-full max-w-5xl max-h-[95vh] bg-[#0c0c0c] border border-white/10 rounded-2xl sm:rounded-[32px] overflow-hidden overflow-y-auto shadow-[0_32px_64px_-16px_rgba(0,0,0,0.6)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -51,9 +51,9 @@ export const ShowcaseModal = ({ component, onClose }: ShowcaseModalProps) => {
           </button>
         </div>
 
-        <div className="flex flex-col lg:flex-row h-[60vh] max-h-[700px]">
+        <div className="flex flex-col lg:flex-row lg:h-[60vh] lg:max-h-[700px]">
           {/* Preview Panel */}
-          <div className="flex-1 bg-white/[0.02] relative min-h-[300px]">
+          <div className="flex-1 bg-white/[0.02] relative min-h-[200px] sm:min-h-[300px]">
             <iframe
               src={previewUrl}
               className="w-full h-full border-none opacity-90 hover:opacity-100 transition-opacity"
@@ -65,7 +65,7 @@ export const ShowcaseModal = ({ component, onClose }: ShowcaseModalProps) => {
           </div>
 
           {/* Details Panel */}
-          <div className="w-full lg:w-[400px] p-6 md:p-10 flex flex-col gap-8 border-l border-white/5 bg-black/20">
+          <div className="w-full lg:w-[400px] p-4 sm:p-6 md:p-10 flex flex-col gap-6 sm:gap-8 border-t lg:border-t-0 lg:border-l border-white/5 bg-black/20">
 
             {/* Description */}
             <div>
