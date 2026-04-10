@@ -1,0 +1,28 @@
+{
+  "name": "@hannah-ui/bigcalendar",
+  "version": "0.0.1",
+  "type": "module",
+  "main": "./dist/hannah-ui-bigcalendar.umd.cjs",
+  "module": "./dist/hannah-ui-bigcalendar.js",
+  "types": "./dist/src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/src/index.d.ts",
+      "import": "./dist/hannah-ui-bigcalendar.js",
+      "require": "./dist/hannah-ui-bigcalendar.umd.cjs"
+    }
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
+  },
+  "dependencies": {
+    "clsx": "^2.1.1",
+    "tailwind-merge": "^3.5.0",
+    "react-big-calendar": "^1.0.0",
+    "date-fns": "^4.0.0"
+  }
+}
